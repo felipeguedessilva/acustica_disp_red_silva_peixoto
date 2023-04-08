@@ -1,4 +1,4 @@
-# Arbitrary high order shaped stencils for time domain finite difference schemes in seismic wave propagation}
+# Arbitrary high order shaped stencils for time domain finite difference schemes in seismic wave propagation
 
 ## Authors: Felipe A. G. Silva and Pedro S. Peixoto
 
