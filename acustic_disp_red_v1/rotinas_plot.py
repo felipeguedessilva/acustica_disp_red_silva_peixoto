@@ -34,7 +34,7 @@ def datasave(teste,rec,solplot,rec_select,ref,ptype,dttype):
     method = teste.method
     
     loc_save1_list = ['teste1/','teste2/','teste3/','teste4/']
-    loc_save2_list = ['dt1/','dt2/','dt3/','dt4/','dt5/','dt6/']
+    loc_save2_list = ['dt1/']
     
     nteste = len(loc_save1_list)
     ntimes = len(loc_save2_list)
@@ -110,7 +110,7 @@ def graph2d(U,teste,i):
     if(i==1): plot.savefig('figures/temporario/disp_ref.png',dpi=100)
     
     plot.show()
-    #plot.close()
+    plot.close()
 #==============================================================================
 
 #==============================================================================

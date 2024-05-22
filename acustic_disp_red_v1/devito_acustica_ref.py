@@ -18,7 +18,6 @@ import testes_opt              as ttopt
 import rotinas_plot            as rplot
 import macustica               as mc
 import coef_opt                as copt
-from   scipy.interpolate       import interp1d    
 #==============================================================================
 
 #==============================================================================
@@ -43,13 +42,9 @@ plot.close("all")
 #==============================================================================
 # Testes de Leitura de Dados
 #==============================================================================
-ptype        = 1
-ref          = 0
-save_stencil = 0
-save_sol     = 0
-print_sol    = 1
-exec_op      = 1
-stop_param   = 1
+ptype      = 1
+ref        = 1
+stop_param = 0
 
 if(ref!=0):
 
@@ -57,7 +52,7 @@ if(ref!=0):
     if(ptype==2): teste = ttopt.teste2_ref1
     if(ptype==3): teste = ttopt.teste3_ref1
     if(ptype==4): teste = ttopt.teste4_ref1
- 
+
 else:
 
     if(ptype==1): teste = ttopt.teste1
@@ -96,12 +91,11 @@ tou     = teste.tou     # Time Order Displacement
 btype   = teste.btype   # Boundary Type
 ftype   = teste.ftype   # Source type  
 dttype  = teste.dttype  # dt type  
-    
 sou        = teste.sou     # Space Order Displacement     
 mvalue     = teste.mvalue  # First Parameter for Stencil
 nvalue     = teste.nvalue  # Second Parameter for Stencils
 mshape     = teste.shape   # Stencil Geometry
-method     = teste.method  # FD Method
+method     = teste.method  # FD Method       
 #==============================================================================
 
 #==============================================================================
@@ -117,7 +111,8 @@ class d0domain(SubDomain):
     def define(self, dimensions):
         x, y = dimensions
         return {x: x, y: y}
-d0_domain = d0domain()    
+d0_domain = d0domain()
+    
 grid = Grid(origin=origin,extent=extent,shape=shape,subdomains=(d0_domain),dtype=np.float64)
 #==============================================================================
 
@@ -126,19 +121,19 @@ grid = Grid(origin=origin,extent=extent,shape=shape,subdomains=(d0_domain),dtype
 #==============================================================================
 vmax  = np.around(np.amax(v),1) 
 dtmax = (min(hxv,hyv)*CFL)/(vmax)
+dtmax = np.round(dtmax,8)
 ntmax = int((tn-t0)/dtmax)
 dt0   = (tn-t0)/(ntmax)
 time_range = TimeAxis(start=t0,stop=tn,num=ntmax+1)
 nt         = time_range.num - 1
 nplot      = mt.ceil(nt/jump) + 1
-cur        = (vmax*dt0)/(min(hxv,hyv))
 #==============================================================================
 
 #==============================================================================
 # Analyse Parameters
 #==============================================================================
 if(stop_param==1):
-    print(dt0,nt,jump,nplot,hxv,hyv,dt0*jump,vmax)
+    print(dt0,nt,jump,nplot,hxv,hyv,dt0*jump)
     sys.exit()
 #==============================================================================
 
@@ -205,26 +200,15 @@ u = TimeFunction(name="u",grid=grid,time_order=tou,space_order=sou,staggered=NOD
 vel = Function(name="vel",grid=grid,space_order=2,staggered=NODE,dtype=np.float64)
 vel.data[:,:] = v[:,:]
 
-fact = 1
-src_term = src.inject(field=u.forward,expr=fact*1*src*dt**2*vel**2)
-rec_term = rec.interpolate(expr=u)
+factor_ref = 5
+fact       = factor_ref*factor_ref
+src_term   = src.inject(field=u.forward,expr=fact*1*src*dt**2*vel**2)
+rec_term   = rec.interpolate(expr=u)
 rec_select_term = rec_select.interpolate(expr=u)
 
-try: 
-        
-    mcoef = np.load("stencil_save/mcoef_%s_%s_%d_%d_%f.npy"%(mshape,method,mvalue,nvalue,cur))
-    print('Read Memorized Stencil')
-            
-except:
-    
-    cte   = (1/(min(hxv,hyv)**2))
-    mcoef = cte*coef1.calccoef(method,mshape,mvalue,nvalue,cur)    
-    if(save_stencil==1): np.save("stencil_save/mcoef_%s_%s_%d_%d_%f"%(mshape,method,mvalue,nvalue,cur),mcoef)    
-    print('Calcualte a New Stencil')
-
-new_laplace, contcoef = coef1.eqconstuct1(mcoef,u,t,x,y)
-pde0                  = Eq(u.dt2 - new_laplace*vel*vel)
-stencil0              = Eq(u.forward, solve(pde0,u.forward),subdomain = grid.subdomains['d0'])
+pde0     = Eq(u.dt2 - u.laplace*vel*vel)
+stencil0 = Eq(u.forward, solve(pde0,u.forward),subdomain = grid.subdomains['d0'])
+print('Devito Stencil')
 #==============================================================================
 
 #==============================================================================
@@ -245,34 +229,25 @@ if(btype==1):
 
 if(btype==2):
 
-    bc  = [Eq(u[t+1,0,y],0.),Eq(u[t+1,nptx-1,y],0.),Eq(u[t+1,x,npty-1],0.)]
+    bc = [Eq(u[t+1,0,y],0.),Eq(u[t+1,nptx-1,y],0.),Eq(u[t+1,x,npty-1],0.)]
     bc1 = [Eq(u[t+1,x,-k],u[t+1,x,k]) for k in range(1,int(sou/2)+1)]
-    op  = Operator([stencil0] + src_term + bc + bc1 + rec_term + rec_select_term + [Eq(usave,u.forward)],subs=grid.spacing_map)
+    op    = Operator([stencil0] + src_term + bc + bc1 + rec_term + rec_select_term + [Eq(usave,u.forward)],subs=grid.spacing_map)
 
 if(btype==3):
 
-    bc =      [Eq(u[t+1,x,-k],u[t+1,x,npty-1-k])      for k in range(0,int(sou/2)+1)]
+    bc = [Eq(u[t+1,x,-k],u[t+1,x,npty-1-k])      for k in range(0,int(sou/2)+1)]
     bc = bc + [Eq(u[t+1,x,npty-1+k],u[t+1,x,k])  for k in range(0,int(sou/2)+1)]
     bc = bc + [Eq(u[t+1,-k,y],u[t+1,nptx-1-k,y]) for k in range(0,int(sou/2)+1)]
     bc = bc + [Eq(u[t+1,nptx-1+k,y],u[t+1,k,y])  for k in range(0,int(sou/2)+1)]
     op = Operator([stencil0] + src_term + bc + rec_term + rec_select_term + [Eq(usave,u.forward)],subs=grid.spacing_map)
 
-nrodadas   = 1
-mtime_exec = 0
+usave.data[:] = 0.
+u.data[:]     = 0.
 
-for i in range(0,nrodadas):
-
-    usave.data[:]      = 0.
-    u.data[:]          = 0.
-    rec.data[:]        = 0.
-    rec_select.data[:] = 0.
-    time_exec = 0.0
-    start     = tm.time()
-    if(exec_op==1): op(time=nt,dt=dt0)
-    end       = tm.time()
-    time_exec = end - start
-        
-    mtime_exec = mtime_exec + time_exec/nrodadas 
+start = tm.time()
+op(time=nt,dt=dt0)
+end   = tm.time()
+time_exec = end - start
 
 Ug[:] = usave.data[:]
 Ug[nplot-1,:,:] = u.data[0,:,:]
@@ -281,16 +256,14 @@ Ug[nplot-1,:,:] = u.data[0,:,:]
 #==============================================================================
 # Plots de Interesse
 #==============================================================================
-if(print_sol==1): 
-    G1 = rplot.graph2d(u.data[0,:,:],teste,ref)
-    #R1 = rplot.graph2drec(rec.data,teste,ref)
-    #V1 = rplot.graph2dvel(v,teste)
-if(save_sol==1): S1 = rplot.datasave(teste,rec.data,Ug,rec_select.data,ref,ptype,dttype)
+#G1 = rplot.graph2d(u.data[0,:,:],teste,ref)
+#R1 = rplot.graph2drec(rec.data,teste,ref)
+#V1 = rplot.graph2dvel(v,teste)
+S1 = rplot.datasave(teste,rec.data,Ug,rec_select.data,ref,ptype,dttype)
 #==============================================================================
 
 #==============================================================================
-print('Problem =  %d - Dtype = %d'%(ptype,teste.dttype+1))
+print('Problem =  %d'%(ptype))
 print('hx = %.2f - hy = %.2f - dt = %.2f - nt = %d - jump = %d - vmax = %.2f'%(hxv,hyv,dt0,nt,jump,vmax))
-print("Tempo de Execuação = %.3f s" %(mtime_exec))
-print('')
+print("Tempo de Execuação da Referencia = %.3f s" %time_exec)
 #==============================================================================

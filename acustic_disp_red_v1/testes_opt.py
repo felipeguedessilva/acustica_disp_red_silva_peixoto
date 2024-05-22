@@ -51,11 +51,11 @@ class teste1:
     jumpv      = np.array([300])       # Vetor com Diferentes Valores de Jump
     jump       = int(jumpv[dttype])               # Intervalo de Dados a Serem Salvos
     tou        = 2                                # Time Order Displacement 
-    sou        = 8                                # Space Order Displacement
+    sou        = 20                               # Space Order Displacement
     mvalue     = int(sou/2)                       # First Parameter for Stencil
-    nvalue     = 1                                # Second Parameter for Stencils
-    shape      = 'cl'                             # Stencil Geometry
-    method     = 'spatte'                         # FD Method
+    nvalue     = 3                                # Second Parameter for Stencils
+    shape      = 'csq'                            # Stencil Geometry
+    method     = 'dispte'                         # FD Method
     btype      = 3                                # Boundary Type    
     ftype      = 0                                # Source type                                                                                                                                                                                                                                                                                                                                                                                                                                                  
 #==============================================================================
@@ -83,7 +83,7 @@ class teste1_ref1:
     Y0     = np.linspace(y0,y1,npty)    # Malha Direção Y
     X0grid,Y0grid = np.meshgrid(X0,Y0)  # Grid Auxiliar X0 x Y0 
     t0     = 0.       # Tempo Inicial da Simulação em Milisegundos
-    tn     = 3000.    # Tempo Final   da Simulação em Milisegundos (1 Segundo = 1000 Ms) #min de 0.2s até 2.0s      
+    tn     = 900.     # Tempo Final   da Simulação em Milisegundos (1 Segundo = 1000 Ms) #min de 0.2s até 2.0s      
     f0     = 0.03     # Frequência da Fonte (1 Hz = 0.001 kHz) #min de 0.02 até 0.05
     nfonte = 1        # Número de Fontes  (Para nfonte>1 -> Vetor em xposf e yposf)
     xposf  = 1500.    # Posição da Fonte em X
@@ -109,7 +109,7 @@ class teste1_ref1:
 
 #==============================================================================
 class teste2:
-# Configuração Non-Absorbing para o Teste 2
+# Configuração Non-Absorbing para o Teste 1
 #==============================================================================
 
 #==============================================================================
@@ -156,7 +156,7 @@ class teste2:
 
 #==============================================================================
 class teste2_ref1:
-# Configuração Non-Absorbing para o Teste 2
+# Configuração Non-Absorbing para o Teste 1
 #==============================================================================
 
 #==============================================================================
@@ -203,7 +203,7 @@ class teste2_ref1:
 
 #==============================================================================
 class teste3:
-# Configuração Non-Absorbing para o Teste 3
+# Configuração Non-Absorbing para o Teste 2
 #==============================================================================
 
 #==============================================================================
@@ -250,7 +250,7 @@ class teste3:
 
 #==============================================================================
 class teste3_ref1:
-# Configuração Non-Absorbing para o Teste 3
+# Configuração Non-Absorbing para o Teste 2
 #==============================================================================
 
 #==============================================================================
@@ -297,7 +297,7 @@ class teste3_ref1:
 
 #==============================================================================
 class teste4:
-# Configuração Non-Absorbing para o Teste 4
+# Configuração Non-Absorbing para o Teste 5
 #==============================================================================
 
 #==============================================================================
@@ -344,7 +344,7 @@ class teste4:
 
 #==============================================================================
 class teste4_ref1:
-# Configuração Non-Absorbing para o Teste 4
+# Configuração Non-Absorbing para o Teste 5
 #==============================================================================
 
 #==============================================================================

@@ -23,6 +23,7 @@ np.set_printoptions(formatter={'float': '{: 0.3e}'.format})
 #==============================================================================
 # Basic Coefs
 #==============================================================================
+import ger_coef  as coefdispred
 import ger_coef1 as coefdispred1
 import ger_coef2 as coefdispred2
 import ger_coef3 as coefdispred3
@@ -30,7 +31,7 @@ import ger_coef3 as coefdispred3
 
 #==============================================================================
 plot.close("all")
-print_allow = 0
+print_allow = 1
 plot_allow  = 0
 #==============================================================================
 
@@ -43,16 +44,16 @@ print('Dispersion Reduction Scheme: ')
 print('=========================================================================')
 print('')
 
-mvalue    = 10
-nvalue    = 10#np.random.randint(low=1,high=mvalue+1,size=1)[0]
+mvalue    = 2
+nvalue    = 1#np.random.randint(low=1,high=mvalue+1,size=1)[0]
 dx        = 30
 dt        = 0.5
 vmax      = 5.0
 cur       = (vmax*dt)/(dx)
 vshape    = ['cl','rb','crb','sq','csq']
 vmethod   = ['spatte','specte','specls','dispte','spectetheta','displs'] 
-shape     = vshape[1]
-method    = vmethod[2]
+shape     = vshape[0]
+method    = vmethod[0]
 
 if(print_allow==1):
         
@@ -64,6 +65,11 @@ if(print_allow==1):
     print('nvalue: %d'%nvalue)
     print('=========================================================================')
 
+start0 = tm.time()
+T0     = coefdispred.calccoef(method,shape,mvalue,nvalue,cur)
+end0   = tm.time()
+tt0    = end0 - start0
+print('Tempo Total T0: %f'%tt0)
 
 # start0 = tm.time()
 # T0     = coefdispred1.calccoef(method,shape,mvalue,nvalue,cur)
@@ -77,11 +83,11 @@ if(print_allow==1):
 # tt1    = end1 - start1
 # print('Tempo Total T1: %f'%tt1)
 
-start2 = tm.time()
-T2     = coefdispred3.calccoef(method,shape,mvalue,nvalue,cur)
-end2   = tm.time()
-tt2    = end2 - start2
-print('Tempo Total T2: %f'%tt2)
+#start2 = tm.time()
+#T2     = coefdispred3.calccoef(method,shape,mvalue,nvalue,cur)
+#end2   = tm.time()
+#tt2    = end2 - start2
+#print('Tempo Total T2: %f'%tt2)
 #==============================================================================
 
 #==============================================================================
