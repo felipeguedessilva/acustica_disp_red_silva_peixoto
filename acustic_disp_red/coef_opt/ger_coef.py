@@ -4,7 +4,7 @@
 import numpy               as np
 import math                as mt
 import sys
-import time
+import time as tm
 import scipy.special
 from   scipy               import integrate
 from   scipy.integrate     import nquad
@@ -15,6 +15,10 @@ from   scipy.linalg        import lu_factor, lu_solve
 from   scipy.linalg        import solve
 from   scipy.linalg        import lstsq
 from   scipy               import linalg as lasci
+from   scipy.integrate     import quad_vec
+from scipy.special         import gamma  as sgamma
+from scipy.special         import factorial as sfactorial
+
 #==============================================================================
 
 #==============================================================================
@@ -45,7 +49,7 @@ def fun2(beta,theta,mvalue,mloc):
     
     for r in range(0,mvalue+1):
         
-        a      = (2*mloc**(2*r)*beta**(2*r))/(np.math.factorial(2*r))
+        a      = (2*mloc**(2*r)*beta**(2*r))/(scipy.special.factorial(2*r))
         b      = (-1)**(r)
         c      = np.cos(theta)**(2*r) + np.sin(theta)**(2*r)
         phisum = phisum + a*b*c
@@ -65,7 +69,7 @@ def fun3(beta,theta,mvalue,ploc,qloc):
         for s in range(0,r+1):
         
             a      = scipy.special.binom(2*r,2*s)
-            b      = (4*(ploc**(2*r-2*s))*(qloc**(2*s))*(beta**(2*r)))/(np.math.factorial(2*r))
+            b      = (4*(ploc**(2*r-2*s))*(qloc**(2*s))*(beta**(2*r)))/(scipy.special.factorial(2*r))
             c      = (-1)**(r)
             d      = np.cos(theta)**(2*r-2*s) + np.sin(theta)**(2*s)
             phisum = phisum + a*b*c*d
@@ -190,7 +194,7 @@ def fun6new(bint,thetaint,mvalue,mloc1,mloc2):
     
     for r1 in range(0,mvalue+1):
         
-        f1 = lambda beta: ((-1)**(r1))*(2*mloc1**(2*r1)*beta**(2*r1))/(np.math.factorial(2*r1))
+        f1 = lambda beta: ((-1)**(r1))*(2*mloc1**(2*r1)*beta**(2*r1))/(scipy.special.factorial(2*r1))
         f2 = lambda theta: np.cos(theta)**(2*r1) + np.sin(theta)**(2*r1)
         
         i1, error1 = quad(f1,0,bint)
@@ -202,7 +206,7 @@ def fun6new(bint,thetaint,mvalue,mloc1,mloc2):
     
     for r2 in range(0,mvalue+1):
         
-        f1 = lambda beta: ((-1)**(r2))*(2*mloc2**(2*r2)*beta**(2*r2))/(np.math.factorial(2*r2))
+        f1 = lambda beta: ((-1)**(r2))*(2*mloc2**(2*r2)*beta**(2*r2))/(scipy.special.factorial(2*r2))
         f2 = lambda theta: np.cos(theta)**(2*r2) + np.sin(theta)**(2*r2)
         
         i1, error1 = quad(f1,0,bint)
@@ -216,7 +220,7 @@ def fun6new(bint,thetaint,mvalue,mloc1,mloc2):
         
         for r2 in range(0,mvalue+1):
             
-            f1 = lambda beta: (((-1)**(r1))*(2*mloc1**(2*r1)*beta**(2*r1))/(np.math.factorial(2*r1)))*(((-1)**(r2))*(2*mloc2**(2*r2)*beta**(2*r2))/(np.math.factorial(2*r2)))                              
+            f1 = lambda beta: (((-1)**(r1))*(2*mloc1**(2*r1)*beta**(2*r1))/(scipy.special.factorial(2*r1)))*(((-1)**(r2))*(2*mloc2**(2*r2)*beta**(2*r2))/(scipy.special.factorial(2*r2)))                              
             f2 = lambda theta: (np.cos(theta)**(2*r1) + np.sin(theta)**(2*r1))*(np.cos(theta)**(2*r2) + np.sin(theta)**(2*r2))
         
             i1, error1 = quad(f1,0,bint)
@@ -248,7 +252,7 @@ def fun7new(bint,thetaint,mvalue,ploc1,qloc1,mloc1):
     
     for r1 in range(0,mvalue+1):
         
-        f1 = lambda beta: ((-1)**(r1))*(2*mloc1**(2*r1)*beta**(2*r1))/(np.math.factorial(2*r1))
+        f1 = lambda beta: ((-1)**(r1))*(2*mloc1**(2*r1)*beta**(2*r1))/(scipy.special.factorial(2*r1))
         f2 = lambda theta: np.cos(theta)**(2*r1) + np.sin(theta)**(2*r1)
         
         i1, error1 = quad(f1,0,bint)
@@ -262,7 +266,7 @@ def fun7new(bint,thetaint,mvalue,ploc1,qloc1,mloc1):
     
         for s1 in range(0,r1+1):
             
-            f1 = lambda beta: (scipy.special.binom(2*r1,2*s1))*((4*(ploc1**(2*r1-2*s1))*(qloc1**(2*s1))*(beta**(2*r1)))/(np.math.factorial(2*r1)))*((-1)**(r1))
+            f1 = lambda beta: (scipy.special.binom(2*r1,2*s1))*((4*(ploc1**(2*r1-2*s1))*(qloc1**(2*s1))*(beta**(2*r1)))/(scipy.special.factorial(2*r1)))*((-1)**(r1))
             f2 = lambda theta:np.cos(theta)**(2*r1-2*s1) + np.sin(theta)**(2*s1)
             
             i1, error1 = quad(f1,0,bint)
@@ -278,7 +282,7 @@ def fun7new(bint,thetaint,mvalue,ploc1,qloc1,mloc1):
             
             for r2 in range(0,mvalue+1):
 
-                f1 = lambda beta: ((scipy.special.binom(2*r1,2*s1))*((4*(ploc1**(2*r1-2*s1))*(qloc1**(2*s1))*(beta**(2*r1)))/(np.math.factorial(2*r1)))*((-1)**(r1)))*(((-1)**(r2))*(2*mloc1**(2*r2)*beta**(2*r2))/(np.math.factorial(2*r2)))      
+                f1 = lambda beta: ((scipy.special.binom(2*r1,2*s1))*((4*(ploc1**(2*r1-2*s1))*(qloc1**(2*s1))*(beta**(2*r1)))/(scipy.special.factorial(2*r1)))*((-1)**(r1)))*(((-1)**(r2))*(2*mloc1**(2*r2)*beta**(2*r2))/(scipy.special.factorial(2*r2)))      
                 f2 = lambda theta: (np.cos(theta)**(2*r1-2*s1) + np.sin(theta)**(2*s1))*(np.cos(theta)**(2*r2) + np.sin(theta)**(2*r2))
             
                 i1, error1 = quad(f1,0,bint)
@@ -308,7 +312,7 @@ def fun8new(bint,thetaint,mvalue,mloc1):
     
     for r1 in range(0,mvalue+1):
         
-        f1 = lambda beta: ((beta**2))*(((-1)**(r1))*(2*mloc1**(2*r1)*beta**(2*r1))/(np.math.factorial(2*r1)))
+        f1 = lambda beta: ((beta**2))*(((-1)**(r1))*(2*mloc1**(2*r1)*beta**(2*r1))/(scipy.special.factorial(2*r1)))
         f2 = lambda theta: np.cos(theta)**(2*r1) + np.sin(theta)**(2*r1)
         
         i1, error1 = quad(f1,0,bint)
@@ -320,6 +324,95 @@ def fun8new(bint,thetaint,mvalue,mloc1):
     
     int2d = phisum0 + phisum1 
     
+    return int2d
+#==============================================================================
+
+#==============================================================================
+def fun10newv2(bint,thetaint,mvalue,ploc1,qloc1,ploc2,qloc2):
+    
+    int2d   = 0
+    phisum0 = 0 
+    phisum1 = 0
+    phisum2 = 0
+    phisum3 = 0
+        
+    phisum0 = 16*bint*thetaint 
+    
+    lr1 = []
+    ls1 = []
+    
+    for r1 in range(0,mvalue+1):
+    
+        for s1 in range(0,r1+1):
+            
+           lr1.append(r1)
+           ls1.append(s1)
+   
+    vr1 = np.array(lr1)
+    vs1 = np.array(ls1)
+   
+    f1 = lambda beta: (scipy.special.binom(2*vr1,2*vs1))*((4*(ploc1**(2*vr1-2*vs1))*(qloc1**(2*vs1))*(beta**(2*vr1)))/(scipy.special.factorial(2*vr1)))*((-1)**(vr1))
+    f2 = lambda theta: np.cos(theta)**(2*vr1-2*vs1) + np.sin(theta)**(2*vs1)
+   
+    i1, error1 = quad_vec(f1,0,bint)
+    i2, error2 = quad_vec(f2,0,thetaint)
+    
+    phisum1 = -4*np.sum(i1*i2)
+    
+    lr2 = []
+    ls2 = []
+    
+    for r2 in range(0,mvalue+1):
+    
+        for s2 in range(0,r2+1):
+            
+            lr2.append(r2)
+            ls2.append(s2)
+    
+    vr2 = np.array(lr2)
+    vs2 = np.array(ls2)    
+    
+    f1 = lambda beta: (scipy.special.binom(2*vr2,2*vs2))*((4*(ploc2**(2*vr2-2*vs2))*(qloc2**(2*vs2))*(beta**(2*vr2)))/(scipy.special.factorial(2*vr2)))*((-1)**(vr2))
+    f2 = lambda theta:np.cos(theta)**(2*vr2-2*vs2) + np.sin(theta)**(2*vs2)
+            
+    i1, error1 = quad_vec(f1,0,bint)
+    i2, error2 = quad_vec(f2,0,thetaint)
+            
+    phisum2 = -4*np.sum(i1*i2)
+    
+    lr1 = []
+    ls1 = []
+    lr2 = []
+    ls2 = []
+    
+    for r1 in range(0,mvalue+1):
+    
+        for s1 in range(0,r1+1):
+            
+            for r2 in range(0,mvalue+1):
+                
+                for s2 in range(0,r2+1):
+                    
+                    lr1.append(r1)
+                    ls1.append(s1)
+                    lr2.append(r2)
+                    ls2.append(s2)
+                    
+    vr1 = np.array(lr1)
+    vs1 = np.array(ls1)
+    vr2 = np.array(lr2)
+    vs2 = np.array(ls2)    
+                    
+    f1 = lambda beta: ((scipy.special.binom(2*vr1,2*vs1))*((4*(ploc1**(2*vr1-2*vs1))*(qloc1**(2*vs1))*(beta**(2*vr1)))/(scipy.special.factorial(2*vr1)))*((-1)**(vr1)))*((scipy.special.binom(2*vr2,2*vs2))*((4*(ploc2**(2*vr2-2*vs2))*(qloc2**(2*vs2))*(beta**(2*vr2)))/(scipy.special.factorial(2*vr2)))*((-1)**(vr2)))
+    f2 = lambda theta: (np.cos(theta)**(2*vr1-2*vs1) + np.sin(theta)**(2*vs1))*(np.cos(theta)**(2*vr2-2*vs2) + np.sin(theta)**(2*vs2))
+                
+    i1, error1 = quad_vec(f1,0,bint)
+    i2, error2 = quad_vec(f2,0,thetaint)
+            
+    phisum3 = np.sum(i1*i2)
+
+    int2d = phisum0 + phisum1 + phisum2 + phisum3
+        
     return int2d
 #==============================================================================
 
@@ -344,7 +437,7 @@ def fun10new(bint,thetaint,mvalue,ploc1,qloc1,ploc2,qloc2):
     
         for s1 in range(0,r1+1):
             
-            f1 = lambda beta: (scipy.special.binom(2*r1,2*s1))*((4*(ploc1**(2*r1-2*s1))*(qloc1**(2*s1))*(beta**(2*r1)))/(np.math.factorial(2*r1)))*((-1)**(r1))
+            f1 = lambda beta: (scipy.special.binom(2*r1,2*s1))*((4*(ploc1**(2*r1-2*s1))*(qloc1**(2*s1))*(beta**(2*r1)))/(scipy.special.factorial(2*r1)))*((-1)**(r1))
             f2 = lambda theta:np.cos(theta)**(2*r1-2*s1) + np.sin(theta)**(2*s1)
             
             i1, error1 = quad(f1,0,bint)
@@ -358,7 +451,7 @@ def fun10new(bint,thetaint,mvalue,ploc1,qloc1,ploc2,qloc2):
     
         for s2 in range(0,r2+1):
             
-            f1 = lambda beta: (scipy.special.binom(2*r2,2*s2))*((4*(ploc2**(2*r2-2*s2))*(qloc2**(2*s2))*(beta**(2*r2)))/(np.math.factorial(2*r2)))*((-1)**(r2))
+            f1 = lambda beta: (scipy.special.binom(2*r2,2*s2))*((4*(ploc2**(2*r2-2*s2))*(qloc2**(2*s2))*(beta**(2*r2)))/(scipy.special.factorial(2*r2)))*((-1)**(r2))
             f2 = lambda theta:np.cos(theta)**(2*r2-2*s2) + np.sin(theta)**(2*s2)
             
             i1, error1 = quad(f1,0,bint)
@@ -376,7 +469,7 @@ def fun10new(bint,thetaint,mvalue,ploc1,qloc1,ploc2,qloc2):
                 
                 for s2 in range(0,r2+1):
             
-                    f1 = lambda beta: ((scipy.special.binom(2*r1,2*s1))*((4*(ploc1**(2*r1-2*s1))*(qloc1**(2*s1))*(beta**(2*r1)))/(np.math.factorial(2*r1)))*((-1)**(r1)))*((scipy.special.binom(2*r2,2*s2))*((4*(ploc2**(2*r2-2*s2))*(qloc2**(2*s2))*(beta**(2*r2)))/(np.math.factorial(2*r2)))*((-1)**(r2)))
+                    f1 = lambda beta: ((scipy.special.binom(2*r1,2*s1))*((4*(ploc1**(2*r1-2*s1))*(qloc1**(2*s1))*(beta**(2*r1)))/(scipy.special.factorial(2*r1)))*((-1)**(r1)))*((scipy.special.binom(2*r2,2*s2))*((4*(ploc2**(2*r2-2*s2))*(qloc2**(2*s2))*(beta**(2*r2)))/(scipy.special.factorial(2*r2)))*((-1)**(r2)))
                     f2 = lambda theta: (np.cos(theta)**(2*r1-2*s1) + np.sin(theta)**(2*s1))*(np.cos(theta)**(2*r2-2*s2) + np.sin(theta)**(2*s2))
                 
                     i1, error1 = quad(f1,0,bint)
@@ -408,7 +501,7 @@ def fun11new(bint,thetaint,mvalue,ploc1,qloc1):
     
         for s1 in range(0,r1+1):
             
-            f1 = lambda beta: (beta**2)*((scipy.special.binom(2*r1,2*s1))*((4*(ploc1**(2*r1-2*s1))*(qloc1**(2*s1))*(beta**(2*r1)))/(np.math.factorial(2*r1)))*((-1)**(r1)))
+            f1 = lambda beta: (beta**2)*((scipy.special.binom(2*r1,2*s1))*((4*(ploc1**(2*r1-2*s1))*(qloc1**(2*s1))*(beta**(2*r1)))/(scipy.special.factorial(2*r1)))*((-1)**(r1)))
             f2 = lambda theta:np.cos(theta)**(2*r1-2*s1) + np.sin(theta)**(2*s1)
             
             i1, error1 = quad(f1,0,bint)
@@ -438,7 +531,7 @@ def fun12new(bint,thetaint,mvalue,mloc1,cur):
      
     for r1 in range(0,mvalue+1):
         
-        f1 = lambda beta: ((2-2*np.cos(cur*beta))/(cur**2))*(((-1)**(r1))*(2*mloc1**(2*r1)*beta**(2*r1))/(np.math.factorial(2*r1)))
+        f1 = lambda beta: ((2-2*np.cos(cur*beta))/(cur**2))*(((-1)**(r1))*(2*mloc1**(2*r1)*beta**(2*r1))/(scipy.special.factorial(2*r1)))
         f2 = lambda theta: np.cos(theta)**(2*r1) + np.sin(theta)**(2*r1)
         
         i1, error1 = quad(f1,0,bint)
@@ -470,7 +563,7 @@ def fun13new(bint,thetaint,mvalue,ploc1,qloc1,cur):
     
         for s1 in range(0,r1+1):
             
-            f1 = lambda beta: ((2-2*np.cos(cur*beta))/(cur**2))*((scipy.special.binom(2*r1,2*s1))*((4*(ploc1**(2*r1-2*s1))*(qloc1**(2*s1))*(beta**(2*r1)))/(np.math.factorial(2*r1)))*((-1)**(r1)))
+            f1 = lambda beta: ((2-2*np.cos(cur*beta))/(cur**2))*((scipy.special.binom(2*r1,2*s1))*((4*(ploc1**(2*r1-2*s1))*(qloc1**(2*s1))*(beta**(2*r1)))/(scipy.special.factorial(2*r1)))*((-1)**(r1)))
             f2 = lambda theta:np.cos(theta)**(2*r1-2*s1) + np.sin(theta)**(2*s1)
             
             i1, error1 = quad(f1,0,bint)
@@ -511,7 +604,7 @@ def spatte_cl(mvalue,nvalue,nrow,ncol):
     
     except:
             
-        csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=None)                 
+        csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=-1)                 
 
     return csis
 #==============================================================================
@@ -553,11 +646,11 @@ def specte_cl(mvalue,nvalue,nrow,ncol,theta):
     
         except:
             
-            csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=None)                 
+            csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=-1)                 
 
     else:
         
-        csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=None)                         
+        csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=-1)                         
 
     return csis
 #==============================================================================
@@ -599,11 +692,11 @@ def specte_rb(mvalue,nvalue,nrow,ncol,theta):
     
         except:
             
-            csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=None)                 
+            csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=-1)                 
 
     else:
         
-        csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=None)                  
+        csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=-1)                  
 
     return csis
 #==============================================================================
@@ -645,11 +738,11 @@ def specte_crb(mvalue,nvalue,nrow,ncol,theta):
     
         except:
             
-            csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=None)                 
+            csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=-1)                 
 
     else:
         
-        csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=None)                  
+        csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=-1)                  
 
     return csis
 #==============================================================================
@@ -691,11 +784,11 @@ def specte_sq(mvalue,nvalue,nrow,ncol,theta):
     
         except:
             
-            csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=None)                 
+            csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=-1)                 
 
     else:
         
-        csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=None)                 
+        csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=-1)                 
         
     return csis
 #==============================================================================
@@ -737,11 +830,11 @@ def specte_csq(mvalue,nvalue,nrow,ncol,theta):
     
         except:
             
-            csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=None)                 
+            csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=-1)                 
 
     else:
         
-        csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=None)                    
+        csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=-1)                    
 
     return csis
 #==============================================================================
@@ -813,11 +906,11 @@ def specls_cl(mvalue,nvalue,nrow,ncol,thetaint,bint):
     
         except:
             
-            csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=None)                 
+            csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=-1)                 
 
     else:
         
-        csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=None)                           
+        csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=-1)                           
 
     return csis
 #==============================================================================
@@ -889,11 +982,11 @@ def specls_rb(mvalue,nvalue,nrow,ncol,thetaint,bint):
     
         except:
             
-            csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=None)                 
+            csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=-1)                 
 
     else:
         
-        csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=None)                            
+        csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=-1)                            
 
     return csis
 #==============================================================================
@@ -965,11 +1058,11 @@ def specls_crb(mvalue,nvalue,nrow,ncol,thetaint,bint):
     
         except:
             
-            csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=None)                 
+            csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=-1)                 
 
     else:
         
-        csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=None)                   
+        csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=-1)                   
 
     return csis
 #==============================================================================
@@ -1041,11 +1134,11 @@ def specls_sq(mvalue,nvalue,nrow,ncol,thetaint,bint):
     
         except:
             
-            csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=None)                 
+            csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=-1)                 
 
     else:
         
-        csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=None)                  
+        csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=-1)                  
         
     return csis
 #==============================================================================
@@ -1108,7 +1201,7 @@ def specls_csq(mvalue,nvalue,nrow,ncol,thetaint,bint):
                     pcol            = pcol + 1
                 
             prow = prow + 1
-
+        
     if(nrow==ncol):
     
         try:
@@ -1117,11 +1210,11 @@ def specls_csq(mvalue,nvalue,nrow,ncol,thetaint,bint):
     
         except:
             
-            csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=None)                 
+            csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=-1)                 
 
     else:
         
-        csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=None)                 
+        csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=-1)                 
 
     return csis
 #==============================================================================
@@ -1158,8 +1251,8 @@ def dispte_cl(mvalue,nvalue,nrow,ncol,cur):
         for s in range(1,int(r/2)+1):
             
             a            = 0.5
-            b            = (np.math.factorial(r))*(np.math.factorial(2*s))*(np.math.factorial(2*r-2*s))
-            c            = (np.math.factorial(2*r))*(np.math.factorial(r-s))*(np.math.factorial(s))
+            b            = (scipy.special.factorial(r))*(scipy.special.factorial(2*s))*(scipy.special.factorial(2*r-2*s))
+            c            = (scipy.special.factorial(2*r))*(scipy.special.factorial(r-s))*(scipy.special.factorial(s))
             d            = cur**(2*r-2)
             bsis[prow,0] = a*(b/c)*d
             pcol         = mvalue
@@ -1183,11 +1276,11 @@ def dispte_cl(mvalue,nvalue,nrow,ncol,cur):
     
         except:
             
-            csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=None)                 
+            csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=-1)                 
 
     else:
         
-        csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=None)                             
+        csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=-1)                             
 
     return csis
 #==============================================================================
@@ -1224,8 +1317,8 @@ def dispte_rb(mvalue,nvalue,nrow,ncol,cur):
         for s in range(1,int(r/2)+1):
             
             a            = 0.5
-            b            = (np.math.factorial(r))*(np.math.factorial(2*s))*(np.math.factorial(2*r-2*s))
-            c            = (np.math.factorial(2*r))*(np.math.factorial(r-s))*(np.math.factorial(s))
+            b            = (scipy.special.factorial(r))*(scipy.special.factorial(2*s))*(scipy.special.factorial(2*r-2*s))
+            c            = (scipy.special.factorial(2*r))*(scipy.special.factorial(r-s))*(scipy.special.factorial(s))
             d            = cur**(2*r-2)
             bsis[prow,0] = a*(b/c)*d
             pcol         = mvalue
@@ -1249,11 +1342,11 @@ def dispte_rb(mvalue,nvalue,nrow,ncol,cur):
     
         except:
             
-            csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=None)                 
+            csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=-1)                 
 
     else:
         
-        csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=None)                              
+        csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=-1)                              
  
 
     return csis
@@ -1291,8 +1384,8 @@ def dispte_crb(mvalue,nvalue,nrow,ncol,cur):
         for s in range(1,int(r/2)+1):
             
             a            = 0.5
-            b            = (np.math.factorial(r))*(np.math.factorial(2*s))*(np.math.factorial(2*r-2*s))
-            c            = (np.math.factorial(2*r))*(np.math.factorial(r-s))*(np.math.factorial(s))
+            b            = (scipy.special.factorial(r))*(scipy.special.factorial(2*s))*(scipy.special.factorial(2*r-2*s))
+            c            = (scipy.special.factorial(2*r))*(scipy.special.factorial(r-s))*(scipy.special.factorial(s))
             d            = cur**(2*r-2)
             bsis[prow,0] = a*(b/c)*d
             pcol         = mvalue
@@ -1307,9 +1400,7 @@ def dispte_crb(mvalue,nvalue,nrow,ncol,cur):
                     pcol            = pcol + 1
         
             prow = prow + 1
-    
-    print(la.norm(asis))
-    
+        
     if(nrow==ncol):
     
         try:
@@ -1318,12 +1409,11 @@ def dispte_crb(mvalue,nvalue,nrow,ncol,cur):
     
         except:
             
-            csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=None)                 
+            csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=-1)                 
 
     else:
         
         csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=-1)
-        #csis, rcsis, rankcsis, singcsis = lstsq(asis,bsis,lapack_driver='gelsy')                           
     
     return csis
 #==============================================================================
@@ -1360,8 +1450,8 @@ def dispte_sq(mvalue,nvalue,nrow,ncol,cur):
         for s in range(1,int(r/2)+1):
             
             a            = 0.5
-            b            = (np.math.factorial(r))*(np.math.factorial(2*s))*(np.math.factorial(2*r-2*s))
-            c            = (np.math.factorial(2*r))*(np.math.factorial(r-s))*(np.math.factorial(s))
+            b            = (scipy.special.factorial(r))*(scipy.special.factorial(2*s))*(scipy.special.factorial(2*r-2*s))
+            c            = (scipy.special.factorial(2*r))*(scipy.special.factorial(r-s))*(scipy.special.factorial(s))
             d            = cur**(2*r-2)
             bsis[prow,0] = a*(b/c)*d
             pcol         = mvalue
@@ -1385,11 +1475,11 @@ def dispte_sq(mvalue,nvalue,nrow,ncol,cur):
     
         except:
             
-            csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=None)                 
+            csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=-1)                 
 
     else:
         
-        csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=None)                        
+        csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=-1)                        
         
     return csis
 #==============================================================================
@@ -1426,8 +1516,8 @@ def dispte_csq(mvalue,nvalue,nrow,ncol,cur):
         for s in range(1,int(r/2)+1):
             
             a            = 0.5
-            b            = (np.math.factorial(r))*(np.math.factorial(2*s))*(np.math.factorial(2*r-2*s))
-            c            = (np.math.factorial(2*r))*(np.math.factorial(r-s))*(np.math.factorial(s))
+            b            = (scipy.special.factorial(r))*(scipy.special.factorial(2*s))*(scipy.special.factorial(2*r-2*s))
+            c            = (scipy.special.factorial(2*r))*(scipy.special.factorial(r-s))*(scipy.special.factorial(s))
             d            = cur**(2*r-2)
             bsis[prow,0] = a*(b/c)*d
             pcol         = mvalue
@@ -1442,10 +1532,7 @@ def dispte_csq(mvalue,nvalue,nrow,ncol,cur):
                     pcol            = pcol + 1
         
             prow = prow + 1
-            
-    print(la.norm(asis))
-    print(nrow,ncol)
-    
+      
     if(nrow==ncol):
     
         try:
@@ -1454,24 +1541,12 @@ def dispte_csq(mvalue,nvalue,nrow,ncol,cur):
     
         except:
             
-            csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=None)                 
-
+            csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=-1)                 
+            
     else:
         
-        #csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=-1)
+        csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=-1)
 
-        if(nrow>ncol):
-       
-            Q,R  = la.qr(asis)
-            Qb   = np.dot(Q.T,bsis)
-            csis = la.solve(R,Qb)                
-
-        else:
-            
-            R, Q = lasci.rq(asis)
-            Qb   = la.solve(Q.T,bsis)
-            csis = la.solve(R,Qb)                
-            
     return csis
 #==============================================================================
 
@@ -1511,11 +1586,11 @@ def spectetheta_cl(mvalue,nvalue,nrow,ncol,theta,cur):
     
         except:
             
-            csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=None)                 
+            csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=-1)                 
 
     else:
         
-        csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=None)                 
+        csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=-1)                 
          
 
     return csis
@@ -1557,11 +1632,11 @@ def spectetheta_rb(mvalue,nvalue,nrow,ncol,theta,cur):
     
         except:
             
-            csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=None)                 
+            csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=-1)                 
 
     else:
         
-        csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=None)                    
+        csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=-1)                    
 
     return csis
 #==============================================================================
@@ -1602,11 +1677,11 @@ def spectetheta_crb(mvalue,nvalue,nrow,ncol,theta,cur):
     
         except:
             
-            csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=None)                 
+            csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=-1)                 
 
     else:
         
-        csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=None)                   
+        csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=-1)                   
 
     return csis
 #==============================================================================
@@ -1647,11 +1722,11 @@ def spectetheta_sq(mvalue,nvalue,nrow,ncol,theta,cur):
     
         except:
             
-            csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=None)                 
+            csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=-1)                 
 
     else:
         
-        csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=None)                 
+        csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=-1)                 
 
     return csis
 #==============================================================================
@@ -1692,11 +1767,11 @@ def spectetheta_csq(mvalue,nvalue,nrow,ncol,theta,cur):
     
         except:
             
-            csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=None)                 
+            csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=-1)                 
 
     else:
         
-        csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=None)                      
+        csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=-1)                      
 
     return csis
 #==============================================================================
@@ -1768,11 +1843,11 @@ def displs_cl(mvalue,nvalue,nrow,ncol,thetaint,bint,cur):
     
         except:
             
-            csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=None)                 
+            csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=-1)                 
 
     else:
         
-        csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=None)                          
+        csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=-1)                          
 
     return csis
 #==============================================================================
@@ -1844,11 +1919,11 @@ def displs_rb(mvalue,nvalue,nrow,ncol,thetaint,bint,cur):
     
         except:
             
-            csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=None)                 
+            csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=-1)                 
 
     else:
         
-        csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=None)                             
+        csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=-1)                             
 
     return csis
 #==============================================================================
@@ -1859,7 +1934,7 @@ def displs_crb(mvalue,nvalue,nrow,ncol,thetaint,bint,cur):
     asis   = np.zeros((nrow,ncol))
     bsis   = np.zeros((nrow,1))
     prow   = 0
-    
+        
     for r in range(1,mvalue+1):
         
         #res, err     = nquad(fun12,[[0,bint],[0,thetaint]],args=(mvalue,r,cur,))
@@ -1884,34 +1959,35 @@ def displs_crb(mvalue,nvalue,nrow,ncol,thetaint,bint,cur):
                 pcol            = pcol + 1
         
         prow = prow + 1
-            
+    
     for qline in range(1,mt.floor(nvalue/2)+1):
             
         for pline in range(qline,nvalue-qline+1):
-                
+             
             #res, err     = nquad(fun13,[[0,bint],[0,thetaint]],args=(mvalue,pline,qline,cur,))
             res          = fun13new(bint,thetaint,mvalue,pline,qline,cur)
             bsis[prow,0] = res
             pcol         = 0
-        
-            for m in range(1,mvalue+1):
             
+            for m in range(1,mvalue+1):
+                
                 #res, err        = nquad(fun9,[[0,bint],[0,thetaint]],args=(mvalue,m,pline,qline,))
                 res             = fun7new(bint,thetaint,mvalue,pline,qline,m)
                 asis[prow,pcol] = res
                 pcol            = pcol + 1
-        
+            
             for q in range(1,mt.floor(nvalue/2)+1):
             
                 for p in range(q,nvalue-q+1):
-                
+                    
                     #res, err        = nquad(fun10,[[0,bint],[0,thetaint]],args=(mvalue,p,q,pline,qline,))
+                    #res             = fun10new(bint,thetaint,mvalue,p,q,pline,qline)
                     res             = fun10new(bint,thetaint,mvalue,p,q,pline,qline)
                     asis[prow,pcol] = res
                     pcol            = pcol + 1
-                
+                    
             prow = prow + 1
-
+    
     if(nrow==ncol):
     
         try:
@@ -1920,12 +1996,12 @@ def displs_crb(mvalue,nvalue,nrow,ncol,thetaint,bint,cur):
     
         except:
             
-            csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=None)                 
+            csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=-1)                 
 
     else:
         
-        csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=None)                    
-
+        csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=-1)                    
+    
     return csis
 #==============================================================================
 
@@ -1996,11 +2072,11 @@ def displs_sq(mvalue,nvalue,nrow,ncol,thetaint,bint,cur):
     
         except:
             
-            csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=None)                 
+            csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=-1)                 
 
     else:
         
-        csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=None)                 
+        csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=-1)                 
         
     return csis
 #==============================================================================
@@ -2063,7 +2139,7 @@ def displs_csq(mvalue,nvalue,nrow,ncol,thetaint,bint,cur):
                     pcol            = pcol + 1
                 
             prow = prow + 1
-
+            
     if(nrow==ncol):
     
         try:
@@ -2072,11 +2148,11 @@ def displs_csq(mvalue,nvalue,nrow,ncol,thetaint,bint,cur):
     
         except:
             
-            csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=None)                 
+            csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=-1)                 
 
     else:
         
-        csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=None)                 
+        csis, rcsis, rankcsis, singcsis = la.lstsq(asis,bsis,rcond=-1)                 
 
     return csis
 #==============================================================================
@@ -2373,6 +2449,12 @@ def calccoef(method,shape,mvalue,nvalue,cur):
 
 #==============================================================================
     else: print('Configuration Not Possible!')
+#==============================================================================
+
+#==============================================================================
+    if(ncol>nrow): 
+        
+        print('More Variables then Equations! ALERT!')
 #==============================================================================
 
 #==============================================================================

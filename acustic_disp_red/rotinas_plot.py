@@ -34,7 +34,7 @@ def datasave(teste,rec,solplot,rec_select,ref,ptype,dttype):
     method = teste.method
     
     loc_save1_list = ['teste1/','teste2/','teste3/','teste4/']
-    loc_save2_list = ['dt1/']
+    loc_save2_list = ['dt1/','dt2/','dt3/','dt4/']
     
     nteste = len(loc_save1_list)
     ntimes = len(loc_save2_list)
@@ -50,9 +50,7 @@ def datasave(teste,rec,solplot,rec_select,ref,ptype,dttype):
         if(dttype==1): local_save2 = loc_save2_list[1]
         if(dttype==2): local_save2 = loc_save2_list[2]
         if(dttype==3): local_save2 = loc_save2_list[3]
-        if(dttype==4): local_save2 = loc_save2_list[4]
-        if(dttype==5): local_save2 = loc_save2_list[5]
-
+     
         np.save("data_save/%s%srec_%s_%s_%d_%d"%(local_save1,local_save2,mshape,method,mvalue,nvalue),rec)    
         np.save("data_save/%s%ssolplot_%s_%s_%d_%d"%(local_save1,local_save2,mshape,method,mvalue,nvalue),solplot)
         np.save("data_save/%s%srec_select_%s_%s_%d_%d"%(local_save1,local_save2,mshape,method,mvalue,nvalue),rec_select)
@@ -151,7 +149,7 @@ def graph2drec(rec,teste,i):
     cbar.locator = tick_locator
     cbar.update_ticks()
     if(i==0): plot.savefig('figures/temporario/rec_%s_%s_%d_%d.png'%(mshape,method,mvalue,nvalue),dpi=100)
-    if(i==1): plot.savefig('figures/rec_ref.png')
+    if(i==1): plot.savefig('figures/temporario/rec_ref.png')
     plot.show()
     plot.close()
 #==============================================================================

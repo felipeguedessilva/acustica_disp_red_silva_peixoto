@@ -22,8 +22,8 @@ class teste1:
 #Parâmetros de Malha e Tempo
 #==============================================================================
     dttype = 0       # Choose dt Value
-    nptx   = 101     # Número de Pontos Direção X
-    npty   = 101     # Número de Pontos Direção Y
+    nptx   = 201     # Número de Pontos Direção X
+    npty   = 201     # Número de Pontos Direção Y
     x0     =    0.   # Ponto Inicial Direção X
     x1     = 3000.   # Ponto Final Direção X 
     compx  = x1-x0   # Comprimento do Domínio em X
@@ -46,16 +46,16 @@ class teste1:
     nypos  = 1500                      # Posição dos Receivers em Y
     datainter  = 1                     # Interpolação de Dados de Velocidade
     dataintera = 0                     # Interpolação de Dados de Velocidade Artificial
-    CFLv       = np.array([0.05])      # Vetor com Diferentes Condições CFL
+    CFLv       = np.array([0.05])    # Vetor com Diferentes Condições CFL
     CFL        = CFLv[dttype]          # Condição CFL
     jumpv      = np.array([300])       # Vetor com Diferentes Valores de Jump
     jump       = int(jumpv[dttype])               # Intervalo de Dados a Serem Salvos
     tou        = 2                                # Time Order Displacement 
-    sou        = 20                               # Space Order Displacement
+    sou        = 2                                # Space Order Displacement
     mvalue     = int(sou/2)                       # First Parameter for Stencil
-    nvalue     = 3                                # Second Parameter for Stencils
-    shape      = 'csq'                            # Stencil Geometry
-    method     = 'dispte'                         # FD Method
+    nvalue     = 1                                # Second Parameter for Stencils   
+    shape      = 'cl'                            # Stencil Geometry
+    method     = 'spatte'                        # FD Method
     btype      = 3                                # Boundary Type    
     ftype      = 0                                # Source type                                                                                                                                                                                                                                                                                                                                                                                                                                                  
 #==============================================================================

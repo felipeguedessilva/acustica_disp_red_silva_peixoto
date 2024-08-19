@@ -47,7 +47,7 @@ ptype        = 1
 ref          = 0
 save_stencil = 0
 save_sol     = 0
-print_sol    = 1
+print_sol    = 0
 exec_op      = 1
 stop_param   = 0
 
@@ -124,6 +124,7 @@ grid = Grid(origin=origin,extent=extent,shape=shape,subdomains=(d0_domain),dtype
 # Construção da Malha Temporal
 #==============================================================================
 vmax  = np.around(np.amax(v),1) 
+vmin  = np.around(np.amin(v),1) 
 dtmax = (min(hxv,hyv)*CFL)/(vmax)
 ntmax = int((tn-t0)/dtmax)
 dt0   = (tn-t0)/(ntmax)
@@ -209,6 +210,7 @@ src_term = src.inject(field=u.forward,expr=fact*1*src*dt**2*vel**2)
 rec_term = rec.interpolate(expr=u)
 rec_select_term = rec_select.interpolate(expr=u)
 
+start0 = tm.time()
 try: 
         
     mcoef = np.load("stencil_save/mcoef_%s_%s_%d_%d_%f.npy"%(mshape,method,mvalue,nvalue,cur))
@@ -220,6 +222,9 @@ except:
     mcoef = cte*coef1.calccoef(method,mshape,mvalue,nvalue,cur)    
     if(save_stencil==1): np.save("stencil_save/mcoef_%s_%s_%d_%d_%f"%(mshape,method,mvalue,nvalue,cur),mcoef)    
     print('Calcualte a New Stencil')
+end0 = tm.time()
+t0 = end0 - start0
+print('Tempo para gerar stencil = %f'%t0)
 
 new_laplace, contcoef = coef1.eqconstuct1(mcoef,u,t,x,y)
 pde0                  = Eq(u.dt2 - new_laplace*vel*vel)
@@ -282,14 +287,17 @@ Ug[nplot-1,:,:] = u.data[0,:,:]
 #==============================================================================
 if(print_sol==1): 
     G1 = rplot.graph2d(u.data[0,:,:],teste,ref)
-    #R1 = rplot.graph2drec(rec.data,teste,ref)
-    #V1 = rplot.graph2dvel(v,teste)
+    R1 = rplot.graph2drec(rec.data,teste,ref)
+    V1 = rplot.graph2dvel(v,teste)
 if(save_sol==1): S1 = rplot.datasave(teste,rec.data,Ug,rec_select.data,ref,ptype,dttype)
 #==============================================================================
 
 #==============================================================================
 print('Problem =  %d - Dtype = %d'%(ptype,teste.dttype+1))
-print('hx = %.2f - hy = %.2f - dt = %.2f - nt = %d - jump = %d - vmax = %.2f'%(hxv,hyv,dt0,nt,jump,vmax))
+print('Info 1')
+print('hx = %.4f m - hy = %.4f m - dt = %.4f ms - vmax = %.4f km/h - vminx = %.4f km/h - freq = %.4f Hz'%(hxv,hyv,dt0,vmax,vmin,f0))
+print('Info 2')
+print('hx = %.4f - hy = %.4f - dt = %.4f - nt = %d - jump = %d - vmax = %.4f - freq = %.4f'%(hxv,hyv,dt0,nt,jump,vmax,f0))
 print("Tempo de Execuação = %.3f s" %(mtime_exec))
 print('')
 #==============================================================================

@@ -40,6 +40,8 @@ configuration['log-level']='ERROR'
 plot.close("all")
 #==============================================================================
 
+start_total = tm.time()
+
 #==============================================================================
 # Testes de Leitura de Dados
 #==============================================================================
@@ -47,7 +49,7 @@ ptype        = 1
 ref          = 0
 save_stencil = 1
 save_sol     = 1
-print_sol    = 1
+print_sol    = 0
 exec_op      = 1
 stop_param   = 0
 
@@ -74,7 +76,7 @@ coef1 = copt.coefopt1(teste,MV)
 #==============================================================================
 vmethod  = ['spatte','spectetheta','dispte','specls','displs'] 
 nvmethod = len(vmethod)
-vmvalue  = [1,2,3,4,5,6,7,8,9,10]
+vmvalue  = [1,2,3,4,5,6,7,8]
 nvmvalue = len(vmvalue)
 
 total_configs = 0
@@ -94,8 +96,8 @@ for k1 in range(0,nvmethod):
     
     elif(method == 'dispte' or method == 'specls' or method == 'displs'):
         
-        vshape = ['crb','csq']
-
+        vshape = ['crb']
+        
     nvshape = len(vshape)
     
     for k2 in range(0,nvshape):
@@ -134,11 +136,11 @@ vtime_exec  = np.zeros(nconfig)
 #==============================================================================
 # Obtenção de Parâmetros
 #==============================================================================
-ni = 295
-nf = 349
+#ni = 52
+#nf = 87
 
-for k in range(ni,nf+1):
-#for k in range(0,nconfig):
+#for k in range(ni,nf+1):
+for k in range(0,nconfig):
     
     print('Test with Stencil: %d'%(k))
     nptx    = teste.nptx    # Número de Pontos Direção X
@@ -381,6 +383,12 @@ for k in range(ni,nf+1):
     print("Tempo de Execuação = %.3f s" %(vtime_exec[k]))
     print('')
 #==============================================================================
+
+end_total = tm.time()
+
+ttotal = end_total-start_total
+
+print('Tempo Gasto Total =%f'%ttotal)
 
 #==============================================================================
 # Save Time Execution
