@@ -1,1 +1,0 @@
-/home/felipe-pc/Posdoc_2024_2026/codigos/Python/Projeto1/experiments/server_results/test_stencils_v1/generate/testes_opt.py
