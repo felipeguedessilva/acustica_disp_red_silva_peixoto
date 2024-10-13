@@ -494,7 +494,7 @@ def gera_norms(ptype,dx_ref,dt_ref,freq_ref):
     #==============================================================================
     xpos        = [0,0,1,1]
     ypos        = [0,1,0,1]
-    clnames     = ['spatte','spectetheta','dispte-crb N=1','displs-crb N=1','displs-crb N=1','specls-crb N=1']
+    clnames     = ['spatte','spectetheta','dispte-crb N=1','displs-crb N=1','specls-crb N=1']
     crbnames    = ['dispte-crb','displs-crb','specls-crb']
     #==============================================================================
     
