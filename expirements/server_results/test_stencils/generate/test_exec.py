@@ -9,39 +9,44 @@ from   devito_acustica_ref      import *
 #==============================================================================
 # Multiple Executation - Reference Tests
 #==============================================================================
-vptype     = [1,2,3,4] 
-vfreqref   = [1,2,3]
+# vptype     = [1,2,3,4] 
+# vfreqref   = [1,2,3]
  
-nvptype    = len(vptype) 
-nvfreqref  = len(vfreqref) 
-cont_rt    = 0
-lconfig_rt = []
+# nvptype    = len(vptype) 
+# nvfreqref  = len(vfreqref) 
+# cont_rt    = 0
+# lconfig_rt = []
 
-for k0 in range(0,nvptype):
+# for k0 in range(0,nvptype):
 
-    for k1 in range(0,nvfreqref):
+#     for k1 in range(0,nvfreqref):
 
-        ptype      = vptype[k0] 
-        freq_ref   = vfreqref[k1]
-        factor_ref = 16
+#         ptype      = vptype[k0] 
+#         freq_ref   = vfreqref[k1]
+#         factor_ref = 16
 
-        print('')
-        print('Number    = %d'%cont_rt)
-        print('Test Type = %d'%ptype)
-        print('freq_ref  = %d'%freq_ref)
-        print('')
+#         print('')
+#         print('Number    = %d'%cont_rt)
+#         print('Test Type = %d'%ptype)
+#         print('freq_ref  = %d'%freq_ref)
+#         print('')
                 
-        acoustic_operator_one_exec_ref(freq_ref,factor_ref,ptype)
+#         acoustic_operator_one_exec_ref(freq_ref,factor_ref,ptype)
                 
-        lconfig_rt.append((cont_rt,ptype,freq_ref))
+#         lconfig_rt.append((cont_rt,ptype,freq_ref))
                 
-        cont_rt = cont_rt + 1
+#         cont_rt = cont_rt + 1
 #==============================================================================
 
 #==============================================================================
 # Multiple Executations - Comum Tests
 #==============================================================================
-vptype    = [1,2,3,4] 
+# vptype    = [1,2,3,4] 
+# vdxref    = [1,2,4,8]
+# vdtref    = [1,2,4,6]
+# vfreqref  = [1,2,3] 
+
+vptype    = [2] 
 vdxref    = [1,2,4,8]
 vdtref    = [1,2,4,6]
 vfreqref  = [1,2,3] 

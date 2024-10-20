@@ -16,17 +16,17 @@ import testes_opt              as ttopt
 #==============================================================================
 # Range of Parameters
 #==============================================================================
-# save_fields   = 0
-# vptype        = [1,2,3,4] 
-# vdxref        = [1,2,4,8]
-# vdtref        = [1,2,4,6]
-# vfreqref      = [1,2,3] 
-
 save_fields   = 1
-vptype        = [1,2,3,4] 
-vdxref        = [1]
-vdtref        = [1]
-vfreqref      = [1,2,3] 
+
+# vptype    = [1,2,3,4] 
+# vdxref    = [1]
+# vdtref    = [1]
+# vfreqref  = [1,2,3] 
+
+vptype    = [2] 
+vdxref    = [1]
+vdtref    = [1]
+vfreqref  = [1,2,3] 
 
 nvptype      = len(vptype) 
 nvdxref      = len(vdxref)
@@ -114,7 +114,9 @@ for k0 in range(0,nvptype):
                         
                     elif(method == 'dispte' or method == 'specls' or method == 'displs'):
                             
-                        vshape = ['crb']
+                        #vshape = ['crb']
+                        vshape = ['crb','csq'] 
+                        #vshape = ['rb',crb','csq','sq']
                             
                     nvshape = len(vshape)
                         
@@ -276,6 +278,11 @@ for k0 in range(0,nvptype):
                             npt  = int((nvalue**2-1+4*mvalue+1))
                             
                         npe = npt - (4*mvalue+1) 
+                    
+                    elif(shape=='csq'):
+                        
+                        npt     = int(4*((2*mvalue-nvalue+1)*nvalue-nvalue)+4*mvalue+1)  
+                        npe     = npt - (4*mvalue+1) 
                             
                     sou         = teste.sou    
                     mvalue      = teste.mvalue  
