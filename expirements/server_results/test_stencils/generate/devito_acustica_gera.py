@@ -93,7 +93,11 @@ def acoustic_operator_multiple_exec(dx_ref,dt_ref,freq_ref,ptype,percent_glob):
             #vshape = ['crb']
             vshape = ['crb','csq'] 
             #vshape = ['rb',crb','csq','sq']
+<<<<<<< HEAD
                     
+=======
+             
+>>>>>>> origin/main
         nvshape = len(vshape)
         
         for k2 in range(0,nvshape):

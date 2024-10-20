@@ -33,10 +33,19 @@ plt.close("all")
 #==============================================================================
 # Read Txt Files
 #==============================================================================
+<<<<<<< HEAD
 ptype        = 1
 locopen      = '../testresults/test%d_results_norms_fields'%(ptype)
 conversion_dict2  = {1: 0.5, 2: 1.0, 4: 2.0, 6: 3.0}
 
+=======
+ptype        = 4
+locopen      = '../testresults/test%d_results_norms_fields'%(ptype)
+conversion_dict2  = {1: 0.5, 2: 1.0, 4: 2.0, 6: 3.0}
+
+
+
+>>>>>>> origin/main
 with open(locopen, 'rb') as f: 
 
     if(ptype==1): 
@@ -274,9 +283,12 @@ mask          = dfcomp['normsolmax'] < vallimit_sol
 dfcomp_short  = dfcomp[mask]
 a = 100*dfcomp_short.shape[0]/dfcomp.shape[0]
 print('Percent Valid in Solnormmax: %.3f'%a)
+<<<<<<< HEAD
 
 dfcomp_short  = dfcomp.copy()
 
+=======
+>>>>>>> origin/main
 #==============================================================================
 
 #==============================================================================
@@ -285,6 +297,7 @@ dfcomp_short  = dfcomp.copy()
 mask =   (dfcomp_short['dx']     == dxselect) \
        & (dfcomp_short['dt']     == dtselect) \
        & (dfcomp_short['nvalue'] == nvalueselect)
+<<<<<<< HEAD
 
        
 dfselect  = dfcomp_short[mask]
@@ -293,6 +306,13 @@ lshape    = ['cl','crb','csq']
 lfreq     = dfselect['freqv'].unique().tolist()
 nlmethod  = len(lmethod)
 nlshape   = len(lshape)
+=======
+       
+dfselect  = dfcomp_short[mask]
+lmethod   = ['spatte','spectetheta','dispte','displs','specls']
+lfreq     = dfselect['freqv'].unique().tolist()
+nlmethod  = len(lmethod)
+>>>>>>> origin/main
 nlfreq    = len(lfreq)
 
 lnormsoll2  = []
@@ -327,6 +347,7 @@ for k0 in range(0,nlfreq):
 
         locmethod = lmethod[k1]
 
+<<<<<<< HEAD
         for k2 in range(0,nlshape):
 
             locshape = lshape[k2]
@@ -365,6 +386,31 @@ for k0 in range(0,nlfreq):
             
             lv4min.append(min(v4))
             lv4max.append(max(v4))
+=======
+        mask = (dfcomp_short['method']  == locmethod) & (dfcomp_short['freqv'] == locfreq) 
+
+        v1 = dfselect[mask]['normsoll2'].to_numpy()
+        v2 = dfselect[mask]['normsolmax'].to_numpy()
+        v3 = dfselect[mask]['normrecl2'].to_numpy()
+        v4 = dfselect[mask]['normrecmax'].to_numpy()
+        
+        locsoll2.append(v1)
+        locsolmax.append(v2)
+        locrecl2.append(v3)
+        locrecmax.append(v4)
+        
+        lv1min.append(min(v1))
+        lv1max.append(max(v1))
+        
+        lv2min.append(min(v2))
+        lv2max.append(max(v2))
+        
+        lv3min.append(min(v3))
+        lv3max.append(max(v3))
+        
+        lv4min.append(min(v4))
+        lv4max.append(max(v4))
+>>>>>>> origin/main
     
     lnormsoll2.append(locsoll2)
     lnormsolmax.append(locsolmax)
@@ -397,12 +443,17 @@ linep        = [vticks,vline,vcolors]
 #==============================================================================
 # Plot1
 #==============================================================================
+<<<<<<< HEAD
 def plot1(lnorm,xpos,ypos,clnames,normtype,vmin,vmax,lfreq,ordersv,figname,figtype):
+=======
+def plot1(lnorm,xpos,ypos,clnames,normtype,vmin,vmax,lfreq,ordersv,figname):
+>>>>>>> origin/main
 
     npos  = len(xpos)
     nfreq = len(lfreq)
     nordersv = len(ordersv)
         
+<<<<<<< HEAD
     plt.figure(figsize = (20,18))
 
     if(figtype=='rec'):
@@ -416,6 +467,12 @@ def plot1(lnorm,xpos,ypos,clnames,normtype,vmin,vmax,lfreq,ordersv,figname,figty
         if(normtype=='nmax'): plt.suptitle('Relative Maximum Error of Full Displacement at time  %.3f s \n dx = %.4fm - dt = %.4fs'%(vparameters[0],vparameters[1],vparameters[2]))
         
     grid = plt.GridSpec(3,3,wspace=0.4,hspace=0.2)
+=======
+    plt.figure(figsize = (16,12))
+    if(normtype=='n2'): plt.suptitle('Relative Quadratic Error of Full Receivers at time  %.3f s \n dx = %.4fm - dt = %.4fs'%(vparameters[0],vparameters[1],vparameters[2]))
+    if(normtype=='nmax'): plt.suptitle('Relative Maximum Error of Full Receivers at time  %.3f s \n dx = %.4fm - dt = %.4fs'%(vparameters[0],vparameters[1],vparameters[2]))
+    grid = plt.GridSpec(3,2,wspace=0.2,hspace=0.4)
+>>>>>>> origin/main
         
     min_value = -0.2*vmin
     max_value = 1.2*vmax
@@ -453,13 +510,18 @@ def plot1(lnorm,xpos,ypos,clnames,normtype,vmin,vmax,lfreq,ordersv,figname,figty
 #==============================================================================
 # Plot2
 #==============================================================================
+<<<<<<< HEAD
 def plot2(lnorm,xpos,ypos,clnames,normtype,vmin,vmax,lfreq,ordersv,figname,figtype):
+=======
+def plot2(lnorm,xpos,ypos,clnames,normtype,vmin,vmax,lfreq,ordersv,figname):
+>>>>>>> origin/main
 
     npos     = len(xpos)
     nfreq    = len(lfreq)
     nordersv = len(ordersv)
     nmethods = len(clnames)
         
+<<<<<<< HEAD
     plt.figure(figsize = (16,6))
     
     if(figtype=='rec'):
@@ -473,6 +535,12 @@ def plot2(lnorm,xpos,ypos,clnames,normtype,vmin,vmax,lfreq,ordersv,figname,figty
         if(normtype=='nmax'): plt.suptitle('Relative Maximum Error of Full Displacement at time  %.3f s \n dx = %.4fm - dt = %.4fs'%(vparameters[0],vparameters[1],vparameters[2]))
 
     grid = plt.GridSpec(1,3,wspace=0.4,hspace=0.2)
+=======
+    plt.figure(figsize = (16,12))
+    if(normtype=='n2'): plt.suptitle('Relative Quadratic Error of Full Receivers at time  %.3f s \n dx = %.4fm - dt = %.4fs'%(vparameters[0],vparameters[1],vparameters[2]))
+    if(normtype=='nmax'): plt.suptitle('Relative Maximum Error of Full Receivers at time  %.3f s \n dx = %.4fm - dt = %.4fs'%(vparameters[0],vparameters[1],vparameters[2]))
+    grid = plt.GridSpec(2,2,wspace=0.2,hspace=0.4)
+>>>>>>> origin/main
         
     min_value = -0.2*vmin
     max_value = 1.2*vmax
@@ -510,6 +578,7 @@ def plot2(lnorm,xpos,ypos,clnames,normtype,vmin,vmax,lfreq,ordersv,figname,figty
 #==============================================================================
 # Plot Infos
 #==============================================================================
+<<<<<<< HEAD
 xpos        = [0,0,1,1,1,2,2,2]
 ypos        = [0,1,0,1,2,0,1,2]
 clnames     = ['spatte','spectetheta',
@@ -517,6 +586,11 @@ clnames     = ['spatte','spectetheta',
                'displs-crb N=1','displs-csq N=0',
                'specls-crb N=1','specls-csq N=0']
 
+=======
+xpos        = [0,0,1,1,2]
+ypos        = [0,1,0,1,0]
+clnames     = ['spatte','spectetheta','dispte-crb N=1','displs-crb N=1','specls-crb N=1']
+>>>>>>> origin/main
 locsave     = 'comp_fig/teste%d/compfreq/'%(ptype) 
 #==============================================================================
 
@@ -524,6 +598,7 @@ locsave     = 'comp_fig/teste%d/compfreq/'%(ptype)
 # Plot1 Execute
 #==============================================================================
 normtype = 'n2'
+<<<<<<< HEAD
 
 figtype  = 'sol'
 figname  = '1normsol_p%ddx%ddt%d%s'%(ptype,dx_ref,dt_ref,normtype)
@@ -569,4 +644,30 @@ P3       = plot2(lnormsolmax,xpos,ypos,clnames,normtype,vsolminl2,vsolmaxl2,lfre
 figtype  = 'rec'
 figname  = '2normrec_p%ddx%ddt%d%s'%(ptype,dx_ref,dt_ref,figtype)
 P4       = plot2(lnormrecmax,xpos,ypos,clnames,normtype,vsolminl2,vsolmaxl2,lfreq,ordersv,figname,figtype)
+=======
+figname  = '1normsol_p%ddx%ddt%d'%(ptype,dx_ref,dt_ref)
+P1       = plot1(lnormsoll2,xpos,ypos,clnames,normtype,vsolminl2,vsolmaxl2,lfreq,ordersv,figname)
+figname  = '1normrec_p%ddx%ddt%d'%(ptype,dx_ref,dt_ref)
+P2       = plot1(lnormrecl2,xpos,ypos,clnames,normtype,vsolminl2,vsolmaxl2,lfreq,ordersv,figname)
+normtype = 'nmax'
+figname  = '1normsol_p%ddx%ddt%d'%(ptype,dx_ref,dt_ref)
+P3       = plot1(lnormsolmax,xpos,ypos,clnames,normtype,vsolminl2,vsolmaxl2,lfreq,ordersv,figname)
+figname  = '1normrec_p%ddx%ddt%d'%(ptype,dx_ref,dt_ref)
+P4       = plot1(lnormrecmax,xpos,ypos,clnames,normtype,vsolminl2,vsolmaxl2,lfreq,ordersv,figname)
+#==============================================================================
+
+#==============================================================================
+# Plot1 Execute - L2
+#==============================================================================
+normtype = 'n2'
+figname  = '2normsol_p%ddx%ddt%d'%(ptype,dx_ref,dt_ref)
+P1       = plot2(lnormsoll2,xpos,ypos,clnames,normtype,vsolminl2,vsolmaxl2,lfreq,ordersv,figname)
+figname  = '2normrec_p%ddx%ddt%d'%(ptype,dx_ref,dt_ref)
+P2       = plot2(lnormrecl2,xpos,ypos,clnames,normtype,vsolminl2,vsolmaxl2,lfreq,ordersv,figname)
+normtype = 'nmax'
+figname  = '2normsol_p%ddx%ddt%d'%(ptype,dx_ref,dt_ref)
+P3       = plot2(lnormsolmax,xpos,ypos,clnames,normtype,vsolminl2,vsolmaxl2,lfreq,ordersv,figname)
+figname  = '2normrec_p%ddx%ddt%d'%(ptype,dx_ref,dt_ref)
+P4       = plot2(lnormrecmax,xpos,ypos,clnames,normtype,vsolminl2,vsolmaxl2,lfreq,ordersv,figname)
+>>>>>>> origin/main
 #==============================================================================

@@ -120,7 +120,7 @@ with open(locopen, 'rb') as f:
             
         test_results  = pickle.load(f) 
         ntr           = len(test_results)
-        testname      = 'Marmousi Velocity Model'
+        testname      = 'SEG/EAGE 2D Salt Velocity Model'
         xpositionv    = np.array([4000.0,4000.0,4000.0,6000.0,6000.0,6000.0,8000.0,8000.0,8000.0])   
         ypositionv    = np.array([2000.0,2500.0,3000.0,2000.0,2500.0,3000.0,2000.0,2500.0,3000.0]) 
 
@@ -128,7 +128,7 @@ with open(locopen, 'rb') as f:
             
         test_results  = pickle.load(f)
         ntr           = len(test_results)
-        testname      = 'SEG/EAGE 2D Salt Velocity Model'
+        testname      = 'Marmousi Velocity Model'
         xpositionv  = np.array([6000.0,6000.0,6000.0,8000.0,8000.0,8000.0,10000.0,10000.0,10000.0,12000.0,12000.0,12000.0])
         ypositionv  = np.array([1000.0,2000.0,3000.0,1000.0,2000.0,3000.0,1000.0,2000.0,3000.0,1000.0,2000.0,3000.0])
 #==============================================================================

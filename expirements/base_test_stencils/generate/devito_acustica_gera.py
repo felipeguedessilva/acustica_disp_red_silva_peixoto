@@ -43,7 +43,7 @@ def acoustic_operator_multiple_exec(dx_ref,dt_ref,freq_ref,ptype,percent_glob):
     #==============================================================================
     ref          = 0
     save_stencil = 1
-    save_sol     = 1
+    save_sol     = 0
     exec_op      = 1
     stop_param   = 0
     

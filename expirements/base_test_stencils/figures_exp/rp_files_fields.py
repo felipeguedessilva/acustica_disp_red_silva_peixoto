@@ -55,7 +55,7 @@ def gera_fields(ptype,dx_ref,dt_ref,freq_ref):
                 
             test_results  = pickle.load(f) 
             ntr           = len(test_results)
-            testname      = 'SEG/EAGE 2D Salt Velocity Model'
+            testname      = 'Marmousi Velocity Model'
             xpositionv    = np.array([4000.0,4000.0,4000.0,6000.0,6000.0,6000.0,8000.0,8000.0,8000.0])   
             ypositionv    = np.array([2000.0,2500.0,3000.0,2000.0,2500.0,3000.0,2000.0,2500.0,3000.0]) 
 
@@ -63,7 +63,7 @@ def gera_fields(ptype,dx_ref,dt_ref,freq_ref):
                 
             test_results  = pickle.load(f)
             ntr           = len(test_results)
-            testname      = 'Marmousi Velocity Model'
+            testname      = 'SEG/EAGE 2D Salt Velocity Model'
             xpositionv  = np.array([6000.0,6000.0,6000.0,8000.0,8000.0,8000.0,10000.0,10000.0,10000.0,12000.0,12000.0,12000.0])
             ypositionv  = np.array([1000.0,2000.0,3000.0,1000.0,2000.0,3000.0,1000.0,2000.0,3000.0,1000.0,2000.0,3000.0])
     #==============================================================================
@@ -325,7 +325,7 @@ def gera_fields(ptype,dx_ref,dt_ref,freq_ref):
                 
                 if(k1==0):
                     
-                    fig1 = plt.imshow(np.transpose(vsols[k1][k3]),cmap='binary',interpolation='kaiser',extent=extent,aspect='auto',vmin=-scale,vmax=scale)   
+                    fig1 = plt.imshow(vsols[k1][k3],cmap='binary',interpolation='kaiser',extent=extent,aspect='auto',vmin=-scale,vmax=scale)   
                     plt.grid()
                     plt.title('%s'%(vnames[k1]))
                     plt.gca().xaxis.set_major_formatter(mticker.FormatStrFormatter('%.1f km'))
@@ -339,7 +339,7 @@ def gera_fields(ptype,dx_ref,dt_ref,freq_ref):
                 
                 else:
         
-                    fig1 = plt.imshow(np.transpose(vsols[0][k3]-vsols[k1][k3]),cmap='binary',interpolation='kaiser',extent=extent,aspect='auto',vmin=-scale,vmax=scale)   
+                    fig1 = plt.imshow(vsols[0][k3]-vsols[k1][k3],cmap='binary',interpolation='kaiser',extent=extent,aspect='auto',vmin=-scale,vmax=scale)   
                     plt.grid()
                     plt.title('%s'%(vnames[k1]))
                     plt.gca().xaxis.set_major_formatter(mticker.FormatStrFormatter('%.1f km'))
