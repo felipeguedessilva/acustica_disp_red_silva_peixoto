@@ -8,12 +8,12 @@ from   rp_files_fields import *
 #==============================================================================
 # Multiple Executations - Comum Tests
 #==============================================================================
-# vptype    = [1] 
-# vdxref    = [1,2,4,8]
-# vdtref    = [1,2,4,6]
+# vptype    = [1,2,3,4] 
+# vdxref    = [1]
+# vdtref    = [1]
 # vfreqref  = [1,2,3] 
 
-vptype    = [1,2,3,4] 
+vptype    = [4] 
 vdxref    = [1]
 vdtref    = [1]
 vfreqref  = [1,2,3] 

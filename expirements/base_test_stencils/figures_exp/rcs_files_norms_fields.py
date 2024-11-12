@@ -16,16 +16,17 @@ import testes_opt              as ttopt
 #==============================================================================
 # Range of Parameters
 #==============================================================================
-save_fields   = 0
-# vptype        = [1] 
-# vdxref        = [1,2,4,8]
-# vdtref        = [1,2,4,6]
-# vfreqref      = [1,2,3] 
+save_fields   = 1
 
-vptype        = [1,2,3,4] 
-vdxref        = [1]
-vdtref        = [1]
-vfreqref      = [1,2,3] 
+# vptype    = [1,2,3,4] 
+# vdxref    = [1]
+# vdtref    = [1]
+# vfreqref  = [1,2,3] 
+
+vptype    = [4] 
+vdxref    = [1]
+vdtref    = [1]
+vfreqref  = [1,2,3] 
 
 nvptype      = len(vptype) 
 nvdxref      = len(vdxref)
@@ -113,7 +114,9 @@ for k0 in range(0,nvptype):
                         
                     elif(method == 'dispte' or method == 'specls' or method == 'displs'):
                             
-                        vshape = ['crb']
+                        #vshape = ['crb']
+                        vshape = ['crb','csq'] 
+                        #vshape = ['rb',crb','csq','sq']
                             
                     nvshape = len(vshape)
                         
@@ -275,26 +278,54 @@ for k0 in range(0,nvptype):
                             npt  = int((nvalue**2-1+4*mvalue+1))
                             
                         npe = npt - (4*mvalue+1) 
+                    
+                    elif(shape=='csq'):
+                        
+                        npt     = int(4*((2*mvalue-nvalue+1)*nvalue-nvalue)+4*mvalue+1)  
+                        npe     = npt - (4*mvalue+1) 
                             
                     sou         = teste.sou    
                     mvalue      = teste.mvalue  
                     nvalue      = teste.nvalue  
                     mshape      = teste.shape   
                     method      = teste.method
-                    rec         = np.load("../data_save/%s/rec_%s_%s_%d_%d.npy"%(locopen,mshape,method,mvalue,nvalue))    
-                    solplot     = np.load("../data_save/%s/solplot_%s_%s_%d_%d.npy"%(locopen,mshape,method,mvalue,nvalue))
-                    rec_select  = np.load("../data_save/%s/rec_select_%s_%s_%d_%d.npy"%(locopen,mshape,method,mvalue,nvalue))
+                    
+                    try:
+                    
+                        rec         = np.load("../data_save/%s/rec_%s_%s_%d_%d.npy"%(locopen,mshape,method,mvalue,nvalue))    
+                        solplot     = np.load("../data_save/%s/solplot_%s_%s_%d_%d.npy"%(locopen,mshape,method,mvalue,nvalue))
+                        rec_select  = np.load("../data_save/%s/rec_select_%s_%s_%d_%d.npy"%(locopen,mshape,method,mvalue,nvalue))
+                        fmark       = 0
+                    
+                    except:
+                         
+                        rec        = recrefcut.copy()
+                        solplot    = solplotcut.copy()
+                        rec_select = recselectcut.copy()
+                        fmark      = 1
+                    
                     fields_save = []
                     normrec     = []
                     
                     try:
 
-                        normrec1      = la.norm(recrefcut-rec,1)
-                        normrec2      = la.norm(recrefcut-rec,2)
-                        normrecmax    = la.norm(recrefcut-rec,np.inf)                        
-                        normrecrel1   = la.norm(recrefcut-rec,1)/la.norm(recrefcut,1)            
-                        normrecrel2   = la.norm(recrefcut-rec,2)/la.norm(recrefcut,2)
-                        normrecrelmax = la.norm(recrefcut-rec,np.inf)/la.norm(recrefcut,np.inf)
+                        if(fmark==1):
+                            
+                            normrec1      = 'NC'
+                            normrec2      = 'NC'
+                            normrecmax    = 'NC'                        
+                            normrecrel1   = 'NC'
+                            normrecrel2   = 'NC'
+                            normrecrelmax = 'NC'
+
+                        else:
+
+                            normrec1      = la.norm(recrefcut-rec,1)
+                            normrec2      = la.norm(recrefcut-rec,2)
+                            normrecmax    = la.norm(recrefcut-rec,np.inf)                        
+                            normrecrel1   = la.norm(recrefcut-rec,1)/la.norm(recrefcut,1)            
+                            normrecrel2   = la.norm(recrefcut-rec,2)/la.norm(recrefcut,2)
+                            normrecrelmax = la.norm(recrefcut-rec,np.inf)/la.norm(recrefcut,np.inf)
                         
                     except:
 
@@ -324,12 +355,23 @@ for k0 in range(0,nvptype):
 
                         try:
                             
-                            normloc1      = la.norm(recselectcut[:,i]-rec_select[:,i],1)
-                            normloc2      = la.norm(recselectcut[:,i]-rec_select[:,i],2)  
-                            normlocmax    = la.norm(recselectcut[:,i]-rec_select[:,i],np.inf)  
-                            normlocrel1   = la.norm(recselectcut[:,i]-rec_select[:,i],1)/la.norm(recselectcut[:,i],1)  
-                            normlocrel2   = la.norm(recselectcut[:,i]-rec_select[:,i],2)/la.norm(recselectcut[:,i],2)  
-                            normlocrelmax = la.norm(recselectcut[:,i]-rec_select[:,i],np.inf)/la.norm(recselectcut[:,i],np.inf)  
+                            if(fmark==1):
+                            
+                                normloc1      = 'NC'
+                                normloc2      = 'NC'
+                                normlocmax    = 'NC'
+                                normlocrel1   = 'NC'
+                                normlocrel2   = 'NC'
+                                normlocrelmax = 'NC'
+
+                            else:
+                            
+                                normloc1      = la.norm(recselectcut[:,i]-rec_select[:,i],1)
+                                normloc2      = la.norm(recselectcut[:,i]-rec_select[:,i],2)  
+                                normlocmax    = la.norm(recselectcut[:,i]-rec_select[:,i],np.inf)  
+                                normlocrel1   = la.norm(recselectcut[:,i]-rec_select[:,i],1)/la.norm(recselectcut[:,i],1)  
+                                normlocrel2   = la.norm(recselectcut[:,i]-rec_select[:,i],2)/la.norm(recselectcut[:,i],2)  
+                                normlocrelmax = la.norm(recselectcut[:,i]-rec_select[:,i],np.inf)/la.norm(recselectcut[:,i],np.inf)  
                             
                             n1.append(normloc1)
                             n2.append(normloc2)
@@ -337,7 +379,7 @@ for k0 in range(0,nvptype):
                             n1rel.append(normlocrel1)
                             n2rel.append(normlocrel2)
                             nmaxrel.append(normlocrelmax)
-                            
+                                   
                         except:
                             
                             normloc1      = 'NC'
@@ -374,13 +416,24 @@ for k0 in range(0,nvptype):
                         
                         try:
                             
-                            normloc1      = la.norm(solplotcut[i,:]-solplot[i,:],1)
-                            normloc2      = la.norm(solplotcut[i,:]-solplot[i,:],2)
-                            normlocmax    = la.norm(solplotcut[i,:]-solplot[i,:],np.inf)
-                            normlocrel1   = la.norm(solplotcut[i,:]-solplot[i,:],1)/la.norm(solplotcut[i,:],1)
-                            normlocrel2   = la.norm(solplotcut[i,:]-solplot[i,:],2)/la.norm(solplotcut[i,:],2)
-                            normlocrelmax = la.norm(solplotcut[i,:]-solplot[i,:],np.inf)/la.norm(solplotcut[i,:],np.inf)
+                            if(fmark==1):
                             
+                                normloc1      = 'NC'
+                                normloc2      = 'NC'
+                                normlocmax    = 'NC'
+                                normlocrel1   = 'NC'
+                                normlocrel2   = 'NC'
+                                normlocrelmax = 'NC'
+
+                            else:
+                            
+                                normloc1      = la.norm(solplotcut[i,:]-solplot[i,:],1)
+                                normloc2      = la.norm(solplotcut[i,:]-solplot[i,:],2)
+                                normlocmax    = la.norm(solplotcut[i,:]-solplot[i,:],np.inf)
+                                normlocrel1   = la.norm(solplotcut[i,:]-solplot[i,:],1)/la.norm(solplotcut[i,:],1)
+                                normlocrel2   = la.norm(solplotcut[i,:]-solplot[i,:],2)/la.norm(solplotcut[i,:],2)
+                                normlocrelmax = la.norm(solplotcut[i,:]-solplot[i,:],np.inf)/la.norm(solplotcut[i,:],np.inf)
+
                             n1.append(normloc1)
                             n2.append(normloc2)
                             nmax.append(normlocmax)
@@ -413,6 +466,12 @@ for k0 in range(0,nvptype):
                     
                     if(save_fields==1):
 
+                        if(fmark==1):
+
+                            rec[:]        = np.nan
+                            solplot[:]    = np.nan
+                            rec_select[:] = np.nan
+                
                         fields_save.append(rec)
                         fields_save.append(recrefcut)
                         fields_save.append(rec_select)
@@ -437,7 +496,8 @@ for k0 in range(0,nvptype):
 #==============================================================================
 # Save Results
 #==============================================================================
-    locname     = '../testresults/test%d_results_norms_fields'%(ptype)
+    if(save_fields==0): locname = '../testresults/test%d_results_norms'%(ptype)
+    if(save_fields==1): locname = '../testresults/test%d_results_norms_fields'%(ptype)
     
     with open(locname, 'wb') as f: 
         pickle.dump(testresults, f) 

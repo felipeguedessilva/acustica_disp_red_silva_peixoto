@@ -43,7 +43,7 @@ def acoustic_operator_multiple_exec(dx_ref,dt_ref,freq_ref,ptype,percent_glob):
     #==============================================================================
     ref          = 0
     save_stencil = 1
-    save_sol     = 0
+    save_sol     = 1
     exec_op      = 1
     stop_param   = 0
     
@@ -90,8 +90,10 @@ def acoustic_operator_multiple_exec(dx_ref,dt_ref,freq_ref,ptype,percent_glob):
         
         elif(method == 'dispte' or method == 'specls' or method == 'displs'):
             
-            vshape = ['crb']
-            
+            #vshape = ['crb']
+            vshape = ['crb','csq'] 
+            #vshape = ['rb',crb','csq','sq']
+                    
         nvshape = len(vshape)
         
         for k2 in range(0,nvshape):
