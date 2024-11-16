@@ -1,2 +1,5 @@
 *.npy
 *.segy
+*.jpeg
+*.pickle
+*.pkl
