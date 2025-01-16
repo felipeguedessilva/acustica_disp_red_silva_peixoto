@@ -1,0 +1,158 @@
+
+Number    = 0
+Test Type = 1
+dx_ref    = 1
+dt_ref    = 1
+freq_ref  = 1
+
+Traceback (most recent call last):
+  File "/storage2/felipe_guedes/acustica_disp_red_silva_peixoto/test_stencils_server/figures_exp/test_figures_fields.py", line 49, in <module>
+    gera_fields(ptype,dx_ref,dt_ref,freq_ref)
+  File "/storage2/felipe_guedes/acustica_disp_red_silva_peixoto/test_stencils_server/figures_exp/rp_files_fields.py", line 36, in gera_fields
+    with open(locopen, 'rb') as f: 
+         ^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '../testresults/test1_results_norms_fields'
+
+Number    = 0
+Test Type = 1
+dx_ref    = 1
+dt_ref    = 1
+freq_ref  = 1
+
+Traceback (most recent call last):
+  File "/storage2/felipe_guedes/acustica_disp_red_silva_peixoto/test_stencils_server/figures_exp/test_figures_fields.py", line 49, in <module>
+    gera_fields(ptype,dx_ref,dt_ref,freq_ref)
+  File "/storage2/felipe_guedes/acustica_disp_red_silva_peixoto/test_stencils_server/figures_exp/rp_files_fields.py", line 20, in gera_fields
+    from skimage.metrics import structural_similarity as ssim
+ModuleNotFoundError: No module named 'skimage'
+
+Number    = 0
+Test Type = 1
+dx_ref    = 1
+dt_ref    = 1
+freq_ref  = 1
+
+Traceback (most recent call last):
+  File "/storage2/felipe_guedes/acustica_disp_red_silva_peixoto/test_stencils_server/figures_exp/test_figures_fields.py", line 49, in <module>
+    gera_fields(ptype,dx_ref,dt_ref,freq_ref)
+  File "/storage2/felipe_guedes/acustica_disp_red_silva_peixoto/test_stencils_server/figures_exp/rp_files_fields.py", line 706, in gera_fields
+    P2          = plot2(vsols,vnames,xpos,ypos,extent2,vparameters)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage2/felipe_guedes/acustica_disp_red_silva_peixoto/test_stencils_server/figures_exp/rp_files_fields.py", line 379, in plot2
+    valteste = ssim(vsols[0][k3],vsols[k1][k3])
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/felipe_guedes/anaconda3/envs/devito/lib/python3.12/site-packages/skimage/metrics/_structural_similarity.py", line 204, in structural_similarity
+    raise ValueError(
+ValueError: Since image dtype is floating point, you must specify the data_range parameter. Please read the documentation carefully (including the note). It is recommended that you always specify the data_range anyway.
+
+Number    = 0
+Test Type = 1
+dx_ref    = 1
+dt_ref    = 1
+freq_ref  = 1
+
+
+Number    = 1
+Test Type = 1
+dx_ref    = 1
+dt_ref    = 1
+freq_ref  = 2
+
+
+Number    = 2
+Test Type = 1
+dx_ref    = 1
+dt_ref    = 1
+freq_ref  = 3
+
+
+Number    = 0
+Test Type = 1
+dx_ref    = 1
+dt_ref    = 1
+freq_ref  = 1
+
+Traceback (most recent call last):
+  File "/storage2/felipe_guedes/acustica_disp_red_silva_peixoto/test_stencils_server/figures_exp/test_figures_fields.py", line 49, in <module>
+    gera_fields(ptype,dx_ref,dt_ref,freq_ref)
+  File "/storage2/felipe_guedes/acustica_disp_red_silva_peixoto/test_stencils_server/figures_exp/rp_files_fields.py", line 706, in gera_fields
+    P2          = plot2(vsols,vnames,xpos,ypos,extent2,vparameters)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage2/felipe_guedes/acustica_disp_red_silva_peixoto/test_stencils_server/figures_exp/rp_files_fields.py", line 379, in plot2
+    ssim_score, dif = ssim(vsols[0][k3],vsols[k1][k3])
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/felipe_guedes/anaconda3/envs/devito/lib/python3.12/site-packages/skimage/metrics/_structural_similarity.py", line 204, in structural_similarity
+    raise ValueError(
+ValueError: Since image dtype is floating point, you must specify the data_range parameter. Please read the documentation carefully (including the note). It is recommended that you always specify the data_range anyway.
+
+Number    = 0
+Test Type = 1
+dx_ref    = 1
+dt_ref    = 1
+freq_ref  = 1
+
+Traceback (most recent call last):
+  File "/storage2/felipe_guedes/acustica_disp_red_silva_peixoto/test_stencils_server/figures_exp/test_figures_fields.py", line 49, in <module>
+    gera_fields(ptype,dx_ref,dt_ref,freq_ref)
+  File "/storage2/felipe_guedes/acustica_disp_red_silva_peixoto/test_stencils_server/figures_exp/rp_files_fields.py", line 706, in gera_fields
+    P2          = plot2(vsols,vnames,xpos,ypos,extent2,vparameters)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage2/felipe_guedes/acustica_disp_red_silva_peixoto/test_stencils_server/figures_exp/rp_files_fields.py", line 379, in plot2
+    ssim_score, dif = ssim(vsols[0][k3],vsols[k1][k3],full=True)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/felipe_guedes/anaconda3/envs/devito/lib/python3.12/site-packages/skimage/metrics/_structural_similarity.py", line 204, in structural_similarity
+    raise ValueError(
+ValueError: Since image dtype is floating point, you must specify the data_range parameter. Please read the documentation carefully (including the note). It is recommended that you always specify the data_range anyway.
+
+Number    = 0
+Test Type = 1
+dx_ref    = 1
+dt_ref    = 1
+freq_ref  = 1
+
+Traceback (most recent call last):
+  File "/storage2/felipe_guedes/acustica_disp_red_silva_peixoto/test_stencils_server/figures_exp/test_figures_fields.py", line 49, in <module>
+    gera_fields(ptype,dx_ref,dt_ref,freq_ref)
+  File "/storage2/felipe_guedes/acustica_disp_red_silva_peixoto/test_stencils_server/figures_exp/rp_files_fields.py", line 706, in gera_fields
+    P2          = plot2(vsols,vnames,xpos,ypos,extent2,vparameters)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage2/felipe_guedes/acustica_disp_red_silva_peixoto/test_stencils_server/figures_exp/rp_files_fields.py", line 379, in plot2
+    ssim_score, dif = ssim(vsols[0][k3],vsols[k1][k3],multichannel=False)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/felipe_guedes/anaconda3/envs/devito/lib/python3.12/site-packages/skimage/metrics/_structural_similarity.py", line 204, in structural_similarity
+    raise ValueError(
+ValueError: Since image dtype is floating point, you must specify the data_range parameter. Please read the documentation carefully (including the note). It is recommended that you always specify the data_range anyway.
+
+Number    = 0
+Test Type = 1
+dx_ref    = 1
+dt_ref    = 1
+freq_ref  = 1
+
+Traceback (most recent call last):
+  File "/storage2/felipe_guedes/acustica_disp_red_silva_peixoto/test_stencils_server/figures_exp/test_figures_fields.py", line 49, in <module>
+    gera_fields(ptype,dx_ref,dt_ref,freq_ref)
+  File "/storage2/felipe_guedes/acustica_disp_red_silva_peixoto/test_stencils_server/figures_exp/rp_files_fields.py", line 706, in gera_fields
+    P2          = plot2(vsols,vnames,xpos,ypos,extent2,vparameters)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage2/felipe_guedes/acustica_disp_red_silva_peixoto/test_stencils_server/figures_exp/rp_files_fields.py", line 379, in plot2
+    ssim_score, dif = ssim(vsols[0][k3],vsols[k1][k3],data_range=scale)
+    ^^^^^^^^^^^^^^^
+TypeError: cannot unpack non-iterable numpy.float64 object
+
+Number    = 0
+Test Type = 1
+dx_ref    = 1
+dt_ref    = 1
+freq_ref  = 1
+
+Traceback (most recent call last):
+  File "/storage2/felipe_guedes/acustica_disp_red_silva_peixoto/test_stencils_server/figures_exp/test_figures_fields.py", line 49, in <module>
+    gera_fields(ptype,dx_ref,dt_ref,freq_ref)
+  File "/storage2/felipe_guedes/acustica_disp_red_silva_peixoto/test_stencils_server/figures_exp/rp_files_fields.py", line 711, in gera_fields
+    P2          = plot2(vsols,vnames,xpos,ypos,extent2,vparameters)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage2/felipe_guedes/acustica_disp_red_silva_peixoto/test_stencils_server/figures_exp/rp_files_fields.py", line 379, in plot2
+    img1 = np.zeros(vsols[0][k3].shape[0],vsols[0][k3].shape[1],3)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: Cannot interpret '101' as a data type

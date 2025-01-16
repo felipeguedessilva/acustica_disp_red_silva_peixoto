@@ -13,7 +13,7 @@ from   rp_files_norms import *
 # vdtref    = [1]
 # vfreqref  = [1,2,3] 
 
-vptype    = [4] 
+vptype    = [1] 
 vdxref    = [1]
 vdtref    = [1]
 vfreqref  = [1,2,3] 

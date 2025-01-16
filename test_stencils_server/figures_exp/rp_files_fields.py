@@ -15,6 +15,12 @@ def gera_fields(ptype,dx_ref,dt_ref,freq_ref):
     #==============================================================================
     
     #==============================================================================
+    # Image Comparisson
+    #==============================================================================
+    from skimage.metrics import structural_similarity as ssim
+    #==============================================================================
+
+    #==============================================================================
     # Plot Set
     #==============================================================================
     import matplotlib.pyplot       as plt
@@ -369,7 +375,7 @@ def gera_fields(ptype,dx_ref,dt_ref,freq_ref):
                     cbar.update_ticks()
                 
                 else:
-        
+                    
                     fig1 = plt.imshow(np.transpose(vsols[0][k3]-vsols[k1][k3]),cmap='binary',interpolation='kaiser',extent=extent,aspect='auto',vmin=-scale,vmax=scale)   
                     plt.grid()
                     plt.title('%s'%(vnames[k1]))
