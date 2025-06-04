@@ -14,7 +14,7 @@ from   rp_files_norms import *
 # vfreqref  = [1,2,3] 
 
 vptype    = [1] 
-vdxref    = [1]
+vdxref    = [2]
 vdtref    = [1]
 vfreqref  = [1] 
 

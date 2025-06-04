@@ -11,22 +11,14 @@ import pickle
 # My Modules
 #==============================================================================
 import testes_opt              as ttopt
-# import im_fuzzy_norms          as ifn
 #==============================================================================
 
 #==============================================================================
-# Image Comparisson
+# Signal Comparison
 #==============================================================================
-from skimage.metrics import structural_similarity as ssim
-from skimage.metrics import hausdorff_distance as hd
-from skimage.metrics import mean_squared_error as mse
-from skimage.metrics import normalized_root_mse as nrmse
-from skimage.metrics import adapted_rand_error as are
-from skimage.metrics import normalized_mutual_information as nmi
-from skimage.metrics import peak_signal_noise_ratio as psnr
-from skimage.metrics import variation_of_information as voi
-from skimage.io import imsave
-import cv2
+from im_fft_norms import fftnorm1
+from im_fft_norms import fftnorm2
+from im_fft_norms import fftnorm3
 #==============================================================================
 
 #==============================================================================
@@ -34,7 +26,7 @@ import cv2
 #==============================================================================
 import matplotlib.pyplot       as plt
 import matplotlib.ticker       as mticker    
-from   mpl_toolkits.axes_grid1 import make_axes_locatable
+#from   mpl_toolkits.axes_grid1 import make_axes_locatable
 from   matplotlib              import ticker
 from   matplotlib              import cm
 #==============================================================================
@@ -43,17 +35,11 @@ from   matplotlib              import cm
 # Range of Parameters
 #==============================================================================
 save_fields   = 1
-fuzzymember   = 0
-from im_fuzzy_norms import fuzzynorms1 as fuzzynormfunction
+save_signals  = 1
 
-# vptype    = [1,2,3,4] 
-# vdxref    = [1]
-# vdtref    = [1]
-# vfreqref  = [1,2,3] 
-
-vptype    = [1] 
-vdxref    = [1]
-vdtref    = [1]
+vptype    = [3] 
+vdxref    = [8]
+vdtref    = [1,2]
 vfreqref  = [1] 
 
 nvptype      = len(vptype) 
@@ -243,21 +229,20 @@ for k0 in range(0,nvptype):
                 recrefcut    = rec_ref[0::irecref0,0::irecref1]
                 solplotcut   = solplot_ref[0::isolplotref0,0::isolplotref1,0::isolplotref2]
                 recselectcut = rec_select_ref[0::irecselectref0,0::irecselectref1]
-                        
-                if(ptype==1 and dt_ref==6): 
-                            
-                    recrefcut    = recrefcut[1:,:]
-                    recselectcut = recselectcut[1:,:]
 
-                locsave = 'signals/signal_files/teste%d/'%(ptype)
-                np.save("%srec_select_ref.npy"%(locsave),recselectcut)
+                if(save_signals==1):
+
+                    locsave = 'signals/signal_files/teste%d/dx%ddt%dfreq%d/'%(ptype,dx_ref,dt_ref,freq_ref)
+                    np.save("%ssol_ref.npy"%(locsave),solplotcut[:,:,:])
+                    np.save("%srec_ref.npy"%(locsave),recrefcut)
+                    np.save("%srec_select_ref.npy"%(locsave),recselectcut)
 #==============================================================================                    
 
 #==============================================================================
 # Obtenção de Parâmetros para Open
 #==============================================================================
                 for k in range(0,nconfig):
-                    
+
                     print('')
                     print('Test with Stencil: %d'%(k))
                     
@@ -328,8 +313,12 @@ for k0 in range(0,nvptype):
                         rec_select  = np.load("../data_save/%s/rec_select_%s_%s_%d_%d.npy"%(locopen,mshape,method,mvalue,nvalue))
                         fmark       = 0
                         
-                        locsave = 'signals/signal_files/teste%d/'%(ptype)
-                        np.save("%srec_select_%s_%s_%d_%d.npy"%(locsave,mshape,method,mvalue,nvalue),rec_select)
+                        if(save_signals==1):
+
+                            locsave = 'signals/signal_files/teste%d/dx%ddt%dfreq%d/'%(ptype,dx_ref,dt_ref,freq_ref)
+                            np.save("%ssolplot_%s_%s_%d_%d.npy"%(locsave,mshape,method,mvalue,nvalue),solplot[:,:,:])
+                            np.save("%srec_%s_%s_%d_%d.npy"%(locsave,mshape,method,mvalue,nvalue),rec)
+                            np.save("%srec_select_%s_%s_%d_%d.npy"%(locsave,mshape,method,mvalue,nvalue),rec_select)
 
                     except:
                          
@@ -351,7 +340,7 @@ for k0 in range(0,nvptype):
                             normrecrel1   = np.nan
                             normrecrel2   = np.nan
                             normrecrelmax = np.nan
-                            normrecim     = np.nan
+                            normrecfft    = np.nan
                             
                         else:
 
@@ -361,31 +350,7 @@ for k0 in range(0,nvptype):
                             normrecrel1   = la.norm(recrefcut-rec,1)/la.norm(recrefcut,1)            
                             normrecrel2   = la.norm(recrefcut-rec,2)/la.norm(recrefcut,2)
                             normrecrelmax = la.norm(recrefcut-rec,np.inf)/la.norm(recrefcut,np.inf)
-                            
-                            plt.imshow(recrefcut,cmap='binary',interpolation='kaiser',aspect='auto',vmin=-10,vmax=10)
-                            plt.axis('off')
-                            plt.savefig('../testresults/im_ref1.png',transparent = True, bbox_inches = 'tight', pad_inches = 0)
-                            plt.close()
-                            plt.imshow(rec,cmap='binary',interpolation='kaiser',aspect='auto',vmin=-10,vmax=10)
-                            plt.axis('off')
-                            plt.savefig('../testresults/im_num1.png',transparent = True, bbox_inches = 'tight', pad_inches = 0)
-                            plt.close()
-                            im1       = cv2.imread('../testresults/im_ref1.png')
-                            im2       = cv2.imread('../testresults/im_num1.png')
-                            im1_gray  = cv2.cvtColor(im1, cv2.COLOR_BGR2GRAY)
-                            im2_gray  = cv2.cvtColor(im2, cv2.COLOR_BGR2GRAY)
-                            locmax    = max(np.amax(im1_gray),np.amax(im2_gray))
-                            locmin    = min(np.amin(im1_gray),np.amin(im2_gray))
-                            vssim     = ssim(im1_gray, im2_gray,data_range=locmax-locmin)
-                            vhd       = hd(im1_gray, im2_gray)
-                            vmse      = mse(im1_gray, im2_gray)
-                            vnrmse    = nrmse(im1_gray, im2_gray)
-                            vare      = are(im1_gray, im2_gray)
-                            vnme      = nmi(im1_gray, im2_gray)
-                            vpsnr     = psnr(im1_gray, im2_gray)
-                            vvoi      = voi(im1_gray, im2_gray)
-                            vfuzzy    = fuzzynormfunction(im1_gray,im2_gray,fuzzymember)
-                            normrecim = vfuzzy
+                            normrecfft    = 0.0
 
                     except:
 
@@ -395,7 +360,7 @@ for k0 in range(0,nvptype):
                         normrecrel1   = np.nan
                         normrecrel2   = np.nan
                         normrecrelmax = np.nan
-                        normrecim     = np.nan
+                        normrecfft    = np.nan
 
                     normrec.append(normrec1)
                     normrec.append(normrec2)
@@ -403,7 +368,7 @@ for k0 in range(0,nvptype):
                     normrec.append(normrecrel1)
                     normrec.append(normrecrel2)
                     normrec.append(normrecrelmax)
-                    normrec.append(normrecim)
+                    normrec.append(normrecfft)
 
                     normrecselect = [] 
                     n1            = []
@@ -412,7 +377,7 @@ for k0 in range(0,nvptype):
                     n1rel         = []
                     n2rel         = []
                     nmaxrel       = []
-                    nim           = []
+                    nfft          = []
                                         
                     for i in range(0,rec_select.shape[1]):
                         
@@ -426,7 +391,7 @@ for k0 in range(0,nvptype):
                                 normlocrel1   = np.nan
                                 normlocrel2   = np.nan
                                 normlocrelmax = np.nan
-                                normlocim     = np.nan
+                                normlocfft    = np.nan
 
                             else:
                             
@@ -436,31 +401,7 @@ for k0 in range(0,nvptype):
                                 normlocrel1   = la.norm(recselectcut[:,i]-rec_select[:,i],1)/la.norm(recselectcut[:,i],1)  
                                 normlocrel2   = la.norm(recselectcut[:,i]-rec_select[:,i],2)/la.norm(recselectcut[:,i],2)  
                                 normlocrelmax = la.norm(recselectcut[:,i]-rec_select[:,i],np.inf)/la.norm(recselectcut[:,i],np.inf)  
-                                
-                                plt.plot(recselectcut[:,i])
-                                plt.axis('off')
-                                plt.savefig('../testresults/im_ref2.png',transparent = True, bbox_inches = 'tight', pad_inches = 0)
-                                plt.close()
-                                plt.plot(rec_select[:,i])
-                                plt.axis('off')
-                                plt.savefig('../testresults/im_num2.png',transparent = True, bbox_inches = 'tight', pad_inches = 0)
-                                plt.close()
-                                im1       = cv2.imread('../testresults/im_ref2.png')
-                                im2       = cv2.imread('../testresults/im_num2.png')
-                                im1_gray  = cv2.cvtColor(im1, cv2.COLOR_BGR2GRAY)
-                                im2_gray  = cv2.cvtColor(im2, cv2.COLOR_BGR2GRAY)
-                                locmax    = max(np.amax(im1_gray),np.amax(im2_gray))
-                                locmin    = min(np.amin(im1_gray),np.amin(im2_gray))
-                                vssim     = ssim(im1_gray, im2_gray,data_range=locmax-locmin)      
-                                vhd       = hd(im1_gray, im2_gray)
-                                vmse      = mse(im1_gray, im2_gray)
-                                vnrmse    = nrmse(im1_gray, im2_gray)
-                                vare      = are(im1_gray, im2_gray)
-                                vnme      = nmi(im1_gray, im2_gray)
-                                vpsnr     = psnr(im1_gray, im2_gray)
-                                vvoi      = voi(im1_gray, im2_gray)
-                                vfuzzy    = fuzzynormfunction(im1_gray,im2_gray,fuzzymember)
-                                normlocim = vfuzzy
+                                normlocfft    = fftnorm3(recselectcut[:,i],rec_select[:,i],teste)
 
                             n1.append(normloc1)
                             n2.append(normloc2)
@@ -468,7 +409,7 @@ for k0 in range(0,nvptype):
                             n1rel.append(normlocrel1)
                             n2rel.append(normlocrel2)
                             nmaxrel.append(normlocrelmax)
-                            nim.append(normlocim)
+                            nfft.append(normlocfft)
                             
                         except:
                             
@@ -478,7 +419,7 @@ for k0 in range(0,nvptype):
                             normlocrel1   = np.nan
                             normlocrel2   = np.nan
                             normlocrelmax = np.nan
-                            normlocim     = np.nan
+                            normlocfft    = np.nan
                             
                             n1.append(normloc1)
                             n2.append(normloc2)
@@ -486,7 +427,7 @@ for k0 in range(0,nvptype):
                             n1rel.append(normlocrel1)
                             n2rel.append(normlocrel2)
                             nmaxrel.append(normlocrelmax)
-                            nim.append(normlocim)
+                            nfft.append(normlocfft)
 
                     normrecselect.append(n1)
                     normrecselect.append(n2)
@@ -494,7 +435,7 @@ for k0 in range(0,nvptype):
                     normrecselect.append(n1rel)
                     normrecselect.append(n2rel)
                     normrecselect.append(nmaxrel)
-                    normrecselect.append(nim)
+                    normrecselect.append(nfft)
 
                     normsolplot   = []
                     n1            = []
@@ -503,7 +444,7 @@ for k0 in range(0,nvptype):
                     n1rel         = []
                     n2rel         = []
                     nmaxrel       = []
-                    nim           = []
+                    nfft          = []
                     timesolplot   = [i*dt0*jump for i in range(0,solplot.shape[0])]
                                         
                     for i in range(0,solplot.shape[0]):
@@ -518,7 +459,7 @@ for k0 in range(0,nvptype):
                                 normlocrel1   = np.nan
                                 normlocrel2   = np.nan
                                 normlocrelmax = np.nan
-                                normlocim     = np.nan
+                                normlocfft    = np.nan
 
                             else:
                             
@@ -528,39 +469,15 @@ for k0 in range(0,nvptype):
                                 normlocrel1   = la.norm(solplotcut[i,:]-solplot[i,:],1)/la.norm(solplotcut[i,:],1)
                                 normlocrel2   = la.norm(solplotcut[i,:]-solplot[i,:],2)/la.norm(solplotcut[i,:],2)
                                 normlocrelmax = la.norm(solplotcut[i,:]-solplot[i,:],np.inf)/la.norm(solplotcut[i,:],np.inf)
-                          
-                                plt.imshow(solplotcut[i,:],cmap='binary',interpolation='kaiser',aspect='auto',vmin=-10,vmax=10)
-                                plt.axis('off')
-                                plt.savefig('../testresults/im_ref3.png',transparent = True, bbox_inches = 'tight', pad_inches = 0)
-                                plt.close()
-                                plt.imshow(solplot[i,:],cmap='binary',interpolation='kaiser',aspect='auto',vmin=-10,vmax=10)
-                                plt.axis('off')
-                                plt.savefig('../testresults/im_num3.png',transparent = True, bbox_inches = 'tight', pad_inches = 0)
-                                plt.close()
-                                im1       = cv2.imread('../testresults/im_ref3.png')
-                                im2       = cv2.imread('../testresults/im_num3.png')
-                                im1_gray  = cv2.cvtColor(im1, cv2.COLOR_BGR2GRAY)
-                                im2_gray  = cv2.cvtColor(im2, cv2.COLOR_BGR2GRAY)
-                                locmax    = max(np.amax(im1_gray),np.amax(im2_gray))
-                                locmin    = min(np.amin(im1_gray),np.amin(im2_gray))
-                                vssim     = ssim(im1_gray, im2_gray,data_range=locmax-locmin)
-                                vhd       = hd(im1_gray, im2_gray)
-                                vmse      = mse(im1_gray, im2_gray)
-                                vnrmse    = nrmse(im1_gray, im2_gray)
-                                vare      = are(im1_gray, im2_gray)
-                                vnme      = nmi(im1_gray, im2_gray)
-                                vpsnr     = psnr(im1_gray, im2_gray)
-                                vvoi      = voi(im1_gray, im2_gray)
-                                vfuzzy    = fuzzynormfunction(im1_gray,im2_gray,fuzzymember)
-                                normlocim = vfuzzy
-                                
+                                normlocfft    = 0.0
+
                             n1.append(normloc1)
                             n2.append(normloc2)
                             nmax.append(normlocmax)
                             n1rel.append(normlocrel1)
                             n2rel.append(normlocrel2)
                             nmaxrel.append(normlocrelmax)
-                            nim.append(normlocim)
+                            nfft.append(normlocfft)
                             
                         except:
                             
@@ -570,7 +487,7 @@ for k0 in range(0,nvptype):
                             normlocrel1   = np.nan
                             normlocrel2   = np.nan
                             normlocrelmax = np.nan
-                            normlocim     = np.nan
+                            normlocfft    = np.nan
                             
                             n1.append(normloc1)
                             n2.append(normloc2)
@@ -578,7 +495,7 @@ for k0 in range(0,nvptype):
                             n1rel.append(normlocrel1)
                             n2rel.append(normlocrel2)
                             nmaxrel.append(normlocrelmax)
-                            nim.append(normlocim)
+                            nfft.append(normlocfft)
                     
                     normsolplot.append(n1)
                     normsolplot.append(n2)
@@ -586,7 +503,7 @@ for k0 in range(0,nvptype):
                     normsolplot.append(n1rel)
                     normsolplot.append(n2rel)
                     normsolplot.append(nmaxrel)
-                    normsolplot.append(nim)
+                    normsolplot.append(nfft)
 
                     if(save_fields==1):
 

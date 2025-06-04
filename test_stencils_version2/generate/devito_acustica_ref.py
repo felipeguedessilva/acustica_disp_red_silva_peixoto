@@ -79,6 +79,7 @@ def acoustic_operator_one_exec_ref(freq_ref,factor_ref,ptype):
     nypos   = teste.nypos   # Posição dos Receivers em Y
     CFL     = teste.CFL     # Constante de Estabilidade
     v       = MV.C0a        # Matriz de Velocidade
+    D       = MV.D0         # Matriz de Damping
     jump    = teste.jump    # Intervalo de Plotagem
     tou     = teste.tou     # Time Order Displacement 
     btype   = teste.btype   # Boundary Type
@@ -89,6 +90,8 @@ def acoustic_operator_one_exec_ref(freq_ref,factor_ref,ptype):
     mshape     = teste.shape   # Stencil Geometry
     method     = teste.method  # FD Method       
     factor_ref = teste.factor_ref # Fator de Referencia 
+    npmlx   = teste.npmlx   # Number of Damping Points X Direction
+    npmly   = teste.npmly   # Number of Damping Points Y Direction
     #==============================================================================
     
     #==============================================================================
@@ -127,15 +130,7 @@ def acoustic_operator_one_exec_ref(freq_ref,factor_ref,ptype):
     # Analyse Parameters
     #==============================================================================
     if(stop_param==1):
-        print(dt0)
-        print(nt)
-        print(jump)
-        print(nplot)
-        print(hxv)
-        print(hyv)
-        print(dt0*jump)
-        print(vmax)
-        print(f0)
+        print(dt0,nt,jump,nplot,hxv,hyv,dt0*jump)
         sys.exit()
     #==============================================================================
     
@@ -170,24 +165,48 @@ def acoustic_operator_one_exec_ref(freq_ref,factor_ref,ptype):
     #==============================================================================
     if(ptype==1):
     
-        xpositionv  = np.array([750.0,2250.0, 750.0,2250.0])
-        ypositionv  = np.array([750.0, 750.0,2250.0,2250.0])
-    
+        xivx1      = 1000
+        xfvx1      = 5000
+        nvx1       = 21
+        vx1        = np.linspace(xivx1,xfvx1,nvx1)  
+        yhigh      = 3000
+        vy1        = yhigh*np.ones(vx1.shape[0])
+        xpositionv = vx1
+        ypositionv = vy1
+
     if(ptype==2):
     
-        xpositionv  = np.array([500.0,1500.0, 500.0,1500.0])
-        ypositionv  = np.array([500.0, 500.0,1500.0,1500.0])
+        xivx1      = 1000
+        xfvx1      = 3000
+        nvx1       = 21
+        vx1        = np.linspace(xivx1,xfvx1,nvx1)  
+        yhigh      = 2000
+        vy1        = yhigh*np.ones(vx1.shape[0])
+        xpositionv = vx1
+        ypositionv = vy1
             
     if(ptype==3):
-    
-        xpositionv  = np.array([4000.0,4000.0,4000.0,6000.0,6000.0,6000.0,8000.0,8000.0,8000.0])   
-        ypositionv  = np.array([2000.0,2500.0,3000.0,2000.0,2500.0,3000.0,2000.0,2500.0,3000.0])    
+
+        xivx1      = 2000
+        xfvx1      = 10000
+        nvx1       = 21
+        vx1        = np.linspace(xivx1,xfvx1,nvx1)  
+        yhigh      = 20
+        vy1        = yhigh*np.ones(vx1.shape[0])            
+        xpositionv = vx1
+        ypositionv = vy1
     
     if(ptype==4):
-        
-        xpositionv  = np.array([6000.0,6000.0,6000.0,8000.0,8000.0,8000.0,10000.0,10000.0,10000.0,12000.0,12000.0,12000.0])
-        ypositionv  = np.array([1000.0,2000.0,3000.0,1000.0,2000.0,3000.0,1000.0,2000.0,3000.0,1000.0,2000.0,3000.0])
-    
+
+        xivx1      = 6000
+        xfvx1      = 11000
+        nvx1       = 21
+        vx1        = np.linspace(xivx1,xfvx1,nvx1)  
+        yhigh      = 50
+        vy1        = yhigh*np.ones(vx1.shape[0])        
+        xpositionv = vx1
+        ypositionv = vy1
+
     nrec_select = len(xpositionv)
     rec_select  = Receiver(name='rec_select',grid=grid,npoint=nrec_select,time_range=time_range,staggered=NODE,dtype=np.float64)
     rec_select.coordinates.data[:, 0] = xpositionv
@@ -202,13 +221,18 @@ def acoustic_operator_one_exec_ref(freq_ref,factor_ref,ptype):
     vel = Function(name="vel",grid=grid,space_order=2,staggered=NODE,dtype=np.float64)
     vel.data[:,:] = v[:,:]
     
+    damp           = Function(name="damp",grid=grid,space_order=2,staggered=NODE,dtype=np.float64)
+    damp.data[:,:] = D
+
     fact       = factor_ref*factor_ref
     src_term   = src.inject(field=u.forward,expr=fact*1*src*dt**2*vel**2)
     rec_term   = rec.interpolate(expr=u)
     rec_select_term = rec_select.interpolate(expr=u)
-    
-    pde0     = Eq(u.dt2 - u.laplace*vel*vel)
+
+    #pde0     = Eq(u.dt2 - u.laplace*vel*vel)
+    pde0     = Eq(u.dt2 - u.laplace*vel*vel + vel*vel*damp*u.dtc)
     stencil0 = Eq(u.forward, solve(pde0,u.forward),subdomain = grid.subdomains['d0'])
+    
     print('Devito Stencil')
     #==============================================================================
     
@@ -242,6 +266,14 @@ def acoustic_operator_one_exec_ref(freq_ref,factor_ref,ptype):
         bc = bc + [Eq(u[t+1,nptx-1+k,y],u[t+1,k,y])  for k in range(0,int(sou/2)+1)]
         op = Operator([stencil0] + src_term + bc + rec_term + rec_select_term + [Eq(usave,u.forward)],subs=grid.spacing_map)
     
+    if(btype==4):
+    
+        bc =      [Eq(u[t+1,x,-k],u[t+1,x,k]) for k in range(0,int(sou/2)+1)]
+        bc = bc + [Eq(u[t+1,x,npty-1+k],u[t+1,x,npty-1-k])  for k in range(0,int(sou/2)+1)]
+        bc = bc + [Eq(u[t+1,-k,y],u[t+1,k,y]) for k in range(0,int(sou/2)+1)]
+        bc = bc + [Eq(u[t+1,nptx-1+k,y],u[t+1,nptx-1-k,y])  for k in range(0,int(sou/2)+1)]
+        op = Operator([stencil0] + src_term + bc + rec_term + rec_select_term + [Eq(usave,u.forward)],subs=grid.spacing_map)
+
     usave.data[:] = 0.
     u.data[:]     = 0.
     
@@ -250,7 +282,7 @@ def acoustic_operator_one_exec_ref(freq_ref,factor_ref,ptype):
     end   = tm.time()
     time_exec = end - start
     
-    Ug[:] = usave.data[:]
+    Ug[:]           = usave.data[:]
     Ug[nplot-1,:,:] = u.data[0,:,:]
     #==============================================================================
     

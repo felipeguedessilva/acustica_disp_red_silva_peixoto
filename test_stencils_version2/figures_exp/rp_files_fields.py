@@ -100,7 +100,7 @@ def gera_fields(ptype,dx_ref,dt_ref,freq_ref):
 
     for k1 in range(0,nlf):
         
-        if(lf_select[k1][2]==1 and lf_select[k1][3]==1):
+        if(lf_select[k1][2]==dx_ref and lf_select[k1][3]==dt_ref):
             
             lfdxdt_select.append(lf_select[k1])   
 
@@ -146,7 +146,7 @@ def gera_fields(ptype,dx_ref,dt_ref,freq_ref):
     mv3 = 4
     nv3 = 1
 
-    mv4 = 6
+    mv4 = 5#6
     nv4 = 1
 
     mv5 = 8
@@ -186,11 +186,11 @@ def gera_fields(ptype,dx_ref,dt_ref,freq_ref):
     mv1 = 1
     nv1 = 1
 
-    mv2 = 4
+    mv2 = 5#4
     nv2 = 1
 
-    mv3 = 4
-    nv3 = 4
+    mv3 = 5#4
+    nv3 = 5#4
 
     mv4 = 8
     nv4 = 1
@@ -235,11 +235,11 @@ def gera_fields(ptype,dx_ref,dt_ref,freq_ref):
     mv1 = 1
     nv1 = 1
 
-    mv2 = 4
+    mv2 = 5#4
     nv2 = 1
 
-    mv3 = 4
-    nv3 = 4
+    mv3 = 5#4
+    nv3 = 5#4
 
     mv4 = 8
     nv4 = 1
@@ -284,7 +284,7 @@ def gera_fields(ptype,dx_ref,dt_ref,freq_ref):
     # Plot Routines 1
     #==============================================================================
     def plot1(vsols,vnames,xpos,ypos,extent,vparameters):
-        
+
         plt.figure(figsize = (26,16))
         plt.suptitle('Difference of Full Receivers at time  %.3f s \n dx = %.4fm - dt = %.4fs - freq = %.3f Hz \n %s'%(vparameters[3],vparameters[1],vparameters[2],vparameters[6],vparameters[5]))
         grid  = plt.GridSpec(9,5,wspace=0.5,hspace=0.5) 
@@ -505,7 +505,7 @@ def gera_fields(ptype,dx_ref,dt_ref,freq_ref):
 
                 fig1 = plt.imshow(vsols[k1],cmap='binary',interpolation='kaiser',extent=extent,aspect='auto',vmin=-scale,vmax=scale)   
                 plt.grid()
-                plt.title('%s'%(vnames[k1]),fontsize=5)
+                plt.title('%s'%(vnames[k1]))
                 plt.gca().xaxis.set_major_formatter(mticker.FormatStrFormatter('%.1f km'))
                 plt.gca().yaxis.set_major_formatter(mticker.FormatStrFormatter('%.1f s'))
                 ax = plt.gca()
@@ -543,44 +543,6 @@ def gera_fields(ptype,dx_ref,dt_ref,freq_ref):
                 
         for k3 in range(0,ntimes):
         
-            list_ssim = []
-            list_l2 = []
-            
-            for k1 in range(0,nfigs):
-                
-                arrayim1 = vsols[0][k3]
-                plt.imshow(arrayim1,cmap='binary',interpolation='kaiser',aspect='auto',vmin=-scale,vmax=scale)
-                plt.axis('off')
-                plt.savefig('%s/%s.jpeg'%(locsave,'im_ref'),transparent = True, bbox_inches = 'tight', pad_inches = 0)
-                plt.close()
-                
-                arrayim2 = vsols[k1][k3]
-                plt.imshow(arrayim2,cmap='binary',interpolation='kaiser',aspect='auto',vmin=-scale,vmax=scale)
-                plt.axis('off')
-                plt.savefig('%s/%s.jpeg'%(locsave,'im_num'),transparent = True, bbox_inches = 'tight', pad_inches = 0)
-                plt.close()
-                
-                l2norm = la.norm(arrayim1-arrayim2,2)/la.norm(arrayim1,2)
-                
-                # print(arrayim1.shape,arrayim2.shape)
-                
-                im1 = cv2.imread('%s/%s.jpeg'%(locsave,'im_ref'))
-                im2 = cv2.imread('%s/%s.jpeg'%(locsave,'im_num'))
-                
-                # print(im1.shape,im2.shape)
-
-                im1_gray = cv2.cvtColor(im1, cv2.COLOR_BGR2GRAY)
-                im2_gray = cv2.cvtColor(im2, cv2.COLOR_BGR2GRAY)
-                
-                # print(im1_gray.shape,im2_gray.shape)
-
-                if(k1>0):
-                    (score, diff) = ssim(im1_gray, im2_gray, full=True)
-                    #print("Image similarity with Image %f"%k1, score)
-                    list_l2.append(l2norm)
-                    list_ssim.append(score)        
-            
-            plt.clf()
             plt.figure(figsize = (26,16))
             plt.suptitle('Full Displacement at time  %.3f s \n dx = %.4fm - dt = %.4fs - freq = %.3f Hz \n %s'%(vparameters[3][k3],vparameters[1],vparameters[2],vparameters[6],vparameters[5]))
             grid  = plt.GridSpec(9,5,wspace=0.5,hspace=0.5)    
@@ -607,7 +569,7 @@ def gera_fields(ptype,dx_ref,dt_ref,freq_ref):
         
                     fig1 = plt.imshow(np.transpose(vsols[k1][k3]),cmap='binary',interpolation='kaiser',extent=extent,aspect='auto',vmin=-scale,vmax=scale)   
                     plt.grid()
-                    plt.title('%s - L2_NORM = %.4f - SSIM_NORM = %.4f'%(vnames[k1],list_l2[k1-1],list_ssim[k1-1]),fontsize=5)
+                    plt.title('%s'%(vnames[k1]))
                     plt.gca().xaxis.set_major_formatter(mticker.FormatStrFormatter('%.1f km'))
                     plt.gca().yaxis.set_major_formatter(mticker.FormatStrFormatter('%.1f km'))
                     ax = plt.gca()
@@ -694,15 +656,25 @@ def gera_fields(ptype,dx_ref,dt_ref,freq_ref):
     fscale      = 10**(-3)
     extent1     = [fscale*lfdxdt_select_spatte_cl[0][15][2],fscale*lfdxdt_select_spatte_cl[0][15][4], fscale*lfdxdt_select_spatte_cl[0][15][9], fscale*lfdxdt_select_spatte_cl[0][15][8]]
     extent2     = [fscale*lfdxdt_select_spatte_cl[0][15][2],fscale*lfdxdt_select_spatte_cl[0][15][4], fscale*lfdxdt_select_spatte_cl[0][15][3], fscale*lfdxdt_select_spatte_cl[0][15][5]]
+    # vnames      = ['Reference',
+    #               'spatte-cl M=1','spatte-cl M=2','spatte-cl M=4','spatte-cl M=6','spatte-cl M=8',
+    #               'spectetheta-cl M=1','spectetheta-cl M=2','spectetheta-cl M=4','spectetheta-cl M=6','spectetheta-cl M=8',
+    #               'dispte-crb M=1 and N=1','dispte-crb M=4 and N=1','dispte-crb M=4 and N=4','dispte-crb M=8 and N=1','dispte-crb M=8 and N=8',
+    #               'displs-crb M=1 and N=1','displs-crb M=4 and N=1','displs-crb M=4 and N=4','displs-crb M=8 and N=1','displs-crb M=8 and N=8',
+    #               'specls-crb M=1 and N=1','specls-crb M=4 and N=1','specls-crb M=4 and N=4','specls-crb M=8 and N=1','specls-crb M=8 and N=8',
+    #               'dispte-csq M=1 and N=0','dispte-csq M=4 and N=0','dispte-csq M=4 and N=4','dispte-csq M=8 and N=0','dispte-csq M=8 and N=8',
+    #               'displs-csq M=1 and N=0','displs-csq M=4 and N=0','displs-csq M=4 and N=4','displs-csq M=8 and N=0','displs-csq M=8 and N=8',
+    #               'specls-csq M=1 and N=0','specls-csq M=4 and N=0','specls-csq M=4 and N=4','specls-csq M=8 and N=0','specls-csq M=8 and N=8']
+
     vnames      = ['Reference',
-                  'spatte-cl M=1','spatte-cl M=2','spatte-cl M=4','spatte-cl M=6','spatte-cl M=8',
-                  'spectetheta-cl M=1','spectetheta-cl M=2','spectetheta-cl M=4','spectetheta-cl M=6','spectetheta-cl M=8',
-                  'dispte-crb M=1 and N=1','dispte-crb M=4 and N=1','dispte-crb M=4 and N=4','dispte-crb M=8 and N=1','dispte-crb M=8 and N=8',
-                  'displs-crb M=1 and N=1','displs-crb M=4 and N=1','displs-crb M=4 and N=4','displs-crb M=8 and N=1','displs-crb M=8 and N=8',
-                  'specls-crb M=1 and N=1','specls-crb M=4 and N=1','specls-crb M=4 and N=4','specls-crb M=8 and N=1','specls-crb M=8 and N=8',
-                  'dispte-csq M=1 and N=0','dispte-csq M=4 and N=0','dispte-csq M=4 and N=4','dispte-csq M=8 and N=0','dispte-csq M=8 and N=8',
-                  'displs-csq M=1 and N=0','displs-csq M=4 and N=0','displs-csq M=4 and N=4','displs-csq M=8 and N=0','displs-csq M=8 and N=8',
-                  'specls-csq M=1 and N=0','specls-csq M=4 and N=0','specls-csq M=4 and N=4','specls-csq M=8 and N=0','specls-csq M=8 and N=8']
+                  'spatte-cl M=1','spatte-cl M=2','spatte-cl M=4','spatte-cl M=5','spatte-cl M=8',
+                  'spectetheta-cl M=1','spectetheta-cl M=2','spectetheta-cl M=4','spectetheta-cl M=5','spectetheta-cl M=8',
+                  'dispte-crb M=1 and N=1','dispte-crb M=5 and N=1','dispte-crb M=5 and N=5','dispte-crb M=8 and N=1','dispte-crb M=8 and N=8',
+                  'displs-crb M=1 and N=1','displs-crb M=5 and N=1','displs-crb M=5 and N=5','displs-crb M=8 and N=1','displs-crb M=8 and N=8',
+                  'specls-crb M=1 and N=1','specls-crb M=5 and N=1','specls-crb M=5 and N=5','specls-crb M=8 and N=1','specls-crb M=8 and N=8',
+                  'dispte-csq M=1 and N=0','dispte-csq M=5 and N=0','dispte-csq M=5 and N=5','dispte-csq M=8 and N=0','dispte-csq M=8 and N=8',
+                  'displs-csq M=1 and N=0','displs-csq M=5 and N=0','displs-csq M=5 and N=5','displs-csq M=8 and N=0','displs-csq M=8 and N=8',
+                  'specls-csq M=1 and N=0','specls-csq M=5 and N=0','specls-csq M=5 and N=5','specls-csq M=8 and N=0','specls-csq M=8 and N=8']
 
     vrectime    = np.linspace(fscale*lfdxdt_select_spatte_cl[0][15][8],fscale*lfdxdt_select_spatte_cl[0][15][9],lfdxdt_select_spatte_cl[0][17][3].shape[0])
     #==============================================================================
@@ -819,7 +791,7 @@ def gera_fields(ptype,dx_ref,dt_ref,freq_ref):
 
     figname     = 'fieldssolplot_p%ddx%ddt%dfreq%d'%(vnamefig[0],vnamefig[1],vnamefig[2],vnamefig[3])
 
-    #P5          = plot5(vsols,vnames,xpos,ypos,extent2,vparameters)
+    P5          = plot5(vsols,vnames,xpos,ypos,extent2,vparameters)
     #==============================================================================
 
     #==============================================================================

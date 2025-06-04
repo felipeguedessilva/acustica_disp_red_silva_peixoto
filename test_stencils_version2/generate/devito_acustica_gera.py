@@ -154,6 +154,10 @@ def acoustic_operator_multiple_exec(dx_ref,dt_ref,freq_ref,ptype,percent_glob):
         nypos   = teste.nypos   # Posição dos Receivers em Y
         CFL     = teste.CFL     # Constante de Estabilidade
         v       = MV.C0a        # Matriz de Velocidade
+        D       = MV.D0         # Matriz de Damping
+        npmlx   = teste.npmlx   # Number of Damping Points X Direction
+        npmly   = teste.npmly   # Number of Damping Points Y Direction
+        
         jump    = teste.jump    # Intervalo de Plotagem
         tou     = teste.tou     # Time Order Displacement 
         btype   = teste.btype   # Boundary Type
@@ -175,7 +179,7 @@ def acoustic_operator_multiple_exec(dx_ref,dt_ref,freq_ref,ptype,percent_glob):
         
         nvalue        = int(config[3])  # Second Parameter for Stencil
         teste.nvalue  = nvalue
-          
+        
         print('shape: %s - method: %s - sou: %d - mvalue: %d - nvalue: %d'%(shape,method,sou,mvalue,nvalue))
     #==============================================================================
     
@@ -249,24 +253,48 @@ def acoustic_operator_multiple_exec(dx_ref,dt_ref,freq_ref,ptype,percent_glob):
     # Construção e Posicionamento dos Receivers Seleionados
     #==============================================================================
         if(ptype==1):
-    
-          xpositionv  = np.array([750.0,2250.0, 750.0,2250.0])
-          ypositionv  = np.array([750.0, 750.0,2250.0,2250.0])
-    
+
+            xivx1      = 1000
+            xfvx1      = 5000
+            nvx1       = 21
+            vx1        = np.linspace(xivx1,xfvx1,nvx1)  
+            yhigh      = 3000
+            vy1        = yhigh*np.ones(vx1.shape[0])        
+            xpositionv = vx1
+            ypositionv = vy1
+
         if(ptype==2):
-    
-            xpositionv  = np.array([500.0,1500.0, 500.0,1500.0])
-            ypositionv  = np.array([500.0, 500.0,1500.0,1500.0])
+
+            xivx1      = 1000
+            xfvx1      = 3000
+            nvx1       = 21
+            vx1        = np.linspace(xivx1,xfvx1,nvx1)  
+            yhigh      = 2000
+            vy1        = yhigh*np.ones(vx1.shape[0])        
+            xpositionv = vx1
+            ypositionv = vy1
             
         if(ptype==3):
-    
-            xpositionv  = np.array([4000.0,4000.0,4000.0,6000.0,6000.0,6000.0,8000.0,8000.0,8000.0])   
-            ypositionv  = np.array([2000.0,2500.0,3000.0,2000.0,2500.0,3000.0,2000.0,2500.0,3000.0])    
+            
+            xivx1      = 2000
+            xfvx1      = 10000
+            nvx1       = 21
+            vx1        = np.linspace(xivx1,xfvx1,nvx1)  
+            yhigh      = 20
+            vy1        = yhigh*np.ones(vx1.shape[0])        
+            xpositionv = vx1
+            ypositionv = vy1
                 
         if(ptype==4):
         
-            xpositionv  = np.array([6000.0,6000.0,6000.0,8000.0,8000.0,8000.0,10000.0,10000.0,10000.0,12000.0,12000.0,12000.0])
-            ypositionv  = np.array([1000.0,2000.0,3000.0,1000.0,2000.0,3000.0,1000.0,2000.0,3000.0,1000.0,2000.0,3000.0])
+            xivx1      = 6000
+            xfvx1      = 11000
+            nvx1       = 21
+            vx1        = np.linspace(xivx1,xfvx1,nvx1)  
+            yhigh      = 50
+            vy1        = yhigh*np.ones(vx1.shape[0])        
+            xpositionv = vx1
+            ypositionv = vy1
     
         nrec_select = len(xpositionv)
         rec_select  = Receiver(name='rec_select',grid=grid,npoint=nrec_select,time_range=time_range,staggered=NODE,dtype=np.float64)
@@ -282,14 +310,14 @@ def acoustic_operator_multiple_exec(dx_ref,dt_ref,freq_ref,ptype,percent_glob):
         vel = Function(name="vel",grid=grid,space_order=2,staggered=NODE,dtype=np.float64)
         vel.data[:,:] = v[:,:]
     
-        fact = 1
+        fact = dx_ref*dx_ref
         src_term = src.inject(field=u.forward,expr=fact*1*src*dt**2*vel**2)
         rec_term = rec.interpolate(expr=u)
         rec_select_term = rec_select.interpolate(expr=u)
         
         try: 
             
-            mcoef = np.load("stencil_save/%s/mcoef_%s_%s_%d_%d_%f.npy"%(locsave,shape,method,mvalue,nvalue,cur))
+            mcoef = np.load("stencil_save/%s/mcoef_%s_%s_%d_%d_%f.npy"%(locsave,shape,method,mvalue,nvalue,cur)) 
             print('Read Memorized Stencil')
                 
         except:
@@ -299,8 +327,11 @@ def acoustic_operator_multiple_exec(dx_ref,dt_ref,freq_ref,ptype,percent_glob):
             if(save_stencil==1): np.save("stencil_save/%s/mcoef_%s_%s_%d_%d_%f"%(locsave,shape,method,mvalue,nvalue,cur),mcoef)    
             print('Calcualte a New Stencil')
     
+        damp           = Function(name="damp",grid=grid,space_order=2,staggered=NODE,dtype=np.float64)
+        damp.data[:,:] = D
+
         new_laplace, contcoef = coef1.eqconstuct1(mcoef,u,t,x,y)
-        pde0                  = Eq(u.dt2 - new_laplace*vel*vel)
+        pde0                  = Eq(u.dt2 - new_laplace*vel*vel + vel*vel*damp*u.dtc)
         stencil0              = Eq(u.forward, solve(pde0,u.forward),subdomain = grid.subdomains['d0'])
     #==============================================================================
     
@@ -328,12 +359,20 @@ def acoustic_operator_multiple_exec(dx_ref,dt_ref,freq_ref,ptype,percent_glob):
     
         if(btype==3):
     
-            bc =      [Eq(u[t+1,x,-k],u[t+1,x,npty-1-k])      for k in range(0,int(sou/2)+1)]
+            bc =      [Eq(u[t+1,x,-k],u[t+1,x,npty-1-k]) for k in range(0,int(sou/2)+1)]
             bc = bc + [Eq(u[t+1,x,npty-1+k],u[t+1,x,k])  for k in range(0,int(sou/2)+1)]
             bc = bc + [Eq(u[t+1,-k,y],u[t+1,nptx-1-k,y]) for k in range(0,int(sou/2)+1)]
             bc = bc + [Eq(u[t+1,nptx-1+k,y],u[t+1,k,y])  for k in range(0,int(sou/2)+1)]
             op = Operator([stencil0] + src_term + bc + rec_term + rec_select_term + [Eq(usave,u.forward)],subs=grid.spacing_map)
     
+        if(btype==4):
+    
+            bc =      [Eq(u[t+1,x,-k],u[t+1,x,k]) for k in range(0,int(sou/2)+1)]
+            bc = bc + [Eq(u[t+1,x,npty-1+k],u[t+1,x,npty-1-k])  for k in range(0,int(sou/2)+1)]
+            bc = bc + [Eq(u[t+1,-k,y],u[t+1,k,y]) for k in range(0,int(sou/2)+1)]
+            bc = bc + [Eq(u[t+1,nptx-1+k,y],u[t+1,nptx-1-k,y])  for k in range(0,int(sou/2)+1)]
+            op = Operator([stencil0] + src_term + bc + rec_term + rec_select_term + [Eq(usave,u.forward)],subs=grid.spacing_map)
+
         nrodadas = 1
     
         for i in range(0,nrodadas):

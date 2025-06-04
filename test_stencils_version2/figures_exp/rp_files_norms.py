@@ -40,8 +40,8 @@ def gera_norms(ptype,dx_ref,dt_ref,freq_ref):
             test_results  = pickle.load(f) 
             ntr           = len(test_results)
             testname      = 'Homogeneos Velocity Model'
-            xpositionv    = np.array([750.0,2250.0, 750.0,2250.0])
-            ypositionv    = np.array([750.0, 750.0,2250.0,2250.0])
+            xpositionv    = np.array([1500.0,4500.0,1500.0,4500.0])
+            ypositionv    = np.array([1500.0,1500.0,4500.0,4500.0])
                 
         elif(ptype==2): 
                 
@@ -85,7 +85,7 @@ def gera_norms(ptype,dx_ref,dt_ref,freq_ref):
     
     for k1 in range(0,nlf):
         
-        if(lf_select[k1][2]==1 and lf_select[k1][3]==1):
+        if(lf_select[k1][2]==dx_ref and lf_select[k1][3]==dt_ref):
             
             lfdxdt_select.append(lf_select[k1])   
     
@@ -110,7 +110,7 @@ def gera_norms(ptype,dx_ref,dt_ref,freq_ref):
         if(lfdxdt_select[k1][5]=='csq' and lfdxdt_select[k1][6]=='dispte'):      lfdxdt_select_dispte_csq.append(lfdxdt_select[k1])
         if(lfdxdt_select[k1][5]=='csq' and lfdxdt_select[k1][6]=='displs'):      lfdxdt_select_displs_csq.append(lfdxdt_select[k1])
         if(lfdxdt_select[k1][5]=='csq' and lfdxdt_select[k1][6]=='specls'):      lfdxdt_select_specls_csq.append(lfdxdt_select[k1])
-        
+    
     ncl         = len(lfdxdt_select_spatte_cl)
     ncrb        = len(lfdxdt_select_specls_crb)
     ncsq        = len(lfdxdt_select_specls_csq)
@@ -144,14 +144,14 @@ def gera_norms(ptype,dx_ref,dt_ref,freq_ref):
     lfdxdt_normrecremax_displs_csq              = np.zeros((ncl,ncl))
     lfdxdt_normrecremax_specls_csq              = np.zeros((ncl,ncl))
     
-    lfdxdt_normrecreim_spatte_cl                = np.zeros((ncl,1))
-    lfdxdt_normrecreim_spectetheta_cl           = np.zeros((ncl,1))
-    lfdxdt_normrecreim_dispte_crb               = np.zeros((ncl,ncl))
-    lfdxdt_normrecreim_displs_crb               = np.zeros((ncl,ncl))
-    lfdxdt_normrecreim_specls_crb               = np.zeros((ncl,ncl))
-    lfdxdt_normrecreim_dispte_csq               = np.zeros((ncl,ncl))
-    lfdxdt_normrecreim_displs_csq               = np.zeros((ncl,ncl))
-    lfdxdt_normrecreim_specls_csq               = np.zeros((ncl,ncl))
+    lfdxdt_normrecrefft_spatte_cl                = np.zeros((ncl,1))
+    lfdxdt_normrecrefft_spectetheta_cl           = np.zeros((ncl,1))
+    lfdxdt_normrecrefft_dispte_crb               = np.zeros((ncl,ncl))
+    lfdxdt_normrecrefft_displs_crb               = np.zeros((ncl,ncl))
+    lfdxdt_normrecrefft_specls_crb               = np.zeros((ncl,ncl))
+    lfdxdt_normrecrefft_dispte_csq               = np.zeros((ncl,ncl))
+    lfdxdt_normrecrefft_displs_csq               = np.zeros((ncl,ncl))
+    lfdxdt_normrecrefft_specls_csq               = np.zeros((ncl,ncl))
     
     lfdxdt_normrecselectrel1_spatte_cl          = np.zeros((nprecselect,ncl,1))
     lfdxdt_normrecselectrel1_spectetheta_cl     = np.zeros((nprecselect,ncl,1))
@@ -180,14 +180,14 @@ def gera_norms(ptype,dx_ref,dt_ref,freq_ref):
     lfdxdt_normrecselectremax_displs_csq        = np.zeros((nprecselect,ncl,ncl))
     lfdxdt_normrecselectremax_specls_csq        = np.zeros((nprecselect,ncl,ncl))
 
-    lfdxdt_normrecselectreim_spatte_cl          = np.zeros((nprecselect,ncl,1))
-    lfdxdt_normrecselectreim_spectetheta_cl     = np.zeros((nprecselect,ncl,1))
-    lfdxdt_normrecselectreim_dispte_crb         = np.zeros((nprecselect,ncl,ncl))
-    lfdxdt_normrecselectreim_displs_crb         = np.zeros((nprecselect,ncl,ncl))
-    lfdxdt_normrecselectreim_specls_crb         = np.zeros((nprecselect,ncl,ncl))
-    lfdxdt_normrecselectreim_dispte_csq         = np.zeros((nprecselect,ncl,ncl))
-    lfdxdt_normrecselectreim_displs_csq         = np.zeros((nprecselect,ncl,ncl))
-    lfdxdt_normrecselectreim_specls_csq         = np.zeros((nprecselect,ncl,ncl))
+    lfdxdt_normrecselectrefft_spatte_cl          = np.zeros((nprecselect,ncl,1))
+    lfdxdt_normrecselectrefft_spectetheta_cl     = np.zeros((nprecselect,ncl,1))
+    lfdxdt_normrecselectrefft_dispte_crb         = np.zeros((nprecselect,ncl,ncl))
+    lfdxdt_normrecselectrefft_displs_crb         = np.zeros((nprecselect,ncl,ncl))
+    lfdxdt_normrecselectrefft_specls_crb         = np.zeros((nprecselect,ncl,ncl))
+    lfdxdt_normrecselectrefft_dispte_csq         = np.zeros((nprecselect,ncl,ncl))
+    lfdxdt_normrecselectrefft_displs_csq         = np.zeros((nprecselect,ncl,ncl))
+    lfdxdt_normrecselectrefft_specls_csq         = np.zeros((nprecselect,ncl,ncl))
 
     lfdxdt_normsolplotrel1_spatte_cl            = np.zeros((npsolselect,ncl,1))
     lfdxdt_normsolplotrel1_spectetheta_cl       = np.zeros((npsolselect,ncl,1))
@@ -216,50 +216,50 @@ def gera_norms(ptype,dx_ref,dt_ref,freq_ref):
     lfdxdt_normsolplotremax_displs_csq          = np.zeros((npsolselect,ncl,ncl))
     lfdxdt_normsolplotremax_specls_csq          = np.zeros((npsolselect,ncl,ncl))
     
-    lfdxdt_normsolplotreim_spatte_cl           = np.zeros((npsolselect,ncl,1))
-    lfdxdt_normsolplotreim_spectetheta_cl      = np.zeros((npsolselect,ncl,1))
-    lfdxdt_normsolplotreim_dispte_crb          = np.zeros((npsolselect,ncl,ncl))
-    lfdxdt_normsolplotreim_displs_crb          = np.zeros((npsolselect,ncl,ncl))
-    lfdxdt_normsolplotreim_specls_crb          = np.zeros((npsolselect,ncl,ncl))
-    lfdxdt_normsolplotreim_dispte_csq          = np.zeros((npsolselect,ncl,ncl))
-    lfdxdt_normsolplotreim_displs_csq          = np.zeros((npsolselect,ncl,ncl))
-    lfdxdt_normsolplotreim_specls_csq          = np.zeros((npsolselect,ncl,ncl))
+    lfdxdt_normsolplotrefft_spatte_cl           = np.zeros((npsolselect,ncl,1))
+    lfdxdt_normsolplotrefft_spectetheta_cl      = np.zeros((npsolselect,ncl,1))
+    lfdxdt_normsolplotrefft_dispte_crb          = np.zeros((npsolselect,ncl,ncl))
+    lfdxdt_normsolplotrefft_displs_crb          = np.zeros((npsolselect,ncl,ncl))
+    lfdxdt_normsolplotrefft_specls_crb          = np.zeros((npsolselect,ncl,ncl))
+    lfdxdt_normsolplotrefft_dispte_csq          = np.zeros((npsolselect,ncl,ncl))
+    lfdxdt_normsolplotrefft_displs_csq          = np.zeros((npsolselect,ncl,ncl))
+    lfdxdt_normsolplotrefft_specls_csq          = np.zeros((npsolselect,ncl,ncl))
     
     for k1 in range(0,ncl):
         
         lfdxdt_normrecrel1_spatte_cl[k1,0]  = lfdxdt_select_spatte_cl[k1][11][3]
         lfdxdt_normrecrel2_spatte_cl[k1,0]  = lfdxdt_select_spatte_cl[k1][11][4]
         lfdxdt_normrecremax_spatte_cl[k1,0] = lfdxdt_select_spatte_cl[k1][11][5]
-        lfdxdt_normrecreim_spatte_cl[k1,0]  = lfdxdt_select_spatte_cl[k1][11][6]
+        lfdxdt_normrecrefft_spatte_cl[k1,0]  = lfdxdt_select_spatte_cl[k1][11][6]
 
         lfdxdt_normrecrel1_spectetheta_cl[k1,0]  = lfdxdt_select_spectetheta_cl[k1][11][3]
         lfdxdt_normrecrel2_spectetheta_cl[k1,0]  = lfdxdt_select_spectetheta_cl[k1][11][4]
         lfdxdt_normrecremax_spectetheta_cl[k1,0] = lfdxdt_select_spectetheta_cl[k1][11][5]
-        lfdxdt_normrecreim_spectetheta_cl[k1,0]  = lfdxdt_select_spectetheta_cl[k1][11][6]
+        lfdxdt_normrecrefft_spectetheta_cl[k1,0]  = lfdxdt_select_spectetheta_cl[k1][11][6]
     
         for k2 in range(0,nprecselect):
             
             lfdxdt_normrecselectrel1_spatte_cl[k2,k1,0]  = lfdxdt_select_spatte_cl[k1][12][3][k2]
             lfdxdt_normrecselectrel2_spatte_cl[k2,k1,0]  = lfdxdt_select_spatte_cl[k1][12][4][k2]
             lfdxdt_normrecselectremax_spatte_cl[k2,k1,0] = lfdxdt_select_spatte_cl[k1][12][5][k2]
-            lfdxdt_normrecselectreim_spatte_cl[k2,k1,0]  = lfdxdt_select_spatte_cl[k1][12][6][k2]
+            lfdxdt_normrecselectrefft_spatte_cl[k2,k1,0]  = lfdxdt_select_spatte_cl[k1][12][6][k2]
             
             lfdxdt_normrecselectrel1_spectetheta_cl[k2,k1,0]  = lfdxdt_select_spectetheta_cl[k1][12][3][k2]
             lfdxdt_normrecselectrel2_spectetheta_cl[k2,k1,0]  = lfdxdt_select_spectetheta_cl[k1][12][4][k2]
             lfdxdt_normrecselectremax_spectetheta_cl[k2,k1,0] = lfdxdt_select_spectetheta_cl[k1][12][5][k2]
-            lfdxdt_normrecselectreim_spectetheta_cl[k2,k1,0]  = lfdxdt_select_spectetheta_cl[k1][12][6][k2]
+            lfdxdt_normrecselectrefft_spectetheta_cl[k2,k1,0]  = lfdxdt_select_spectetheta_cl[k1][12][6][k2]
         
         for k3 in range(0,npsolselect):
             
             lfdxdt_normsolplotrel1_spatte_cl[k3,k1,0]  = lfdxdt_select_spatte_cl[k1][13][3][k3]
             lfdxdt_normsolplotrel2_spatte_cl[k3,k1,0]  = lfdxdt_select_spatte_cl[k1][13][4][k3]
             lfdxdt_normsolplotremax_spatte_cl[k3,k1,0] = lfdxdt_select_spatte_cl[k1][13][5][k3]
-            lfdxdt_normsolplotreim_spatte_cl[k3,k1,0]  = lfdxdt_select_spatte_cl[k1][13][6][k3]
+            lfdxdt_normsolplotrefft_spatte_cl[k3,k1,0]  = lfdxdt_select_spatte_cl[k1][13][6][k3]
     
             lfdxdt_normsolplotrel1_spectetheta_cl[k3,k1,0]  = lfdxdt_select_spectetheta_cl[k1][13][3][k3]
             lfdxdt_normsolplotrel2_spectetheta_cl[k3,k1,0]  = lfdxdt_select_spectetheta_cl[k1][13][4][k3]
             lfdxdt_normsolplotremax_spectetheta_cl[k3,k1,0] = lfdxdt_select_spectetheta_cl[k1][13][5][k3]
-            lfdxdt_normsolplotreim_spectetheta_cl[k3,k1,0]  = lfdxdt_select_spectetheta_cl[k1][13][6][k3]
+            lfdxdt_normsolplotrefft_spectetheta_cl[k3,k1,0]  = lfdxdt_select_spectetheta_cl[k1][13][6][k3]
 
     contglob        = 0
     contloc         = 0
@@ -285,96 +285,96 @@ def gera_norms(ptype,dx_ref,dt_ref,freq_ref):
             lfdxdt_normrecrel1_dispte_crb[k2,k1]  = lfdxdt_select_dispte_crb[contglob][11][3]
             lfdxdt_normrecrel2_dispte_crb[k2,k1]  = lfdxdt_select_dispte_crb[contglob][11][4]
             lfdxdt_normrecremax_dispte_crb[k2,k1] = lfdxdt_select_dispte_crb[contglob][11][5]
-            lfdxdt_normrecreim_dispte_crb[k2,k1]  = lfdxdt_select_dispte_crb[contglob][11][6]
+            lfdxdt_normrecrefft_dispte_crb[k2,k1]  = lfdxdt_select_dispte_crb[contglob][11][6]
     
             lfdxdt_normrecrel1_displs_crb[k2,k1]  = lfdxdt_select_displs_crb[contglob][11][3]
             lfdxdt_normrecrel2_displs_crb[k2,k1]  = lfdxdt_select_displs_crb[contglob][11][4]
             lfdxdt_normrecremax_displs_crb[k2,k1] = lfdxdt_select_displs_crb[contglob][11][5]
-            lfdxdt_normrecreim_displs_crb[k2,k1]  = lfdxdt_select_displs_crb[contglob][11][6]
+            lfdxdt_normrecrefft_displs_crb[k2,k1]  = lfdxdt_select_displs_crb[contglob][11][6]
             
             lfdxdt_normrecrel1_specls_crb[k2,k1]  = lfdxdt_select_specls_crb[contglob][11][3]
             lfdxdt_normrecrel2_specls_crb[k2,k1]  = lfdxdt_select_specls_crb[contglob][11][4]
             lfdxdt_normrecremax_specls_crb[k2,k1] = lfdxdt_select_specls_crb[contglob][11][5]
-            lfdxdt_normrecreim_specls_crb[k2,k1]  = lfdxdt_select_specls_crb[contglob][11][6]
+            lfdxdt_normrecrefft_specls_crb[k2,k1]  = lfdxdt_select_specls_crb[contglob][11][6]
 
             lfdxdt_normrecrel1_dispte_csq[k2,k1]  = lfdxdt_select_dispte_csq[contglob][11][3]
             lfdxdt_normrecrel2_dispte_csq[k2,k1]  = lfdxdt_select_dispte_csq[contglob][11][4]
             lfdxdt_normrecremax_dispte_csq[k2,k1] = lfdxdt_select_dispte_csq[contglob][11][5]
-            lfdxdt_normrecreim_dispte_csq[k2,k1]  = lfdxdt_select_dispte_csq[contglob][11][6]
+            lfdxdt_normrecrefft_dispte_csq[k2,k1]  = lfdxdt_select_dispte_csq[contglob][11][6]
             
             lfdxdt_normrecrel1_displs_csq[k2,k1]  = lfdxdt_select_displs_csq[contglob][11][3]
             lfdxdt_normrecrel2_displs_csq[k2,k1]  = lfdxdt_select_displs_csq[contglob][11][4]
             lfdxdt_normrecremax_displs_csq[k2,k1] = lfdxdt_select_displs_csq[contglob][11][5]
-            lfdxdt_normrecreim_displs_csq[k2,k1]  = lfdxdt_select_displs_csq[contglob][11][6]
+            lfdxdt_normrecrefft_displs_csq[k2,k1]  = lfdxdt_select_displs_csq[contglob][11][6]
             
             lfdxdt_normrecrel1_specls_csq[k2,k1]  = lfdxdt_select_specls_csq[contglob][11][3]
             lfdxdt_normrecrel2_specls_csq[k2,k1]  = lfdxdt_select_specls_csq[contglob][11][4]
             lfdxdt_normrecremax_specls_csq[k2,k1] = lfdxdt_select_specls_csq[contglob][11][5]
-            lfdxdt_normrecreim_specls_csq[k2,k1]  = lfdxdt_select_specls_csq[contglob][11][6]
+            lfdxdt_normrecrefft_specls_csq[k2,k1]  = lfdxdt_select_specls_csq[contglob][11][6]
             
             for k3 in range(0,nprecselect):
                 
                 lfdxdt_normrecselectrel1_dispte_crb[k3,k2,k1]  = lfdxdt_select_dispte_crb[contglob][12][3][k3]
                 lfdxdt_normrecselectrel2_dispte_crb[k3,k2,k1]  = lfdxdt_select_dispte_crb[contglob][12][4][k3]
                 lfdxdt_normrecselectremax_dispte_crb[k3,k2,k1] = lfdxdt_select_dispte_crb[contglob][12][5][k3]
-                lfdxdt_normrecselectreim_dispte_crb[k3,k2,k1]  = lfdxdt_select_dispte_crb[contglob][12][6][k3]
+                lfdxdt_normrecselectrefft_dispte_crb[k3,k2,k1]  = lfdxdt_select_dispte_crb[contglob][12][6][k3]
 
                 lfdxdt_normrecselectrel1_displs_crb[k3,k2,k1]  = lfdxdt_select_displs_crb[contglob][12][3][k3]
                 lfdxdt_normrecselectrel2_displs_crb[k3,k2,k1]  = lfdxdt_select_displs_crb[contglob][12][4][k3]
                 lfdxdt_normrecselectremax_displs_crb[k3,k2,k1] = lfdxdt_select_displs_crb[contglob][12][5][k3]
-                lfdxdt_normrecselectreim_displs_crb[k3,k2,k1]  = lfdxdt_select_displs_crb[contglob][12][6][k3]
+                lfdxdt_normrecselectrefft_displs_crb[k3,k2,k1]  = lfdxdt_select_displs_crb[contglob][12][6][k3]
 
                 lfdxdt_normrecselectrel1_specls_crb[k3,k2,k1]  = lfdxdt_select_specls_crb[contglob][12][3][k3]
                 lfdxdt_normrecselectrel2_specls_crb[k3,k2,k1]  = lfdxdt_select_specls_crb[contglob][12][4][k3]
                 lfdxdt_normrecselectremax_specls_crb[k3,k2,k1] = lfdxdt_select_specls_crb[contglob][12][5][k3]
-                lfdxdt_normrecselectreim_specls_crb[k3,k2,k1]  = lfdxdt_select_specls_crb[contglob][12][6][k3]
+                lfdxdt_normrecselectrefft_specls_crb[k3,k2,k1]  = lfdxdt_select_specls_crb[contglob][12][6][k3]
 
                 lfdxdt_normrecselectrel1_dispte_csq[k3,k2,k1]  = lfdxdt_select_dispte_csq[contglob][12][3][k3]
                 lfdxdt_normrecselectrel2_dispte_csq[k3,k2,k1]  = lfdxdt_select_dispte_csq[contglob][12][4][k3]
                 lfdxdt_normrecselectremax_dispte_csq[k3,k2,k1] = lfdxdt_select_dispte_csq[contglob][12][5][k3]
-                lfdxdt_normrecselectreim_dispte_csq[k3,k2,k1]  = lfdxdt_select_dispte_csq[contglob][12][6][k3]
+                lfdxdt_normrecselectrefft_dispte_csq[k3,k2,k1]  = lfdxdt_select_dispte_csq[contglob][12][6][k3]
 
                 lfdxdt_normrecselectrel1_displs_csq[k3,k2,k1]  = lfdxdt_select_displs_csq[contglob][12][3][k3]
                 lfdxdt_normrecselectrel2_displs_csq[k3,k2,k1]  = lfdxdt_select_displs_csq[contglob][12][4][k3]
                 lfdxdt_normrecselectremax_displs_csq[k3,k2,k1] = lfdxdt_select_displs_csq[contglob][12][5][k3]
-                lfdxdt_normrecselectreim_displs_csq[k3,k2,k1]  = lfdxdt_select_displs_csq[contglob][12][6][k3]
+                lfdxdt_normrecselectrefft_displs_csq[k3,k2,k1]  = lfdxdt_select_displs_csq[contglob][12][6][k3]
 
                 lfdxdt_normrecselectrel1_specls_csq[k3,k2,k1]  = lfdxdt_select_specls_csq[contglob][12][3][k3]
                 lfdxdt_normrecselectrel2_specls_csq[k3,k2,k1]  = lfdxdt_select_specls_csq[contglob][12][4][k3]
                 lfdxdt_normrecselectremax_specls_csq[k3,k2,k1] = lfdxdt_select_specls_csq[contglob][12][5][k3]
-                lfdxdt_normrecselectreim_specls_csq[k3,k2,k1]  = lfdxdt_select_specls_csq[contglob][12][6][k3]
+                lfdxdt_normrecselectrefft_specls_csq[k3,k2,k1]  = lfdxdt_select_specls_csq[contglob][12][6][k3]
 
             for k4 in range(0,npsolselect):
               
                 lfdxdt_normsolplotrel1_dispte_crb[k4,k2,k1]  = lfdxdt_select_dispte_crb[contglob][13][3][k4]
                 lfdxdt_normsolplotrel2_dispte_crb[k4,k2,k1]  = lfdxdt_select_dispte_crb[contglob][13][4][k4]
                 lfdxdt_normsolplotremax_dispte_crb[k4,k2,k1] = lfdxdt_select_dispte_crb[contglob][13][5][k4]
-                lfdxdt_normsolplotreim_dispte_crb[k4,k2,k1]  = lfdxdt_select_dispte_crb[contglob][13][6][k4]
+                lfdxdt_normsolplotrefft_dispte_crb[k4,k2,k1]  = lfdxdt_select_dispte_crb[contglob][13][6][k4]
 
                 lfdxdt_normsolplotrel1_displs_crb[k4,k2,k1]  = lfdxdt_select_displs_crb[contglob][13][3][k4]
                 lfdxdt_normsolplotrel2_displs_crb[k4,k2,k1]  = lfdxdt_select_displs_crb[contglob][13][4][k4]
                 lfdxdt_normsolplotremax_displs_crb[k4,k2,k1] = lfdxdt_select_displs_crb[contglob][13][5][k4]
-                lfdxdt_normsolplotreim_displs_crb[k4,k2,k1]  = lfdxdt_select_displs_crb[contglob][13][6][k4]
+                lfdxdt_normsolplotrefft_displs_crb[k4,k2,k1]  = lfdxdt_select_displs_crb[contglob][13][6][k4]
 
                 lfdxdt_normsolplotrel1_specls_crb[k4,k2,k1]  = lfdxdt_select_specls_crb[contglob][13][3][k4]
                 lfdxdt_normsolplotrel2_specls_crb[k4,k2,k1]  = lfdxdt_select_specls_crb[contglob][13][4][k4]
                 lfdxdt_normsolplotremax_specls_crb[k4,k2,k1] = lfdxdt_select_specls_crb[contglob][13][5][k4]
-                lfdxdt_normsolplotreim_specls_crb[k4,k2,k1]  = lfdxdt_select_specls_crb[contglob][13][6][k4]
+                lfdxdt_normsolplotrefft_specls_crb[k4,k2,k1]  = lfdxdt_select_specls_crb[contglob][13][6][k4]
 
                 lfdxdt_normsolplotrel1_dispte_csq[k4,k2,k1]  = lfdxdt_select_dispte_csq[contglob][13][3][k4]
                 lfdxdt_normsolplotrel2_dispte_csq[k4,k2,k1]  = lfdxdt_select_dispte_csq[contglob][13][4][k4]
                 lfdxdt_normsolplotremax_dispte_csq[k4,k2,k1] = lfdxdt_select_dispte_csq[contglob][13][5][k4]
-                lfdxdt_normsolplotreim_dispte_csq[k4,k2,k1]  = lfdxdt_select_dispte_csq[contglob][13][6][k4]
+                lfdxdt_normsolplotrefft_dispte_csq[k4,k2,k1]  = lfdxdt_select_dispte_csq[contglob][13][6][k4]
 
                 lfdxdt_normsolplotrel1_displs_csq[k4,k2,k1]  = lfdxdt_select_displs_csq[contglob][13][3][k4]
                 lfdxdt_normsolplotrel2_displs_csq[k4,k2,k1]  = lfdxdt_select_displs_csq[contglob][13][4][k4]
                 lfdxdt_normsolplotremax_displs_csq[k4,k2,k1] = lfdxdt_select_displs_csq[contglob][13][5][k4]
-                lfdxdt_normsolplotreim_displs_csq[k4,k2,k1]  = lfdxdt_select_displs_csq[contglob][13][6][k4]
+                lfdxdt_normsolplotrefft_displs_csq[k4,k2,k1]  = lfdxdt_select_displs_csq[contglob][13][6][k4]
 
                 lfdxdt_normsolplotrel1_specls_csq[k4,k2,k1]  = lfdxdt_select_specls_csq[contglob][13][3][k4]
                 lfdxdt_normsolplotrel2_specls_csq[k4,k2,k1]  = lfdxdt_select_specls_csq[contglob][13][4][k4]
                 lfdxdt_normsolplotremax_specls_csq[k4,k2,k1] = lfdxdt_select_specls_csq[contglob][13][5][k4]
-                lfdxdt_normsolplotreim_specls_csq[k4,k2,k1]  = lfdxdt_select_specls_csq[contglob][13][6][k4]
+                lfdxdt_normsolplotrefft_specls_csq[k4,k2,k1]  = lfdxdt_select_specls_csq[contglob][13][6][k4]
 
             contglob = contglob + 1
     
@@ -426,7 +426,7 @@ def gera_norms(ptype,dx_ref,dt_ref,freq_ref):
         plt.figure(figsize = (20,16))
         if(normtype=='n2'): plt.suptitle('Relative Quadratic Error of Full Receivers at time  %.3f s \n dx = %.4fm - dt = %.4fs - freq = %.3f Hz \n %s'%(vparameters[3],vparameters[1],vparameters[2],vparameters[6],vparameters[5]))
         if(normtype=='nmax'): plt.suptitle('Relative Maximum Error of Full Receivers at time  %.3f s \n dx = %.4fm - dt = %.4fs - freq = %.3f Hz \n %s'%(vparameters[3],vparameters[1],vparameters[2],vparameters[6],vparameters[5]))
-        if(normtype=='nim'): plt.suptitle('IM Norm of Full Receivers at time  %.3f s \n dx = %.4fm - dt = %.4fs - freq = %.3f Hz \n %s'%(vparameters[3],vparameters[1],vparameters[2],vparameters[6],vparameters[5]))
+        if(normtype=='nfft'): plt.suptitle('FFT Norm of Full Receivers at time  %.3f s \n dx = %.4fm - dt = %.4fs - freq = %.3f Hz \n %s'%(vparameters[3],vparameters[1],vparameters[2],vparameters[6],vparameters[5]))
         grid = plt.GridSpec(3,3,wspace=0.4,hspace=0.2)    
         plt.subplot(grid[xpos[0],ypos[0]])
         min_value = 0.8*min(min(vcl[0]),min(vcl[1]),min(vcl[2]),min(vcl[3]),min(vcl[4]))
@@ -509,7 +509,7 @@ def gera_norms(ptype,dx_ref,dt_ref,freq_ref):
             plt.figure(figsize = (20,16))
             if(normtype=='n2'): plt.suptitle('Relative Quadratic Error of Full Displacements at time  %.3f s \n dx = %.4fm - dt = %.4fs - freq = %.3f Hz \n %s'%(vparameters[3][k3],vparameters[1],vparameters[2],vparameters[6],vparameters[5]))
             if(normtype=='nmax'): plt.suptitle('Relative Maximum Error of Full Displacements at time  %.3f s \n dx = %.4fm - dt = %.4fs - freq = %.3f Hz \n %s'%(vparameters[3][k3],vparameters[1],vparameters[2],vparameters[6],vparameters[5]))
-            if(normtype=='nim'): plt.suptitle('IM Norm of Full Displacements at time  %.3f s \n dx = %.4fm - dt = %.4fs - freq = %.3f Hz \n %s'%(vparameters[3][k3],vparameters[1],vparameters[2],vparameters[6],vparameters[5]))
+            if(normtype=='nfft'): plt.suptitle('FFT Norm of Full Displacements at time  %.3f s \n dx = %.4fm - dt = %.4fs - freq = %.3f Hz \n %s'%(vparameters[3][k3],vparameters[1],vparameters[2],vparameters[6],vparameters[5]))
             grid = plt.GridSpec(3,3,wspace=0.4,hspace=0.2)    
             plt.subplot(grid[xpos[0],ypos[0]])
             min_value = 0.8*min(min(vcl[0][k3,:]),min(vcl[1][k3,:]),min(vcl[2][k3,:]),min(vcl[3][k3,:]),min(vcl[4][k3,:]))
@@ -592,7 +592,7 @@ def gera_norms(ptype,dx_ref,dt_ref,freq_ref):
             plt.figure(figsize = (20,16))
             if(normtype=='n2'): plt.suptitle('Relative Quadratic Error of Full Receivers at time  %.3f s \n dx = %.4f m - dt = %.4f s - freq = %.3f Hz \n %s \n xpos = %.2f m - ypos = %.2f m'%(vparameters[3],vparameters[1],vparameters[2],vparameters[6],vparameters[5],xpositionv[k3],ypositionv[k3]))
             if(normtype=='nmax'): plt.suptitle('Relative Maximum Error of Full Receivers at time  %.3f s \n dx = %.4f m - dt = %.4f s - freq = %.3f Hz \n %s \n xpos = %.2f m - ypos = %.2f m'%(vparameters[3],vparameters[1],vparameters[2],vparameters[6],vparameters[5],xpositionv[k3],ypositionv[k3]))
-            if(normtype=='nim'): plt.suptitle('IM Norm of Full Receivers at time  %.3f s \n dx = %.4f m - dt = %.4f s - freq = %.3f Hz \n %s \n xpos = %.2f m - ypos = %.2f m'%(vparameters[3],vparameters[1],vparameters[2],vparameters[6],vparameters[5],xpositionv[k3],ypositionv[k3]))
+            if(normtype=='nfft'): plt.suptitle('FFT Norm of Full Receivers at time  %.3f s \n dx = %.4f m - dt = %.4f s - freq = %.3f Hz \n %s \n xpos = %.2f m - ypos = %.2f m'%(vparameters[3],vparameters[1],vparameters[2],vparameters[6],vparameters[5],xpositionv[k3],ypositionv[k3]))
             grid = plt.GridSpec(3,3,wspace=0.4,hspace=0.2)    
             plt.subplot(grid[xpos[0],ypos[0]])
             min_value = 0.8*min(min(vcl[0][k3,:]),min(vcl[1][k3,:]),min(vcl[2][k3,:]),min(vcl[3][k3,:]),min(vcl[4][k3,:]))
@@ -699,7 +699,7 @@ def gera_norms(ptype,dx_ref,dt_ref,freq_ref):
     
     figname     = 'normrec_p%ddx%ddt%dfreq%d'%(vnamefig[0],vnamefig[1],vnamefig[2],vnamefig[3])
     
-    #P1          = plot1(vcl,clnames,xpos,ypos,vcrb,crbnames,vparameters,vnamefig,figname,locsave,ordersv,linep,normtype,vnpte_crb,vnpte_csq)
+    P1          = plot1(vcl,clnames,xpos,ypos,vcrb,crbnames,vparameters,vnamefig,figname,locsave,ordersv,linep,normtype,vnpte_crb,vnpte_csq)
     #==============================================================================
     
     #==============================================================================
@@ -719,7 +719,7 @@ def gera_norms(ptype,dx_ref,dt_ref,freq_ref):
     
     figname     = 'normsolplot_p%ddx%ddt%dfreq%d'%(vnamefig[0],vnamefig[1],vnamefig[2],vnamefig[3])
     
-    #P2          = plot2(vcl,clnames,xpos,ypos,vcrb,crbnames,vparameters,vnamefig,figname,locsave,ordersv,linep,normtype,vnpte_crb,vnpte_csq)
+    P2          = plot2(vcl,clnames,xpos,ypos,vcrb,crbnames,vparameters,vnamefig,figname,locsave,ordersv,linep,normtype,vnpte_crb,vnpte_csq)
     #==============================================================================
     
     #==============================================================================
@@ -739,7 +739,7 @@ def gera_norms(ptype,dx_ref,dt_ref,freq_ref):
     
     figname     = 'normrecselect_p%ddx%ddt%dfreq%d'%(vnamefig[0],vnamefig[1],vnamefig[2],vnamefig[3])
     
-    #P3          = plot3(vcl,clnames,xpos,ypos,vcrb,crbnames,vparameters,vnamefig,figname,locsave,ordersv,linep,xpositionv,ypositionv,normtype,vnpte_crb,vnpte_csq)
+    P3          = plot3(vcl,clnames,xpos,ypos,vcrb,crbnames,vparameters,vnamefig,figname,locsave,ordersv,linep,xpositionv,ypositionv,normtype,vnpte_crb,vnpte_csq)
     #==============================================================================
     
     #==============================================================================
@@ -763,7 +763,7 @@ def gera_norms(ptype,dx_ref,dt_ref,freq_ref):
 
     figname     = 'normrec_p%ddx%ddt%dfreq%d'%(vnamefig[0],vnamefig[1],vnamefig[2],vnamefig[3])
 
-    #P4          = plot1(vcl,clnames,xpos,ypos,vcrb,crbnames,vparameters,vnamefig,figname,locsave,ordersv,linep,normtype,vnpte_crb,vnpte_csq)
+    P4          = plot1(vcl,clnames,xpos,ypos,vcrb,crbnames,vparameters,vnamefig,figname,locsave,ordersv,linep,normtype,vnpte_crb,vnpte_csq)
     #==============================================================================
 
     #==============================================================================
@@ -783,7 +783,7 @@ def gera_norms(ptype,dx_ref,dt_ref,freq_ref):
 
     figname     = 'normsolplot_p%ddx%ddt%dfreq%d'%(vnamefig[0],vnamefig[1],vnamefig[2],vnamefig[3])
 
-    #P5          = plot2(vcl,clnames,xpos,ypos,vcrb,crbnames,vparameters,vnamefig,figname,locsave,ordersv,linep,normtype,vnpte_crb,vnpte_csq)
+    P5          = plot2(vcl,clnames,xpos,ypos,vcrb,crbnames,vparameters,vnamefig,figname,locsave,ordersv,linep,normtype,vnpte_crb,vnpte_csq)
     #==============================================================================
 
     #==============================================================================
@@ -803,22 +803,22 @@ def gera_norms(ptype,dx_ref,dt_ref,freq_ref):
 
     figname     = 'normrecselect_p%ddx%ddt%dfreq%d'%(vnamefig[0],vnamefig[1],vnamefig[2],vnamefig[3])
 
-    #P6          = plot3(vcl,clnames,xpos,ypos,vcrb,crbnames,vparameters,vnamefig,figname,locsave,ordersv,linep,xpositionv,ypositionv,normtype,vnpte_crb,vnpte_csq)
+    P6          = plot3(vcl,clnames,xpos,ypos,vcrb,crbnames,vparameters,vnamefig,figname,locsave,ordersv,linep,xpositionv,ypositionv,normtype,vnpte_crb,vnpte_csq)
     #==============================================================================
 
     #==============================================================================
-    normtype = 'nim'
+    normtype = 'nfft'
     #==============================================================================
   
     #==============================================================================
-    # Plot1 Execute - SSIM
+    # Plot1 Execute - NFFT
     #==============================================================================
-    vcl         = [lfdxdt_normrecreim_spatte_cl,lfdxdt_normrecreim_spectetheta_cl,
-                   lfdxdt_normrecreim_dispte_crb[0,:],lfdxdt_normrecreim_displs_crb[0,:],lfdxdt_normrecreim_specls_crb[0,:],
-                   lfdxdt_normrecreim_dispte_csq[0,:],lfdxdt_normrecreim_displs_csq[0,:],lfdxdt_normrecreim_specls_csq[0,:]]
+    vcl         = [lfdxdt_normrecrefft_spatte_cl,lfdxdt_normrecrefft_spectetheta_cl,
+                   lfdxdt_normrecrefft_dispte_crb[0,:],lfdxdt_normrecrefft_displs_crb[0,:],lfdxdt_normrecrefft_specls_crb[0,:],
+                   lfdxdt_normrecrefft_dispte_csq[0,:],lfdxdt_normrecrefft_displs_csq[0,:],lfdxdt_normrecrefft_specls_csq[0,:]]
 
-    vcrb        = [lfdxdt_normrecreim_dispte_crb,lfdxdt_normrecreim_displs_crb,lfdxdt_normrecreim_specls_crb,
-                   lfdxdt_normrecreim_dispte_csq,lfdxdt_normrecreim_displs_csq,lfdxdt_normrecreim_specls_csq]
+    vcrb        = [lfdxdt_normrecrefft_dispte_crb,lfdxdt_normrecrefft_displs_crb,lfdxdt_normrecrefft_specls_crb,
+                   lfdxdt_normrecrefft_dispte_csq,lfdxdt_normrecrefft_displs_csq,lfdxdt_normrecrefft_specls_csq]
 
     vparameters = [lfdxdt_select_spatte_cl[0][15][6],lfdxdt_select_spatte_cl[0][15][7],lfdxdt_select_spatte_cl[0][15][13]/1000,
                     lfdxdt_select_spatte_cl[0][15][9]/1000,lfdxdt_select_spatte_cl[0][15][10],testname,lfdxdt_select_spatte_cl[0][15][10]*1000]
@@ -827,18 +827,18 @@ def gera_norms(ptype,dx_ref,dt_ref,freq_ref):
 
     figname     = 'normrec_p%ddx%ddt%dfreq%d'%(vnamefig[0],vnamefig[1],vnamefig[2],vnamefig[3])
 
-    P7          = plot1(vcl,clnames,xpos,ypos,vcrb,crbnames,vparameters,vnamefig,figname,locsave,ordersv,linep,normtype,vnpte_crb,vnpte_csq)
+    #P7          = plot1(vcl,clnames,xpos,ypos,vcrb,crbnames,vparameters,vnamefig,figname,locsave,ordersv,linep,normtype,vnpte_crb,vnpte_csq)
     #==============================================================================
 
     #==============================================================================
-    # Plot2 Execute - SSIM
+    # Plot2 Execute - NFFT
     #==============================================================================
-    vcl         = [lfdxdt_normsolplotreim_spatte_cl,lfdxdt_normsolplotreim_spectetheta_cl,
-                   lfdxdt_normsolplotreim_dispte_crb[:,0,:],lfdxdt_normsolplotreim_displs_crb[:,0,:],lfdxdt_normsolplotreim_specls_crb[:,0,:],
-                   lfdxdt_normsolplotreim_dispte_csq[:,0,:],lfdxdt_normsolplotreim_displs_csq[:,0,:],lfdxdt_normsolplotreim_specls_csq[:,0,:]]
+    vcl         = [lfdxdt_normsolplotrefft_spatte_cl,lfdxdt_normsolplotrefft_spectetheta_cl,
+                   lfdxdt_normsolplotrefft_dispte_crb[:,0,:],lfdxdt_normsolplotrefft_displs_crb[:,0,:],lfdxdt_normsolplotrefft_specls_crb[:,0,:],
+                   lfdxdt_normsolplotrefft_dispte_csq[:,0,:],lfdxdt_normsolplotrefft_displs_csq[:,0,:],lfdxdt_normsolplotrefft_specls_csq[:,0,:]]
 
-    vcrb        = [lfdxdt_normsolplotreim_dispte_crb,lfdxdt_normsolplotreim_displs_crb,lfdxdt_normsolplotreim_specls_crb,
-                   lfdxdt_normsolplotreim_dispte_csq,lfdxdt_normsolplotreim_displs_csq,lfdxdt_normsolplotreim_specls_csq]
+    vcrb        = [lfdxdt_normsolplotrefft_dispte_crb,lfdxdt_normsolplotrefft_displs_crb,lfdxdt_normsolplotrefft_specls_crb,
+                   lfdxdt_normsolplotrefft_dispte_csq,lfdxdt_normsolplotrefft_displs_csq,lfdxdt_normsolplotrefft_specls_csq]
 
     vparameters = [lfdxdt_select_spatte_cl[0][15][6],lfdxdt_select_spatte_cl[0][15][7],lfdxdt_select_spatte_cl[0][15][13]/1000,
                     np.array(timesolplot)/1000,lfdxdt_select_spatte_cl[0][15][10],testname,lfdxdt_select_spatte_cl[0][15][10]*1000]
@@ -847,18 +847,18 @@ def gera_norms(ptype,dx_ref,dt_ref,freq_ref):
 
     figname     = 'normsolplot_p%ddx%ddt%dfreq%d'%(vnamefig[0],vnamefig[1],vnamefig[2],vnamefig[3])
 
-    P8          = plot2(vcl,clnames,xpos,ypos,vcrb,crbnames,vparameters,vnamefig,figname,locsave,ordersv,linep,normtype,vnpte_crb,vnpte_csq)
+    #P8          = plot2(vcl,clnames,xpos,ypos,vcrb,crbnames,vparameters,vnamefig,figname,locsave,ordersv,linep,normtype,vnpte_crb,vnpte_csq)
     #==============================================================================
 
     #==============================================================================
-    # Plot3 Execute - SSIM
+    # Plot3 Execute - NFFT
     #==============================================================================
-    vcl         = [lfdxdt_normrecselectreim_spatte_cl,lfdxdt_normrecselectreim_spectetheta_cl,
-                   lfdxdt_normrecselectreim_dispte_crb[:,0,:],lfdxdt_normrecselectreim_displs_crb[:,0,:],lfdxdt_normrecselectreim_specls_crb[:,0,:],
-                   lfdxdt_normrecselectreim_dispte_csq[:,0,:],lfdxdt_normrecselectreim_displs_csq[:,0,:],lfdxdt_normrecselectreim_specls_csq[:,0,:]]
+    vcl         = [lfdxdt_normrecselectrefft_spatte_cl,lfdxdt_normrecselectrefft_spectetheta_cl,
+                   lfdxdt_normrecselectrefft_dispte_crb[:,0,:],lfdxdt_normrecselectrefft_displs_crb[:,0,:],lfdxdt_normrecselectrefft_specls_crb[:,0,:],
+                   lfdxdt_normrecselectrefft_dispte_csq[:,0,:],lfdxdt_normrecselectrefft_displs_csq[:,0,:],lfdxdt_normrecselectrefft_specls_csq[:,0,:]]
 
-    vcrb        = [lfdxdt_normrecselectreim_dispte_crb,lfdxdt_normrecselectreim_displs_crb,lfdxdt_normrecselectreim_specls_crb,
-                   lfdxdt_normrecselectreim_dispte_csq,lfdxdt_normrecselectreim_displs_csq,lfdxdt_normrecselectreim_specls_csq]
+    vcrb        = [lfdxdt_normrecselectrefft_dispte_crb,lfdxdt_normrecselectrefft_displs_crb,lfdxdt_normrecselectrefft_specls_crb,
+                   lfdxdt_normrecselectrefft_dispte_csq,lfdxdt_normrecselectrefft_displs_csq,lfdxdt_normrecselectrefft_specls_csq]
 
     vparameters = [lfdxdt_select_spatte_cl[0][15][6],lfdxdt_select_spatte_cl[0][15][7],lfdxdt_select_spatte_cl[0][15][13]/1000,
                     lfdxdt_select_spatte_cl[0][15][9]/1000,lfdxdt_select_spatte_cl[0][15][10],testname,lfdxdt_select_spatte_cl[0][15][10]*1000]
@@ -867,7 +867,7 @@ def gera_norms(ptype,dx_ref,dt_ref,freq_ref):
 
     figname     = 'normrecselect_p%ddx%ddt%dfreq%d'%(vnamefig[0],vnamefig[1],vnamefig[2],vnamefig[3])
 
-    P9          = plot3(vcl,clnames,xpos,ypos,vcrb,crbnames,vparameters,vnamefig,figname,locsave,ordersv,linep,xpositionv,ypositionv,normtype,vnpte_crb,vnpte_csq)
+    #P9          = plot3(vcl,clnames,xpos,ypos,vcrb,crbnames,vparameters,vnamefig,figname,locsave,ordersv,linep,xpositionv,ypositionv,normtype,vnpte_crb,vnpte_csq)
     #==============================================================================    
     
     #==============================================================================

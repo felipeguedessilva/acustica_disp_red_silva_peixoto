@@ -21,13 +21,20 @@ class acusdevito:
 
 #==============================================================================    
     def __init__(self,teste,ptype):
+        
         self.teste = teste
         self.ptype = ptype
         
-        if(ptype==1): self.C0a   = self.geramvel1(teste)
-        if(ptype==2): self.C0a   = self.geramvel2(teste)
-        if(ptype==3): self.C0a   = self.geramvel3(teste)
-        if(ptype==4): self.C0a   = self.geramvel4(teste)
+        if(ptype==1): 
+            self.C0a   = self.geramvel1(teste)
+        if(ptype==2): 
+            self.C0a   = self.geramvel2(teste)
+        if(ptype==3): 
+            self.C0a   = self.geramvel3(teste)
+        if(ptype==4): 
+            self.C0a   = self.geramvel4(teste)
+        
+        self.D0     = self.geramdamp(teste,self.C0a)
 #==============================================================================
 
 #==============================================================================        
@@ -50,7 +57,7 @@ class acusdevito:
         C0a       = np.zeros((nptx,npty))                     
         
         p0  = 0    
-        py1 = 1200
+        py1 = 2400
         
         for i in range(0,Y0.shape[0]):
             
@@ -193,4 +200,50 @@ class acusdevito:
         C0        = np.where(C0>=vlimit,new_limit,C0)
 
         return C0
+#==============================================================================
+
+#==============================================================================    
+    def geramdamp(self,teste,C):
+    
+        nptx   = teste.nptx
+        npty   = teste.npty
+        X0grid = teste.X0grid
+        Y0grid = teste.Y0grid
+       
+        D0 = np.zeros((nptx,npty))
+               
+        vmax = np.amax(C)
+
+        D0 = np.transpose(self.fdamp(X0grid,Y0grid,vmax,teste))
+             
+        return D0
+#==============================================================================
+
+#==============================================================================
+    def fdamp(self,x,y,vmax,teste):
+
+        deltax  = teste.deltax
+        deltay  = teste.deltay
+        hx      = teste.hx
+        hy      = teste.hy
+        x0pml   = teste.x0pml
+        x1pml   = teste.x1pml
+        y0pml   = teste.y0pml
+        y1pml   = teste.y1pml
+        npmlx   = teste.npmlx
+        npmly   = teste.npmly
+        quibar  = 1.5*np.log(1.0/0.001)/(40)
+        quibarx = 1.5*np.log(1.0/0.001)/(npmlx)
+        quibary = 1.5*np.log(1.0/0.001)/(npmly)
+        cte     = 1./vmax
+        ctex    = vmax/deltax
+        ctey    = vmax/deltay
+        
+        a = np.where(x<=x0pml,(np.abs(x-x0pml)/deltax),np.where(x>=x1pml,(np.abs(x-x1pml)/deltax),0.))
+        b = np.where(y<=y0pml,(np.abs(y-y0pml)/deltay),np.where(y>=y1pml,(np.abs(y-y1pml)/deltay),0.))
+        adamp = cte*quibar*(a-(1./(2.*np.pi))*np.sin(2.*np.pi*a))/hx
+        bdamp = cte*quibar*(b-(1./(2.*np.pi))*np.sin(2.*np.pi*b))/hy
+        fdamp = (adamp+bdamp)
+
+        return fdamp
 #==============================================================================

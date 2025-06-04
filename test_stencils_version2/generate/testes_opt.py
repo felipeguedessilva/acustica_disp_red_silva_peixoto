@@ -1,8 +1,4 @@
 #==============================================================================
-# -*- encoding: utf-8 -*-
-#==============================================================================
-
-#==============================================================================
 # Módulos Importados do Python / Devito / Examples
 #==============================================================================
 
@@ -24,39 +20,59 @@ class teste1:
         self.dx_ref   = dx_ref
         self.dt_ref   = dt_ref
         self.freq_ref = freq_ref
-        self.nptx     = dx_ref*100+1 # Número de Pontos Direção X
-        self.npty     = dx_ref*100+1 # Número de Pontos Direção Y
+        self.nptx     = dx_ref*200+1 # Número de Pontos Direção X
+        self.npty     = dx_ref*200+1 # Número de Pontos Direção Y
         self.x0       =    0.   # Ponto Inicial Direção X
-        self.x1       = 3000.   # Ponto Final Direção X 
+        self.x1       = 6000.   # Ponto Final Direção X 
         self.compx    = self.x1-self.x0   # Comprimento do Domínio em X
         self.y0       =    0.   # Ponto Inicial Direção Y
-        self.y1       = 3000.   # Ponto Final Direção Y
+        self.y1       = 6000.   # Ponto Final Direção Y
         self.compy    = self.y1-self.y0   # Comprimento do Domínio em Y
         self.hx       = (self.x1-self.x0)/(self.nptx-1)           # Delta x
-        self.hy       = (self.y1-self.y0)/(self.npty-1)           # Delta y    
+        self.hy       = (self.y1-self.y0)/(self.npty-1)           # Delta y
+
+        self.deltax = 0.1*self.compx  # Comprimento do Absorving Layer em X
+        self.deltay = 0.1*self.compy  # Comprimento do Absorving Layer em Y
+        self.npmlx  = int(self.deltax/self.hx)  # Número de Pontos no Absroving Layer em X
+        self.npmly  = int(self.deltay/self.hy)  # Número de Pontos no Absroving Layer em Y
+        
+        self.x0    = self.x0 - self.deltax
+        self.x1    = self.x1 + self.deltax
+        self.compx = self.compx + 2*self.deltax
+        self.nptx  = self.nptx  + 2*self.npmlx 
+        self.y0    = self.y0 - self.deltay
+        self.y1    = self.y1 + self.deltay
+        self.compy = self.compy + 2*self.deltay
+        self.npty  = self.npty  + 2*self.npmly
+        
+        self.x0pml  = self.x0 + self.npmlx*self.hx # Ponto Inicial do PML em X
+        self.x1pml  = self.x1 - self.npmlx*self.hx # Ponto Final do PML em X
+        self.y0pml  = self.y0 + self.npmly*self.hy # Ponto Inicial do PML em X
+        self.y1pml  = self.y1 - self.npmly*self.hy # Ponto Final do PML em X
+        
         self.X0       = np.linspace(self.x0,self.x1,self.nptx)    # Malha Direção X
         self.Y0       = np.linspace(self.y0,self.y1,self.npty)    # Malha Direção Y
-        self.X0grid,self.Y0grid = np.meshgrid(self.X0,self.Y0)  # Grid Auxiliar X0 x Y0 
+        self.X0grid,self.Y0grid = np.meshgrid(self.X0,self.Y0)    # Grid Auxiliar X0 x Y0 
         self.t0         = 0.       # Tempo Inicial da Simulação em Milisegundos
-        self.tn         = 900.     # Tempo Final   da Simulação em Milisegundos (1 Segundo = 1000 Ms) #min de 0.2s até 2.0s      
+        self.tn         = 1500.     # Tempo Final   da Simulação em Milisegundos (1 Segundo = 1000 Ms) #min de 0.2s até 2.0s      
         self.f0         = np.around(0.030 - 0.010*(self.freq_ref-1),4)   # Frequência da Fonte (1 Hz = 0.001 kHz) #min de 0.02 até 0.05
         self.nfonte     = 1        # Número de Fontes  (Para nfonte>1 -> Vetor em xposf e yposf)
-        self.xposf      = 1500.    # Posição da Fonte em X
-        self.yposf      = 1500.    # Posição da Fonte em Y
+        self.xposf      = 3000.    # Posição da Fonte em X
+        self.yposf      = 3000.    # Posição da Fonte em Y
         self.nrec       = self.nptx     # Número de Receivers
         self.nxpos      = np.linspace(self.x0,self.x1,self.nrec)   # Posição dos Receivers em X
-        self.nypos      = 1500                      # Posição dos Receivers em Y
+        self.nypos      = 3000                      # Posição dos Receivers em Y
         self.datainter  = 1                     # Interpolação de Dados de Velocidade
         self.dataintera = 0                     # Interpolação de Dados de Velocidade Artificial
-        self.CFL        = 0.05*self.dx_ref*self.dt_ref    # Condição CFL
-        self.jump       = int(300/self.dt_ref)                  # Intervalo de Dados a Serem Salvos
+        self.CFL        = 0.05*self.dx_ref*self.dt_ref     # Condição CFL
+        self.jump       = int(300/self.dt_ref)             # Intervalo de Dados a Serem Salvos
         self.tou        = 2                                # Time Order Displacement 
         self.sou        = 2                                # Space Order Displacement
-        self.mvalue     = int(self.sou/2)                       # First Parameter for Stencil
+        self.mvalue     = int(self.sou/2)                  # First Parameter for Stencil
         self.nvalue     = 1                                # Second Parameter for Stencils
         self.shape      = 'cl'                             # Stencil Geometry
         self.method     = 'spatte'                         # FD Method
-        self.btype      = 3                                # Boundary Type    
+        self.btype      = 4                                # Boundary Type    
         self.ftype      = 0                                # Source type
 #==============================================================================
 
@@ -70,39 +86,59 @@ class teste1_ref1:
         
         self.freq_ref   = freq_ref
         self.factor_ref = factor_ref
-        self.nptx   = factor_ref*100+1 # Número de Pontos Direção X
-        self.npty   = factor_ref*100+1 # Número de Pontos Direção Y
+        self.nptx   = factor_ref*200+1 # Número de Pontos Direção X
+        self.npty   = factor_ref*200+1 # Número de Pontos Direção Y
         self.x0     =    0.   # Ponto Inicial Direção X
-        self.x1     = 3000.   # Ponto Final Direção X 
+        self.x1     = 6000.   # Ponto Final Direção X 
         self.compx  = self.x1-self.x0   # Comprimento do Domínio em X
         self.y0     =    0.   # Ponto Inicial Direção Y
-        self.y1     = 3000.   # Ponto Final Direção Y
+        self.y1     = 6000.   # Ponto Final Direção Y
         self.compy  = self.y1-self.y0   # Comprimento do Domínio em Y
         self.hx     = (self.x1-self.x0)/(self.nptx-1)           # Delta x
-        self.hy     = (self.y1-self.y0)/(self.npty-1)           # Delta y    
+        self.hy     = (self.y1-self.y0)/(self.npty-1)           # Delta y
+
+        self.deltax = 0.1*self.compx   # Comprimento do Absorving Layer em X
+        self.deltay = 0.1*self.compy   # Comprimento do Absorving Layer em Y
+        self.npmlx  = int(self.deltax/self.hx)  # Número de Pontos no Absroving Layer em X
+        self.npmly  = int(self.deltay/self.hy)  # Número de Pontos no Absroving Layer em Y
+        
+        self.x0    = self.x0 - self.deltax
+        self.x1    = self.x1 + self.deltax
+        self.compx = self.compx + 2*self.deltax
+        self.nptx  = self.nptx  + 2*self.npmlx 
+        self.y0    = self.y0 - self.deltay
+        self.y1    = self.y1 + self.deltay
+        self.compy = self.compy + 2*self.deltay
+        self.npty  = self.npty  + 2*self.npmly
+        
+        self.x0pml  = self.x0 + self.npmlx*self.hx # Ponto Inicial do PML em X
+        self.x1pml  = self.x1 - self.npmlx*self.hx # Ponto Final do PML em X
+        self.y0pml  = self.y0 + self.npmly*self.hy # Ponto Inicial do PML em X
+        self.y1pml  = self.y1 - self.npmly*self.hy # Ponto Final do PML em X
+
         self.X0     = np.linspace(self.x0,self.x1,self.nptx)    # Malha Direção X
         self.Y0     = np.linspace(self.y0,self.y1,self.npty)    # Malha Direção Y
         self.X0grid,self.Y0grid = np.meshgrid(self.X0,self.Y0)  # Grid Auxiliar X0 x Y0 
         self.t0     = 0.       # Tempo Inicial da Simulação em Milisegundos
-        self.tn     = 900.     # Tempo Final   da Simulação em Milisegundos (1 Segundo = 1000 Ms) #min de 0.2s até 2.0s      
+        self.tn     = 1500.     # Tempo Final   da Simulação em Milisegundos (1 Segundo = 1000 Ms) #min de 0.2s até 2.0s      
         self.f0     = np.around(0.030 - 0.010*(self.freq_ref-1),4)   # Frequência da Fonte (1 Hz = 0.001 kHz) #min de 0.02 até 0.05
         self.nfonte = 1        # Número de Fontes  (Para nfonte>1 -> Vetor em xposf e yposf)
-        self.xposf  = 1500.    # Posição da Fonte em X
-        self.yposf  = 1500.    # Posição da Fonte em Y
+        self.xposf  = 3000.    # Posição da Fonte em X
+        self.yposf  = 3000.    # Posição da Fonte em Y
         self.nrec   = self.nptx     # Número de Receivers
         self.nxpos  = np.linspace(self.x0,self.x1,self.nrec)   # Posição dos Receivers em X
-        self.nypos  = 1500                      # Posição dos Receivers em Y
+        self.nypos  = 3000                      # Posição dos Receivers em Y
         self.datainter  = 1                     # Interpolação de Dados de Velocidade
         self.dataintera = 0                     # Interpolação de Dados de Velocidade Artificial
         self.CFL        = 0.05                  # Condição CFL
         self.jump       = int(300*factor_ref)             # Intervalo de Dados a Serem Salvos
         self.tou        = 2                               # Time Order Displacement 
-        self.sou        = 40                              # Space Order Displacement
-        self.mvalue     = int(self.sou/2)                      # First Parameter for Stencil
+        self.sou        = 20                              # Space Order Displacement
+        self.mvalue     = int(self.sou/2)                 # First Parameter for Stencil
         self.nvalue     = 1                               # Second Parameter for Stencils
         self.shape      = 'cl'                            # Stencil Geometry
         self.method     = 'spatte'                        # FD Method
-        self.btype      = 3                               # Boundary Type    
+        self.btype      = 4                               # Boundary Type    
         self.ftype      = 0                               # Source type
 #==============================================================================
 
@@ -117,16 +153,36 @@ class teste2:
         self.dx_ref   = dx_ref
         self.dt_ref   = dt_ref
         self.freq_ref = freq_ref
-        self.nptx   = dx_ref*100+1   # Número de Pontos Direção X
-        self.npty   = dx_ref*100+1   # Número de Pontos Direção Y
+        self.nptx   = dx_ref*200+1   # Número de Pontos Direção X
+        self.npty   = dx_ref*200+1   # Número de Pontos Direção Y
         self.x0     =    0.   # Ponto Inicial Direção X
-        self.x1     = 2000.   # Ponto Final Direção X 
+        self.x1     = 4000.   # Ponto Final Direção X 
         self.compx  = self.x1-self.x0   # Comprimento do Domínio em X
         self.y0     =    0.   # Ponto Inicial Direção Y
-        self.y1     = 2000.   # Ponto Final Direção Y
+        self.y1     = 4000.   # Ponto Final Direção Y
         self.compy  = self.y1-self.y0   # Comprimento do Domínio em Y
         self.hx     = (self.x1-self.x0)/(self.nptx-1)           # Delta x
-        self.hy     = (self.y1-self.y0)/(self.npty-1)           # Delta y    
+        self.hy     = (self.y1-self.y0)/(self.npty-1)           # Delta y
+
+        self.deltax = 0.1*self.compx  # Comprimento do Absorving Layer em X
+        self.deltay = 0.1*self.compy  # Comprimento do Absorving Layer em Y
+        self.npmlx  = int(self.deltax/self.hx)  # Número de Pontos no Absroving Layer em X
+        self.npmly  = int(self.deltay/self.hy)  # Número de Pontos no Absroving Layer em Y
+        
+        self.x0    = self.x0 - self.deltax
+        self.x1    = self.x1 + self.deltax
+        self.compx = self.compx + 2*self.deltax
+        self.nptx  = self.nptx  + 2*self.npmlx 
+        self.y0    = self.y0 - self.deltay
+        self.y1    = self.y1 + self.deltay
+        self.compy = self.compy + 2*self.deltay
+        self.npty  = self.npty  + 2*self.npmly
+        
+        self.x0pml  = self.x0 + self.npmlx*self.hx # Ponto Inicial do PML em X
+        self.x1pml  = self.x1 - self.npmlx*self.hx # Ponto Final do PML em X
+        self.y0pml  = self.y0 + self.npmly*self.hy # Ponto Inicial do PML em X
+        self.y1pml  = self.y1 - self.npmly*self.hy # Ponto Final do PML em X
+
         self.X0     = np.linspace(self.x0,self.x1,self.nptx)    # Malha Direção X
         self.Y0     = np.linspace(self.y0,self.y1,self.npty)    # Malha Direção Y
         self.X0grid,self.Y0grid = np.meshgrid(self.X0,self.Y0)  # Grid Auxiliar X0 x Y0 
@@ -134,22 +190,22 @@ class teste2:
         self.tn     = 3000.    # Tempo Final   da Simulação em Milisegundos (1 Segundo = 1000 Ms) #min de 0.2s até 2.0s      
         self.f0     = np.around(0.025 - 0.010*(self.freq_ref-1),4)   # Frequência da Fonte (1 Hz = 0.001 kHz) #min de 0.02 até 0.05
         self.nfonte = 1        # Número de Fontes  (Para nfonte>1 -> Vetor em xposf e yposf)
-        self.xposf  = 1000.    # Posição da Fonte em X
-        self.yposf  = 800.     # Posição da Fonte em Y
+        self.xposf  = 2000.    # Posição da Fonte em X
+        self.yposf  = 1600.     # Posição da Fonte em Y
         self.nrec   = self.nptx     # Número de Receivers
         self.nxpos  = np.linspace(self.x0,self.x1,self.nrec)   # Posição dos Receivers em X
-        self.nypos  = 1000.                     # Posição dos Receivers em Y
+        self.nypos  = 2000.                     # Posição dos Receivers em Y
         self.datainter  = 1                     # Interpolação de Dados de Velocidade
         self.dataintera = 0                     # Interpolação de Dados de Velocidade Artificial
         self.CFL        = 0.075*dx_ref*dt_ref   # Condição CFL
         self.jump       = int(360/dt_ref)       # Intervalo de Dados a Serem Salvos
         self.tou        = 2                                # Time Order Displacement 
         self.sou        = 2                                # Space Order Displacement
-        self.mvalue     = int(self.sou/2)                       # First Parameter for Stencil
+        self.mvalue     = int(self.sou/2)                  # First Parameter for Stencil
         self.nvalue     = 1                                # Second Parameter for Stencils
         self.shape      = 'cl'                             # Stencil Geometry
         self.method     = 'spatte'                         # FD Method
-        self.btype      = 1                                # Boundary Type    
+        self.btype      = 4                                # Boundary Type    
         self.ftype      = 0                                # Source type                                                                                                                                                                                                                                                                                                                                                                                                                                                  
 #==============================================================================
 
@@ -163,16 +219,36 @@ class teste2_ref1:
         
         self.freq_ref   = freq_ref
         self.factor_ref = factor_ref
-        self.nptx   = factor_ref*100+1   # Número de Pontos Direção X
-        self.npty   = factor_ref*100+1   # Número de Pontos Direção Y
+        self.nptx   = factor_ref*200+1   # Número de Pontos Direção X
+        self.npty   = factor_ref*200+1   # Número de Pontos Direção Y
         self.x0     =    0.   # Ponto Inicial Direção X
-        self.x1     = 2000.   # Ponto Final Direção X 
+        self.x1     = 4000.   # Ponto Final Direção X 
         self.compx  = self.x1-self.x0   # Comprimento do Domínio em X
         self.y0     =    0.   # Ponto Inicial Direção Y
-        self.y1     = 2000.   # Ponto Final Direção Y
+        self.y1     = 4000.   # Ponto Final Direção Y
         self.compy  = self.y1-self.y0   # Comprimento do Domínio em Y
         self.hx     = (self.x1-self.x0)/(self.nptx-1)           # Delta x
-        self.hy     = (self.y1-self.y0)/(self.npty-1)           # Delta y    
+        self.hy     = (self.y1-self.y0)/(self.npty-1)           # Delta y
+
+        self.deltax = 0.1*self.compx  # Comprimento do Absorving Layer em X
+        self.deltay = 0.1*self.compy  # Comprimento do Absorving Layer em Y
+        self.npmlx  = int(self.deltax/self.hx)  # Número de Pontos no Absroving Layer em X
+        self.npmly  = int(self.deltay/self.hy)  # Número de Pontos no Absroving Layer em Y
+        
+        self.x0    = self.x0 - self.deltax
+        self.x1    = self.x1 + self.deltax
+        self.compx = self.compx + 2*self.deltax
+        self.nptx  = self.nptx  + 2*self.npmlx 
+        self.y0    = self.y0 - self.deltay
+        self.y1    = self.y1 + self.deltay
+        self.compy = self.compy + 2*self.deltay
+        self.npty  = self.npty  + 2*self.npmly
+        
+        self.x0pml  = self.x0 + self.npmlx*self.hx # Ponto Inicial do PML em X
+        self.x1pml  = self.x1 - self.npmlx*self.hx # Ponto Final do PML em X
+        self.y0pml  = self.y0 + self.npmly*self.hy # Ponto Inicial do PML em X
+        self.y1pml  = self.y1 - self.npmly*self.hy # Ponto Final do PML em X
+
         self.X0     = np.linspace(self.x0,self.x1,self.nptx)    # Malha Direção X
         self.Y0     = np.linspace(self.y0,self.y1,self.npty)    # Malha Direção Y
         self.X0grid,self.Y0grid = np.meshgrid(self.X0,self.Y0)  # Grid Auxiliar X0 x Y0 
@@ -180,28 +256,28 @@ class teste2_ref1:
         self.tn     = 3000.    # Tempo Final   da Simulação em Milisegundos (1 Segundo = 1000 Ms) #min de 0.2s até 2.0s      
         self.f0     = np.around(0.025 - 0.010*(self.freq_ref-1),4)   # Frequência da Fonte (1 Hz = 0.001 kHz) #min de 0.02 até 0.05
         self.nfonte = 1        # Número de Fontes  (Para nfonte>1 -> Vetor em xposf e yposf)
-        self.xposf  = 1000.    # Posição da Fonte em X
-        self.yposf  = 800.     # Posição da Fonte em Y
+        self.xposf  = 2000.    # Posição da Fonte em X
+        self.yposf  = 1600.    # Posição da Fonte em Y
         self.nrec   = self.nptx     # Número de Receivers
         self.nxpos  = np.linspace(self.x0,self.x1,self.nrec)   # Posição dos Receivers em X
-        self.nypos  = 1000.                     # Posição dos Receivers em Y
+        self.nypos  = 2000.                     # Posição dos Receivers em Y
         self.datainter  = 1                     # Interpolação de Dados de Velocidade
         self.dataintera = 0                     # Interpolação de Dados de Velocidade Artificial
         self.CFL        = 0.075                           # Condição CFL
         self.jump       = int(360*factor_ref)             # Intervalo de Dados a Serem Salvos
         self.tou        = 2                               # Time Order Displacement 
-        self.sou        = 40                              # Space Order Displacement
-        self.mvalue     = int(self.sou/2)                      # First Parameter for Stencil
+        self.sou        = 20                              # Space Order Displacement
+        self.mvalue     = int(self.sou/2)                 # First Parameter for Stencil
         self.nvalue     = 1                               # Second Parameter for Stencils
         self.shape      = 'cl'                            # Stencil Geometry
         self.method     = 'spatte'                        # FD Method
-        self.btype      = 1                               # Boundary Type    
+        self.btype      = 4                               # Boundary Type    
         self.ftype      = 0                               # Source type  
 #==============================================================================
 
 #==============================================================================
 class teste3:
-# Configuração Non-Absorbing para o Teste 2
+# Configuração Non-Absorbing para o Teste 3
 #==============================================================================
 
 #==============================================================================
@@ -219,7 +295,27 @@ class teste3:
         self.y1     =  4000.  # Ponto Final Direção Y
         self.compy  = self.y1-self.y0   # Comprimento do Domínio em Y
         self.hx     = (self.x1-self.x0)/(self.nptx-1)           # Delta x
-        self.hy     = (self.y1-self.y0)/(self.npty-1)           # Delta y    
+        self.hy     = (self.y1-self.y0)/(self.npty-1)           # Delta y
+
+        self.deltax = 0.1*self.compx  # Comprimento do Absorving Layer em X
+        self.deltay = 0.1*self.compy  # Comprimento do Absorving Layer em Y
+        self.npmlx  = int(self.deltax/self.hx)  # Número de Pontos no Absroving Layer em X
+        self.npmly  = int(self.deltay/self.hy)  # Número de Pontos no Absroving Layer em Y
+        
+        self.x0    = self.x0 - self.deltax
+        self.x1    = self.x1 + self.deltax
+        self.compx = self.compx + 2*self.deltax
+        self.nptx  = self.nptx  + 2*self.npmlx 
+        self.y0    = self.y0 - self.deltay
+        self.y1    = self.y1 + self.deltay
+        self.compy = self.compy + 2*self.deltay
+        self.npty  = self.npty  + 2*self.npmly
+        
+        self.x0pml  = self.x0 + self.npmlx*self.hx # Ponto Inicial do PML em X
+        self.x1pml  = self.x1 - self.npmlx*self.hx # Ponto Final do PML em X
+        self.y0pml  = self.y0 + self.npmly*self.hy # Ponto Inicial do PML em X
+        self.y1pml  = self.y1 - self.npmly*self.hy # Ponto Final do PML em X
+
         self.X0     = np.linspace(self.x0,self.x1,self.nptx)    # Malha Direção X
         self.Y0     = np.linspace(self.y0,self.y1,self.npty)    # Malha Direção Y
         self.X0grid,self.Y0grid = np.meshgrid(self.X0,self.Y0)  # Grid Auxiliar X0 x Y0 
@@ -238,7 +334,7 @@ class teste3:
         self.jump       = int(300/dt_ref)       # Intervalo de Dados a Serem Salvos
         self.tou        = 2                                # Time Order Displacement 
         self.sou        = 2                                # Space Order Displacement
-        self.mvalue     = int(self.sou/2)                       # First Parameter for Stencil
+        self.mvalue     = int(self.sou/2)                  # First Parameter for Stencil
         self.nvalue     = 1                                # Second Parameter for Stencils
         self.shape      = 'cl'                             # Stencil Geometry
         self.method     = 'spatte'                         # FD Method
@@ -265,7 +361,27 @@ class teste3_ref1:
         self.y1     =  4000.  # Ponto Final Direção Y
         self.compy  = self.y1-self.y0   # Comprimento do Domínio em Y
         self.hx     = (self.x1-self.x0)/(self.nptx-1)           # Delta x
-        self.hy     = (self.y1-self.y0)/(self.npty-1)           # Delta y    
+        self.hy     = (self.y1-self.y0)/(self.npty-1)           # Delta y
+
+        self.deltax = 0.1*self.compx  # Comprimento do Absorving Layer em X
+        self.deltay = 0.1*self.compy  # Comprimento do Absorving Layer em Y
+        self.npmlx  = int(self.deltax/self.hx)  # Número de Pontos no Absroving Layer em X
+        self.npmly  = int(self.deltay/self.hy)  # Número de Pontos no Absroving Layer em Y
+        
+        self.x0    = self.x0 - self.deltax
+        self.x1    = self.x1 + self.deltax
+        self.compx = self.compx + 2*self.deltax
+        self.nptx  = self.nptx  + 2*self.npmlx 
+        self.y0    = self.y0 - self.deltay
+        self.y1    = self.y1 + self.deltay
+        self.compy = self.compy + 2*self.deltay
+        self.npty  = self.npty  + 2*self.npmly
+        
+        self.x0pml  = self.x0 + self.npmlx*self.hx # Ponto Inicial do PML em X
+        self.x1pml  = self.x1 - self.npmlx*self.hx # Ponto Final do PML em X
+        self.y0pml  = self.y0 + self.npmly*self.hy # Ponto Inicial do PML em X
+        self.y1pml  = self.y1 - self.npmly*self.hy # Ponto Final do PML em X
+
         self.X0     = np.linspace(self.x0,self.x1,self.nptx)    # Malha Direção X
         self.Y0     = np.linspace(self.y0,self.y1,self.npty)    # Malha Direção Y
         self.X0grid,self.Y0grid = np.meshgrid(self.X0,self.Y0)  # Grid Auxiliar X0 x Y0 
@@ -283,8 +399,8 @@ class teste3_ref1:
         self.CFL        = 0.0625                # Condição CFL
         self.jump       = int(300*factor_ref)             # Intervalo de Dados a Serem Salvos
         self.tou        = 2                               # Time Order Displacement 
-        self.sou        = 40                              # Space Order Displacement
-        self.mvalue     = int(self.sou/2)                      # First Parameter for Stencil
+        self.sou        = 20                              # Space Order Displacement
+        self.mvalue     = int(self.sou/2)                 # First Parameter for Stencil
         self.nvalue     = 1                               # Second Parameter for Stencils
         self.shape      = 'cl'                            # Stencil Geometry
         self.method     = 'spatte'                        # FD Method
@@ -312,7 +428,27 @@ class teste4:
         self.y1     =  3200.  # Ponto Final Direção Y
         self.compy  = self.y1-self.y0   # Comprimento do Domínio em Y
         self.hx     = (self.x1-self.x0)/(self.nptx-1)           # Delta x
-        self.hy     = (self.y1-self.y0)/(self.npty-1)           # Delta y    
+        self.hy     = (self.y1-self.y0)/(self.npty-1)           # Delta y
+
+        self.deltax = 0.1*self.compx  # Comprimento do Absorving Layer em X
+        self.deltay = 0.1*self.compy  # Comprimento do Absorving Layer em Y
+        self.npmlx  = int(self.deltax/self.hx)  # Número de Pontos no Absroving Layer em X
+        self.npmly  = int(self.deltay/self.hy)  # Número de Pontos no Absroving Layer em Y
+        
+        self.x0    = self.x0 - self.deltax
+        self.x1    = self.x1 + self.deltax
+        self.compx = self.compx + 2*self.deltax
+        self.nptx  = self.nptx  + 2*self.npmlx 
+        self.y0    = self.y0 - self.deltay
+        self.y1    = self.y1 + self.deltay
+        self.compy = self.compy + 2*self.deltay
+        self.npty  = self.npty  + 2*self.npmly
+        
+        self.x0pml  = self.x0 + self.npmlx*self.hx # Ponto Inicial do PML em X
+        self.x1pml  = self.x1 - self.npmlx*self.hx # Ponto Final do PML em X
+        self.y0pml  = self.y0 + self.npmly*self.hy # Ponto Inicial do PML em X
+        self.y1pml  = self.y1 - self.npmly*self.hy # Ponto Final do PML em X
+
         self.X0     = np.linspace(self.x0,self.x1,self.nptx)    # Malha Direção X
         self.Y0     = np.linspace(self.y0,self.y1,self.npty)    # Malha Direção Y
         self.X0grid,self.Y0grid = np.meshgrid(self.X0,self.Y0)  # Grid Auxiliar X0 x Y0 
@@ -331,7 +467,7 @@ class teste4:
         self.jump       = int(300/dt_ref)       # Intervalo de Dados a Serem Salvos
         self.tou        = 2                               # Time Order Displacement 
         self.sou        = 2                               # Space Order Displacement
-        self.mvalue     = int(self.sou/2)                      # First Parameter for Stencil
+        self.mvalue     = int(self.sou/2)                 # First Parameter for Stencil
         self.nvalue     = 1                               # Second Parameter for Stencils
         self.shape      = 'cl'                            # Stencil Geometry
         self.method     = 'spatte'                        # FD Method
@@ -359,6 +495,26 @@ class teste4_ref1:
         self.compy  = self.y1-self.y0   # Comprimento do Domínio em Y
         self.hx     = (self.x1-self.x0)/(self.nptx-1)           # Delta x
         self.hy     = (self.y1-self.y0)/(self.npty-1)           # Delta y    
+        
+        self.deltax = 0.1*self.compx  # Comprimento do Absorving Layer em X
+        self.deltay = 0.1*self.compy  # Comprimento do Absorving Layer em Y
+        self.npmlx  = int(self.deltax/self.hx)  # Número de Pontos no Absroving Layer em X
+        self.npmly  = int(self.deltay/self.hy)  # Número de Pontos no Absroving Layer em Y
+        
+        self.x0    = self.x0 - self.deltax
+        self.x1    = self.x1 + self.deltax
+        self.compx = self.compx + 2*self.deltax
+        self.nptx  = self.nptx  + 2*self.npmlx 
+        self.y0    = self.y0 - self.deltay
+        self.y1    = self.y1 + self.deltay
+        self.compy = self.compy + 2*self.deltay
+        self.npty  = self.npty  + 2*self.npmly
+        
+        self.x0pml  = self.x0 + self.npmlx*self.hx # Ponto Inicial do PML em X
+        self.x1pml  = self.x1 - self.npmlx*self.hx # Ponto Final do PML em X
+        self.y0pml  = self.y0 + self.npmly*self.hy # Ponto Inicial do PML em X
+        self.y1pml  = self.y1 - self.npmly*self.hy # Ponto Final do PML em X
+
         self.X0     = np.linspace(self.x0,self.x1,self.nptx)    # Malha Direção X
         self.Y0     = np.linspace(self.y0,self.y1,self.npty)    # Malha Direção Y
         self.X0grid,self.Y0grid = np.meshgrid(self.X0,self.Y0)  # Grid Auxiliar X0 x Y0 
@@ -373,11 +529,11 @@ class teste4_ref1:
         self.nypos  =  50.                      # Posição dos Receivers em Y
         self.datainter  = 1                     # Interpolação de Dados de Velocidade
         self.dataintera = 0                     # Interpolação de Dados de Velocidade Artificial
-        self.CFL        = 0.0625                 # Condição CFL
-        self.jump       = int(300*factor_ref)              # Intervalo de Dados a Serem Salvos
+        self.CFL        = 0.0625                # Condição CFL
+        self.jump       = int(300*factor_ref)             # Intervalo de Dados a Serem Salvos
         self.tou        = 2                               # Time Order Displacement 
-        self.sou        = 40                              # Space Order Displacement
-        self.mvalue     = int(self.sou/2)                      # First Parameter for Stencil
+        self.sou        = 20                              # Space Order Displacement
+        self.mvalue     = int(self.sou/2)                 # First Parameter for Stencil
         self.nvalue     = 1                               # Second Parameter for Stencils
         self.shape      = 'cl'                            # Stencil Geometry
         self.method     = 'spatte'                        # FD Method
