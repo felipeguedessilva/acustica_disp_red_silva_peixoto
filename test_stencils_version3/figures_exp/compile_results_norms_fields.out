@@ -27023,3 +27023,303 @@ shape: crb - method: displs - sou: 16 - mvalue: 8 - nvalue: 5
 
 Test with Stencil: 193
 shape: crb - method: displs - sou: 16 - mvalue: 8 - nvalue: 6
+
+Test with Stencil: 194
+shape: crb - method: displs - sou: 16 - mvalue: 8 - nvalue: 7
+
+Test with Stencil: 195
+shape: crb - method: displs - sou: 16 - mvalue: 8 - nvalue: 8
+
+Test with Stencil: 196
+shape: csq - method: displs - sou: 2 - mvalue: 1 - nvalue: 1
+
+Test with Stencil: 197
+shape: csq - method: displs - sou: 4 - mvalue: 2 - nvalue: 1
+
+Test with Stencil: 198
+shape: csq - method: displs - sou: 4 - mvalue: 2 - nvalue: 2
+
+Test with Stencil: 199
+shape: csq - method: displs - sou: 6 - mvalue: 3 - nvalue: 1
+
+Test with Stencil: 200
+shape: csq - method: displs - sou: 6 - mvalue: 3 - nvalue: 2
+
+Test with Stencil: 201
+shape: csq - method: displs - sou: 6 - mvalue: 3 - nvalue: 3
+
+Test with Stencil: 202
+shape: csq - method: displs - sou: 8 - mvalue: 4 - nvalue: 1
+
+Test with Stencil: 203
+shape: csq - method: displs - sou: 8 - mvalue: 4 - nvalue: 2
+
+Test with Stencil: 204
+shape: csq - method: displs - sou: 8 - mvalue: 4 - nvalue: 3
+
+Test with Stencil: 205
+shape: csq - method: displs - sou: 8 - mvalue: 4 - nvalue: 4
+
+Test with Stencil: 206
+shape: csq - method: displs - sou: 10 - mvalue: 5 - nvalue: 1
+
+Test with Stencil: 207
+shape: csq - method: displs - sou: 10 - mvalue: 5 - nvalue: 2
+
+Test with Stencil: 208
+shape: csq - method: displs - sou: 10 - mvalue: 5 - nvalue: 3
+
+Test with Stencil: 209
+shape: csq - method: displs - sou: 10 - mvalue: 5 - nvalue: 4
+
+Test with Stencil: 210
+shape: csq - method: displs - sou: 10 - mvalue: 5 - nvalue: 5
+
+Test with Stencil: 211
+shape: csq - method: displs - sou: 12 - mvalue: 6 - nvalue: 1
+
+Test with Stencil: 212
+shape: csq - method: displs - sou: 12 - mvalue: 6 - nvalue: 2
+
+Test with Stencil: 213
+shape: csq - method: displs - sou: 12 - mvalue: 6 - nvalue: 3
+
+Test with Stencil: 214
+shape: csq - method: displs - sou: 12 - mvalue: 6 - nvalue: 4
+
+Test with Stencil: 215
+shape: csq - method: displs - sou: 12 - mvalue: 6 - nvalue: 5
+
+Test with Stencil: 216
+shape: csq - method: displs - sou: 12 - mvalue: 6 - nvalue: 6
+
+Test with Stencil: 217
+shape: csq - method: displs - sou: 14 - mvalue: 7 - nvalue: 1
+
+Test with Stencil: 218
+shape: csq - method: displs - sou: 14 - mvalue: 7 - nvalue: 2
+
+Test with Stencil: 219
+shape: csq - method: displs - sou: 14 - mvalue: 7 - nvalue: 3
+
+Test with Stencil: 220
+shape: csq - method: displs - sou: 14 - mvalue: 7 - nvalue: 4
+
+Test with Stencil: 221
+shape: csq - method: displs - sou: 14 - mvalue: 7 - nvalue: 5
+
+Test with Stencil: 222
+shape: csq - method: displs - sou: 14 - mvalue: 7 - nvalue: 6
+
+Test with Stencil: 223
+shape: csq - method: displs - sou: 14 - mvalue: 7 - nvalue: 7
+
+Test with Stencil: 224
+shape: csq - method: displs - sou: 16 - mvalue: 8 - nvalue: 1
+
+Test with Stencil: 225
+shape: csq - method: displs - sou: 16 - mvalue: 8 - nvalue: 2
+
+Test with Stencil: 226
+shape: csq - method: displs - sou: 16 - mvalue: 8 - nvalue: 3
+
+Test with Stencil: 227
+shape: csq - method: displs - sou: 16 - mvalue: 8 - nvalue: 4
+
+Test with Stencil: 228
+shape: csq - method: displs - sou: 16 - mvalue: 8 - nvalue: 5
+
+Test with Stencil: 229
+shape: csq - method: displs - sou: 16 - mvalue: 8 - nvalue: 6
+
+Test with Stencil: 230
+shape: csq - method: displs - sou: 16 - mvalue: 8 - nvalue: 7
+
+Test with Stencil: 231
+shape: csq - method: displs - sou: 16 - mvalue: 8 - nvalue: 8
+
+Close Test Files!
+
+
+Number    = 38
+Test Type = 1
+dx_ref    = 8
+dt_ref    = 1
+freq_ref  = 3
+
+Starting Configs!
+Finishing Configs!
+
+Open Ref Files!
+
+Close Ref Files!
+
+Open Test Files!
+
+Test with Stencil: 0
+shape: cl - method: spatte - sou: 2 - mvalue: 1 - nvalue: 1
+
+Test with Stencil: 1
+shape: cl - method: spatte - sou: 4 - mvalue: 2 - nvalue: 1
+
+Test with Stencil: 2
+shape: cl - method: spatte - sou: 6 - mvalue: 3 - nvalue: 1
+
+Test with Stencil: 3
+shape: cl - method: spatte - sou: 8 - mvalue: 4 - nvalue: 1
+
+Test with Stencil: 4
+shape: cl - method: spatte - sou: 10 - mvalue: 5 - nvalue: 1
+
+Test with Stencil: 5
+shape: cl - method: spatte - sou: 12 - mvalue: 6 - nvalue: 1
+
+Test with Stencil: 6
+shape: cl - method: spatte - sou: 14 - mvalue: 7 - nvalue: 1
+
+Test with Stencil: 7
+shape: cl - method: spatte - sou: 16 - mvalue: 8 - nvalue: 1
+
+Test with Stencil: 8
+shape: cl - method: spectetheta - sou: 2 - mvalue: 1 - nvalue: 1
+
+Test with Stencil: 9
+shape: cl - method: spectetheta - sou: 4 - mvalue: 2 - nvalue: 1
+
+Test with Stencil: 10
+shape: cl - method: spectetheta - sou: 6 - mvalue: 3 - nvalue: 1
+
+Test with Stencil: 11
+shape: cl - method: spectetheta - sou: 8 - mvalue: 4 - nvalue: 1
+
+Test with Stencil: 12
+shape: cl - method: spectetheta - sou: 10 - mvalue: 5 - nvalue: 1
+
+Test with Stencil: 13
+shape: cl - method: spectetheta - sou: 12 - mvalue: 6 - nvalue: 1
+
+Test with Stencil: 14
+shape: cl - method: spectetheta - sou: 14 - mvalue: 7 - nvalue: 1
+
+Test with Stencil: 15
+shape: cl - method: spectetheta - sou: 16 - mvalue: 8 - nvalue: 1
+
+Test with Stencil: 16
+shape: crb - method: dispte - sou: 2 - mvalue: 1 - nvalue: 1
+
+Test with Stencil: 17
+shape: crb - method: dispte - sou: 4 - mvalue: 2 - nvalue: 1
+
+Test with Stencil: 18
+shape: crb - method: dispte - sou: 4 - mvalue: 2 - nvalue: 2
+
+Test with Stencil: 19
+shape: crb - method: dispte - sou: 6 - mvalue: 3 - nvalue: 1
+
+Test with Stencil: 20
+shape: crb - method: dispte - sou: 6 - mvalue: 3 - nvalue: 2
+
+Test with Stencil: 21
+shape: crb - method: dispte - sou: 6 - mvalue: 3 - nvalue: 3
+
+Test with Stencil: 22
+shape: crb - method: dispte - sou: 8 - mvalue: 4 - nvalue: 1
+
+Test with Stencil: 23
+shape: crb - method: dispte - sou: 8 - mvalue: 4 - nvalue: 2
+
+Test with Stencil: 24
+shape: crb - method: dispte - sou: 8 - mvalue: 4 - nvalue: 3
+
+Test with Stencil: 25
+shape: crb - method: dispte - sou: 8 - mvalue: 4 - nvalue: 4
+
+Test with Stencil: 26
+shape: crb - method: dispte - sou: 10 - mvalue: 5 - nvalue: 1
+
+Test with Stencil: 27
+shape: crb - method: dispte - sou: 10 - mvalue: 5 - nvalue: 2
+
+Test with Stencil: 28
+shape: crb - method: dispte - sou: 10 - mvalue: 5 - nvalue: 3
+
+Test with Stencil: 29
+shape: crb - method: dispte - sou: 10 - mvalue: 5 - nvalue: 4
+
+Test with Stencil: 30
+shape: crb - method: dispte - sou: 10 - mvalue: 5 - nvalue: 5
+
+Test with Stencil: 31
+shape: crb - method: dispte - sou: 12 - mvalue: 6 - nvalue: 1
+
+Test with Stencil: 32
+shape: crb - method: dispte - sou: 12 - mvalue: 6 - nvalue: 2
+
+Test with Stencil: 33
+shape: crb - method: dispte - sou: 12 - mvalue: 6 - nvalue: 3
+
+Test with Stencil: 34
+shape: crb - method: dispte - sou: 12 - mvalue: 6 - nvalue: 4
+
+Test with Stencil: 35
+shape: crb - method: dispte - sou: 12 - mvalue: 6 - nvalue: 5
+
+Test with Stencil: 36
+shape: crb - method: dispte - sou: 12 - mvalue: 6 - nvalue: 6
+
+Test with Stencil: 37
+shape: crb - method: dispte - sou: 14 - mvalue: 7 - nvalue: 1
+
+Test with Stencil: 38
+shape: crb - method: dispte - sou: 14 - mvalue: 7 - nvalue: 2
+
+Test with Stencil: 39
+shape: crb - method: dispte - sou: 14 - mvalue: 7 - nvalue: 3
+
+Test with Stencil: 40
+shape: crb - method: dispte - sou: 14 - mvalue: 7 - nvalue: 4
+
+Test with Stencil: 41
+shape: crb - method: dispte - sou: 14 - mvalue: 7 - nvalue: 5
+
+Test with Stencil: 42
+shape: crb - method: dispte - sou: 14 - mvalue: 7 - nvalue: 6
+
+Test with Stencil: 43
+shape: crb - method: dispte - sou: 14 - mvalue: 7 - nvalue: 7
+
+Test with Stencil: 44
+shape: crb - method: dispte - sou: 16 - mvalue: 8 - nvalue: 1
+
+Test with Stencil: 45
+shape: crb - method: dispte - sou: 16 - mvalue: 8 - nvalue: 2
+
+Test with Stencil: 46
+shape: crb - method: dispte - sou: 16 - mvalue: 8 - nvalue: 3
+
+Test with Stencil: 47
+shape: crb - method: dispte - sou: 16 - mvalue: 8 - nvalue: 4
+
+Test with Stencil: 48
+shape: crb - method: dispte - sou: 16 - mvalue: 8 - nvalue: 5
+
+Test with Stencil: 49
+shape: crb - method: dispte - sou: 16 - mvalue: 8 - nvalue: 6
+
+Test with Stencil: 50
+shape: crb - method: dispte - sou: 16 - mvalue: 8 - nvalue: 7
+
+Test with Stencil: 51
+shape: crb - method: dispte - sou: 16 - mvalue: 8 - nvalue: 8
+
+Test with Stencil: 52
+shape: csq - method: dispte - sou: 2 - mvalue: 1 - nvalue: 1
+
+Test with Stencil: 53
+shape: csq - method: dispte - sou: 4 - mvalue: 2 - nvalue: 1
+
+Test with Stencil: 54
+shape: csq - method: dispte - sou: 4 - mvalue: 2 - nvalue: 2
+
+Test with Stencil: 55
+shape: csq - method: dispte - sou: 6 - mvalue: 3 - nvalue: 1
