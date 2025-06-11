@@ -42,10 +42,10 @@ from im_fft_norms import fftnorm3
 #==============================================================================
 # Range of Parameters
 #==============================================================================
-vptype    = [3] 
-vdxref    = [8]
-vdtref    = [1,2]
-vfreqref  = [1] 
+vptype    = [1] 
+vdxref    = [1,2,3,4]
+vdtref    = [1,2,4,6]
+vfreqref  = [1,2,3] 
 
 nvptype      = len(vptype) 
 nvdxref      = len(vdxref)
@@ -156,7 +156,6 @@ for k0 in range(0,nvptype):
                     xpvplot = xpositionv
                     ypvplot = ypositionv
 
-                locopen = 'signals/signal_files/teste%d/dx%ddt%dfreq%d/'%(ptype,dx_ref,dt_ref,freq_ref)
                 locsave = 'signals/boards/teste%d/dx%ddt%dfreq%d/'%(ptype,dx_ref,dt_ref,freq_ref)
 #==============================================================================
 
@@ -317,13 +316,17 @@ for k0 in range(0,nvptype):
 
                         print('Case N=1')
                     
-                        sol_ref        = np.load("%ssol_ref.npy"%(locopen))
-                        rec_ref        = np.load("%srec_ref.npy"%(locopen))
-                        rec_select_ref = np.load("%srec_select_ref.npy"%(locopen))
+                        locopenref = '../data_save/teste%d/reffreq%d/'%(ptype,freq_ref)
 
-                        sol            = np.load("%ssolplot_%s_%s_%d_%d.npy"%(locopen,mshape,method,mvalue,nvalue))
-                        rec            = np.load("%srec_%s_%s_%d_%d.npy"%(locopen,mshape,method,mvalue,nvalue))
-                        rec_select     = np.load("%srec_select_%s_%s_%d_%d.npy"%(locopen,mshape,method,mvalue,nvalue))
+                        sol_ref        = np.load("%solplotcut.npy"%(locopenref))
+                        rec_ref        = np.load("%recrefcut.npy"%(locopenref))
+                        rec_select_ref = np.load("%recselectcut.npy"%(locopenref))
+
+                        locopensol    = '../data_save/teste%d/dx%ddt%dfreq%d/'%(ptype,dx_ref,dt_ref,freq_ref)
+
+                        sol            = np.load("%ssolplot_%s_%s_%d_%d.npy"%(locopensol,mshape,method,mvalue,nvalue))
+                        rec            = np.load("%srec_%s_%s_%d_%d.npy"%(locopensol,mshape,method,mvalue,nvalue))
+                        rec_select     = np.load("%srec_select_%s_%s_%d_%d.npy"%(locopensol,mshape,method,mvalue,nvalue))
                         
                         vtimejump  = np.linspace(0,teste.tn,sol.shape[0])
                         itime      = 10

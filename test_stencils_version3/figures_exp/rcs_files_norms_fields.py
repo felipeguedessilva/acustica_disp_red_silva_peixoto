@@ -4,7 +4,8 @@
 import numpy                    as np
 from   numpy import linalg      as la
 import sys
-import pickle 
+import pickle
+import gc
 #==============================================================================
 
 #==============================================================================
@@ -34,13 +35,13 @@ from   matplotlib              import cm
 #==============================================================================
 # Range of Parameters
 #==============================================================================
-save_fields   = 1
+save_fields   = 0
 save_signals  = 1
 
-vptype    = [3] 
-vdxref    = [8]
-vdtref    = [1,2]
-vfreqref  = [1] 
+vptype    = [1] 
+vdxref    = [1,2,4,8]
+vdtref    = [1,2,4,6]
+vfreqref  = [1,2,3] 
 
 nvptype      = len(vptype) 
 nvdxref      = len(vdxref)
@@ -230,12 +231,13 @@ for k0 in range(0,nvptype):
                 solplotcut   = solplot_ref[0::isolplotref0,0::isolplotref1,0::isolplotref2]
                 recselectcut = rec_select_ref[0::irecselectref0,0::irecselectref1]
 
-                if(save_signals==1):
-
-                    locsave = 'signals/signal_files/teste%d/dx%ddt%dfreq%d/'%(ptype,dx_ref,dt_ref,freq_ref)
-                    np.save("%ssol_ref.npy"%(locsave),solplotcut[:,:,:])
-                    np.save("%srec_ref.npy"%(locsave),recrefcut)
-                    np.save("%srec_select_ref.npy"%(locsave),recselectcut)
+                locosaverefcut = '../data_save/teste%d/reffreq%d/'%(ptype,freq_ref)
+                np.save("%ssolplotcut.npy"%(locosaverefcut),solplotcut[:,:,:])
+                np.save("%srecrefcut.npy"%(locosaverefcut),recrefcut)
+                np.save("%srecselectcut.npy"%(locosaverefcut),recselectcut)
+                
+                del rec_ref, solplot_ref, rec_select_ref
+                gc.collect()
 #==============================================================================                    
 
 #==============================================================================
@@ -313,13 +315,6 @@ for k0 in range(0,nvptype):
                         rec_select  = np.load("../data_save/%s/rec_select_%s_%s_%d_%d.npy"%(locopen,mshape,method,mvalue,nvalue))
                         fmark       = 0
                         
-                        if(save_signals==1):
-
-                            locsave = 'signals/signal_files/teste%d/dx%ddt%dfreq%d/'%(ptype,dx_ref,dt_ref,freq_ref)
-                            np.save("%ssolplot_%s_%s_%d_%d.npy"%(locsave,mshape,method,mvalue,nvalue),solplot[:,:,:])
-                            np.save("%srec_%s_%s_%d_%d.npy"%(locsave,mshape,method,mvalue,nvalue),rec)
-                            np.save("%srec_select_%s_%s_%d_%d.npy"%(locsave,mshape,method,mvalue,nvalue),rec_select)
-
                     except:
                          
                         rec        = recrefcut.copy()
@@ -401,7 +396,7 @@ for k0 in range(0,nvptype):
                                 normlocrel1   = la.norm(recselectcut[:,i]-rec_select[:,i],1)/la.norm(recselectcut[:,i],1)  
                                 normlocrel2   = la.norm(recselectcut[:,i]-rec_select[:,i],2)/la.norm(recselectcut[:,i],2)  
                                 normlocrelmax = la.norm(recselectcut[:,i]-rec_select[:,i],np.inf)/la.norm(recselectcut[:,i],np.inf)  
-                                normlocfft    = fftnorm3(recselectcut[:,i],rec_select[:,i],teste)
+                                normlocfft    = 0.0
 
                             n1.append(normloc1)
                             n2.append(normloc2)
@@ -514,11 +509,35 @@ for k0 in range(0,nvptype):
                             rec_select[:] = np.nan
                 
                         fields_save.append(rec)
-                        fields_save.append(recrefcut)
+                        
+                        if(cont_glob==0): 
+                            
+                            fields_save.append(recrefcut)
+                        
+                        else:
+
+                            fields_save.append(0.0)
+
                         fields_save.append(rec_select)
-                        fields_save.append(recselectcut)
+                        
+                        if(cont_glob==0): 
+                        
+                            fields_save.append(recselectcut)
+                        
+                        else:
+
+                            fields_save.append(0.0)                            
+
                         fields_save.append(solplot)
-                        fields_save.append(solplotcut)
+                        
+                        if(cont_glob==0): 
+
+                            fields_save.append(solplotcut)
+
+                        else:
+
+                            fields_save.append(0.0)
+
                         testresults.append([cont_me,ptype,dx_ref,dt_ref,freq_ref,mshape,method,mvalue,nvalue,npt,npe,normrec,normrecselect,normsolplot,timesolplot,parameters,cont_glob,fields_save])
                     
                     else:

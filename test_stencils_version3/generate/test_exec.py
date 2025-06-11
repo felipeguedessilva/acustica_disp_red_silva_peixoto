@@ -8,7 +8,7 @@ from   devito_acustica_ref      import *
 
 #==============================================================================
 execsol = 1
-execref = 0
+execref = 1
 #==============================================================================
 
 #==============================================================================
@@ -16,15 +16,15 @@ execref = 0
 #==============================================================================
 if(execsol==1):
 
-    # vptype    = [1,2,3,4] 
-    # vdxref    = [1,2,4,8]
-    # vdtref    = [1,2,4]
-    # vfreqref  = [1,2,3] 
+    vptype    = [1] 
+    vdxref    = [1,2,4,8]
+    vdtref    = [1,2,4,6]
+    vfreqref  = [1,2,3] 
 
-    vptype    = [3]
-    vdxref    = [8]
-    vdtref    = [1,2]
-    vfreqref  = [1]
+    # vptype    = [3]
+    # vdxref    = [8]
+    # vdtref    = [1,2]
+    # vfreqref  = [1]
 
     nvptype      = len(vptype) 
     nvdxref      = len(vdxref)
@@ -66,11 +66,11 @@ if(execsol==1):
 #==============================================================================
 if(execref==1):
 
-    # vptype     = [1,2,3,4] 
-    # vfreqref   = [1,2,3]
+    vptype     = [1] 
+    vfreqref   = [1,2,3]
 
-    vptype     = [3] 
-    vfreqref   = [1]
+    #vptype     = [3] 
+    #vfreqref   = [1]
     
     nvptype    = len(vptype) 
     nvfreqref  = len(vfreqref) 
