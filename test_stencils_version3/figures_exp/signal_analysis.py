@@ -43,7 +43,7 @@ from im_fft_norms import fftnorm3
 # Range of Parameters
 #==============================================================================
 vptype    = [1] 
-vdxref    = [1,2,3,4]
+vdxref    = [1,2,4,8]
 vdtref    = [1,2,4,6]
 vfreqref  = [1,2,3] 
 
@@ -318,33 +318,15 @@ for k0 in range(0,nvptype):
                     
                         locopenref = '../data_save/teste%d/reffreq%d/'%(ptype,freq_ref)
 
-                        sol_ref        = np.load("%solplotcut.npy"%(locopenref))
-                        rec_ref        = np.load("%recrefcut.npy"%(locopenref))
-                        rec_select_ref = np.load("%recselectcut.npy"%(locopenref))
+                        sol_ref        = np.load("%ssolplotcut_%d_%d_%d_%d.npy"%(locopenref,vptype[k0],vdxref[k1],vdtref[k2],vfreqref[k3]))
+                        rec_ref        = np.load("%srecrefcut_%d_%d_%d_%d.npy"%(locopenref,vptype[k0],vdxref[k1],vdtref[k2],vfreqref[k3]))
+                        rec_select_ref = np.load("%srecselectcut_%d_%d_%d_%d.npy"%(locopenref,vptype[k0],vdxref[k1],vdtref[k2],vfreqref[k3]))
 
                         locopensol    = '../data_save/teste%d/dx%ddt%dfreq%d/'%(ptype,dx_ref,dt_ref,freq_ref)
 
                         sol            = np.load("%ssolplot_%s_%s_%d_%d.npy"%(locopensol,mshape,method,mvalue,nvalue))
                         rec            = np.load("%srec_%s_%s_%d_%d.npy"%(locopensol,mshape,method,mvalue,nvalue))
                         rec_select     = np.load("%srec_select_%s_%s_%d_%d.npy"%(locopensol,mshape,method,mvalue,nvalue))
-                        
-                        vtimejump  = np.linspace(0,teste.tn,sol.shape[0])
-                        itime      = 10
-                        timeselect = vtimejump[itime]
-
-                        sol     = sol[itime,:,:]
-                        sol_ref = sol_ref[itime,:,:]
-
-                        rec     = rec[:,:]
-                        rec_ref = rec_ref[:,:]
-
-                        solnorm1   = la.norm(sol-sol_ref,1)/la.norm(sol_ref,1)
-                        solnorm2   = la.norm(sol-sol_ref,2)/la.norm(sol_ref,2)
-                        solnormmax = la.norm(sol-sol_ref,np.inf)/la.norm(sol_ref,np.inf)
-
-                        recnorm1   = la.norm(rec-rec_ref,1)/la.norm(rec_ref,1)
-                        recnorm2   = la.norm(rec-rec_ref,2)/la.norm(rec_ref,2)
-                        recnormmax = la.norm(rec-rec_ref,np.inf)/la.norm(rec_ref,np.inf)
 
                         nts = rec_select.shape[1]
 
@@ -438,6 +420,24 @@ for k0 in range(0,nvptype):
                         lglobal.append(llocal)
 
                         if(plotfig==1):
+
+                            vtimejump  = np.linspace(0,teste.tn,sol.shape[0])
+                            itime      = 10
+                            timeselect = vtimejump[itime]
+
+                            sol     = sol[itime,:,:]
+                            sol_ref = sol_ref[itime,:,:]
+
+                            rec     = rec[:,:]
+                            rec_ref = rec_ref[:,:]
+
+                            solnorm1   = la.norm(sol-sol_ref,1)/la.norm(sol_ref,1)
+                            solnorm2   = la.norm(sol-sol_ref,2)/la.norm(sol_ref,2)
+                            solnormmax = la.norm(sol-sol_ref,np.inf)/la.norm(sol_ref,np.inf)
+
+                            recnorm1   = la.norm(rec-rec_ref,1)/la.norm(rec_ref,1)
+                            recnorm2   = la.norm(rec-rec_ref,2)/la.norm(rec_ref,2)
+                            recnormmax = la.norm(rec-rec_ref,np.inf)/la.norm(rec_ref,np.inf)
 
                             ts     = int(nts/2)
                             recref = rec_select_ref[:,ts]
