@@ -15,28 +15,8 @@ import testes_opt              as ttopt
 #==============================================================================
 
 #==============================================================================
-# Signal Comparison
-#==============================================================================
-from im_fft_norms import fftnorm1
-from im_fft_norms import fftnorm2
-from im_fft_norms import fftnorm3
-#==============================================================================
-
-#==============================================================================
-# Plot Set
-#==============================================================================
-import matplotlib.pyplot       as plt
-import matplotlib.ticker       as mticker    
-#from   mpl_toolkits.axes_grid1 import make_axes_locatable
-from   matplotlib              import ticker
-from   matplotlib              import cm
-#==============================================================================
-
-#==============================================================================
 # Range of Parameters
 #==============================================================================
-save_fields   = 0
-
 vptype    = [1] 
 vdxref    = [1,2,4,8]
 vdtref    = [1,2,4,6]
@@ -334,7 +314,6 @@ for k0 in range(0,nvptype):
                             normrecrel1   = np.nan
                             normrecrel2   = np.nan
                             normrecrelmax = np.nan
-                            normrecfft    = np.nan
                             
                         else:
 
@@ -344,7 +323,6 @@ for k0 in range(0,nvptype):
                             normrecrel1   = la.norm(recrefcut-rec,1)/la.norm(recrefcut,1)            
                             normrecrel2   = la.norm(recrefcut-rec,2)/la.norm(recrefcut,2)
                             normrecrelmax = la.norm(recrefcut-rec,np.inf)/la.norm(recrefcut,np.inf)
-                            normrecfft    = 0.0
 
                     except:
 
@@ -354,7 +332,6 @@ for k0 in range(0,nvptype):
                         normrecrel1   = np.nan
                         normrecrel2   = np.nan
                         normrecrelmax = np.nan
-                        normrecfft    = np.nan
 
                     normrec.append(normrec1)
                     normrec.append(normrec2)
@@ -362,7 +339,6 @@ for k0 in range(0,nvptype):
                     normrec.append(normrecrel1)
                     normrec.append(normrecrel2)
                     normrec.append(normrecrelmax)
-                    normrec.append(normrecfft)
 
                     normrecselect = [] 
                     n1            = []
@@ -371,7 +347,6 @@ for k0 in range(0,nvptype):
                     n1rel         = []
                     n2rel         = []
                     nmaxrel       = []
-                    nfft          = []
                                         
                     for i in range(0,rec_select.shape[1]):
                         
@@ -385,7 +360,6 @@ for k0 in range(0,nvptype):
                                 normlocrel1   = np.nan
                                 normlocrel2   = np.nan
                                 normlocrelmax = np.nan
-                                normlocfft    = np.nan
 
                             else:
                             
@@ -395,7 +369,6 @@ for k0 in range(0,nvptype):
                                 normlocrel1   = la.norm(recselectcut[:,i]-rec_select[:,i],1)/la.norm(recselectcut[:,i],1)  
                                 normlocrel2   = la.norm(recselectcut[:,i]-rec_select[:,i],2)/la.norm(recselectcut[:,i],2)  
                                 normlocrelmax = la.norm(recselectcut[:,i]-rec_select[:,i],np.inf)/la.norm(recselectcut[:,i],np.inf)  
-                                normlocfft    = 0.0
 
                             n1.append(normloc1)
                             n2.append(normloc2)
@@ -403,7 +376,6 @@ for k0 in range(0,nvptype):
                             n1rel.append(normlocrel1)
                             n2rel.append(normlocrel2)
                             nmaxrel.append(normlocrelmax)
-                            nfft.append(normlocfft)
                             
                         except:
                             
@@ -413,7 +385,6 @@ for k0 in range(0,nvptype):
                             normlocrel1   = np.nan
                             normlocrel2   = np.nan
                             normlocrelmax = np.nan
-                            normlocfft    = np.nan
                             
                             n1.append(normloc1)
                             n2.append(normloc2)
@@ -421,7 +392,6 @@ for k0 in range(0,nvptype):
                             n1rel.append(normlocrel1)
                             n2rel.append(normlocrel2)
                             nmaxrel.append(normlocrelmax)
-                            nfft.append(normlocfft)
 
                     normrecselect.append(n1)
                     normrecselect.append(n2)
@@ -429,7 +399,6 @@ for k0 in range(0,nvptype):
                     normrecselect.append(n1rel)
                     normrecselect.append(n2rel)
                     normrecselect.append(nmaxrel)
-                    normrecselect.append(nfft)
 
                     normsolplot   = []
                     n1            = []
@@ -438,7 +407,6 @@ for k0 in range(0,nvptype):
                     n1rel         = []
                     n2rel         = []
                     nmaxrel       = []
-                    nfft          = []
                     timesolplot   = [i*dt0*jump for i in range(0,solplot.shape[0])]
                                         
                     for i in range(0,solplot.shape[0]):
@@ -453,7 +421,6 @@ for k0 in range(0,nvptype):
                                 normlocrel1   = np.nan
                                 normlocrel2   = np.nan
                                 normlocrelmax = np.nan
-                                normlocfft    = np.nan
 
                             else:
                             
@@ -463,7 +430,6 @@ for k0 in range(0,nvptype):
                                 normlocrel1   = la.norm(solplotcut[i,:]-solplot[i,:],1)/la.norm(solplotcut[i,:],1)
                                 normlocrel2   = la.norm(solplotcut[i,:]-solplot[i,:],2)/la.norm(solplotcut[i,:],2)
                                 normlocrelmax = la.norm(solplotcut[i,:]-solplot[i,:],np.inf)/la.norm(solplotcut[i,:],np.inf)
-                                normlocfft    = 0.0
 
                             n1.append(normloc1)
                             n2.append(normloc2)
@@ -471,7 +437,6 @@ for k0 in range(0,nvptype):
                             n1rel.append(normlocrel1)
                             n2rel.append(normlocrel2)
                             nmaxrel.append(normlocrelmax)
-                            nfft.append(normlocfft)
                             
                         except:
                             
@@ -481,7 +446,6 @@ for k0 in range(0,nvptype):
                             normlocrel1   = np.nan
                             normlocrel2   = np.nan
                             normlocrelmax = np.nan
-                            normlocfft    = np.nan
                             
                             n1.append(normloc1)
                             n2.append(normloc2)
@@ -489,7 +453,6 @@ for k0 in range(0,nvptype):
                             n1rel.append(normlocrel1)
                             n2rel.append(normlocrel2)
                             nmaxrel.append(normlocrelmax)
-                            nfft.append(normlocfft)
                     
                     normsolplot.append(n1)
                     normsolplot.append(n2)
@@ -497,51 +460,8 @@ for k0 in range(0,nvptype):
                     normsolplot.append(n1rel)
                     normsolplot.append(n2rel)
                     normsolplot.append(nmaxrel)
-                    normsolplot.append(nfft)
-
-                    if(save_fields==1):
-
-                        if(fmark==1):
-
-                            rec[:]        = np.nan
-                            solplot[:]    = np.nan
-                            rec_select[:] = np.nan
-                
-                        fields_save.append(rec)
-                        
-                        if(cont_glob==0): 
-                            
-                            fields_save.append(recrefcut)
-                        
-                        else:
-
-                            fields_save.append(0.0)
-
-                        fields_save.append(rec_select)
-                        
-                        if(cont_glob==0): 
-                        
-                            fields_save.append(recselectcut)
-                        
-                        else:
-
-                            fields_save.append(0.0)                            
-
-                        fields_save.append(solplot)
-                        
-                        if(cont_glob==0): 
-
-                            fields_save.append(solplotcut)
-
-                        else:
-
-                            fields_save.append(0.0)
-
-                        testresults.append([cont_me,ptype,dx_ref,dt_ref,freq_ref,mshape,method,mvalue,nvalue,npt,npe,normrec,normrecselect,normsolplot,timesolplot,parameters,cont_glob,fields_save])
-                    
-                    else:
-                        
-                        testresults.append([cont_me,ptype,dx_ref,dt_ref,freq_ref,mshape,method,mvalue,nvalue,npt,npe,normrec,normrecselect,normsolplot,timesolplot,parameters,cont_glob])
+    
+                    testresults.append([cont_me,ptype,dx_ref,dt_ref,freq_ref,mshape,method,mvalue,nvalue,npt,npe,normrec,normrecselect,normsolplot,timesolplot,parameters,cont_glob])
                     
                     cont_glob = cont_glob + 1
 #==============================================================================
@@ -555,9 +475,7 @@ for k0 in range(0,nvptype):
 #==============================================================================
 # Save Results
 #==============================================================================
-    if(save_fields==0): locname = '../testresults/test%d_results_norms'%(ptype)
-    if(save_fields==1): locname = '../testresults/test%d_results_norms_fields'%(ptype)
-    
+    locname = '../testresults/test%d_results_norms_classic'%(ptype)
     with open(locname, 'wb') as f: 
         pickle.dump(testresults, f) 
 #==============================================================================
