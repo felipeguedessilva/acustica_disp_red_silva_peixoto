@@ -211,9 +211,9 @@ for k0 in range(0,nvptype):
                 recselectcut = rec_select_ref[0::irecselectref0,0::irecselectref1]
 
                 locosaverefcut = '../data_save/teste%d/reffreq%d/'%(ptype,freq_ref)
-                np.save("%ssolplotcut_%d_%d_%d_%d.npy"%(locosaverefcut,vptype[k0],vdxref[k1],vdtref[k2],vfreqref[k3]),solplotcut[:,:,:])
-                np.save("%srecrefcut_%d_%d_%d_%d.npy"%(locosaverefcut,vptype[k0],vdxref[k1],vdtref[k2],vfreqref[k3]),recrefcut)
-                np.save("%srecselectcut_%d_%d_%d_%d.npy"%(locosaverefcut,vptype[k0],vdxref[k1],vdtref[k2],vfreqref[k3]),recselectcut)
+                np.save("%ssolplotcut_%d_%d_%d_%d.npy"%(locosaverefcut,ptype,dx_ref,dt_ref,freq_ref),solplotcut[:,:,:])
+                np.save("%srecrefcut_%d_%d_%d_%d.npy"%(locosaverefcut,ptype,dx_ref,dt_ref,freq_ref),recrefcut)
+                np.save("%srecselectcut_%d_%d_%d_%d.npy"%(locosaverefcut,ptype,dx_ref,dt_ref,freq_ref),recselectcut)
                 
                 del rec_ref, solplot_ref, rec_select_ref
                 gc.collect()

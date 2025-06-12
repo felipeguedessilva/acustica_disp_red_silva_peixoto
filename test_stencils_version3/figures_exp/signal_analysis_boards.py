@@ -90,7 +90,7 @@ for k0 in range(0,nvptype):
 #==============================================================================
 # Teste Select
 #==============================================================================
-                locopen  = '../testresults/test%d_results_norms_fch'%(ptype)
+                locopen = '../testresults/test%d_results_norms_fch_%d_%d_%d'%(ptype,dx_ref,dt_ref,freq_ref)
                 with open(locopen, 'rb') as f: 
                     test_results  = pickle.load(f) 
 
@@ -316,21 +316,21 @@ for k0 in range(0,nvptype):
                     cutf = 150
                     wcut = 1
 
-                    nfftrecselect1     = test_results[cont_glob][4]
-                    ncwtrecselect1     = test_results[cont_glob][5]
-                    nhilbertrecselect1 = test_results[cont_glob][6]
-                    nfftrecselect2     = test_results[cont_glob][7]
-                    ncwtrecselect2     = test_results[cont_glob][8]
-                    nhilbertrecselect2 = test_results[cont_glob][9]
-                    n1recselect1       = test_results[cont_glob][10]
-                    n2recselect1       = test_results[cont_glob][11]
-                    nmaxrecselect1     = test_results[cont_glob][12]
-                    n1recselect2       = test_results[cont_glob][13]
-                    n2recselect2       = test_results[cont_glob][14]
-                    nmaxrecselect2     = test_results[cont_glob][15]
-                    rec_selectnorm1    = test_results[cont_glob][16]
-                    rec_selectnorm2    = test_results[cont_glob][17]
-                    rec_selectnormmax  = test_results[cont_glob][19]
+                    nfftrecselect1     = test_results[k][4]
+                    ncwtrecselect1     = test_results[k][5]
+                    nhilbertrecselect1 = test_results[k][6]
+                    nfftrecselect2     = test_results[k][7]
+                    ncwtrecselect2     = test_results[k][8]
+                    nhilbertrecselect2 = test_results[k][9]
+                    n1recselect1       = test_results[k][10]
+                    n2recselect1       = test_results[k][11]
+                    nmaxrecselect1     = test_results[k][12]
+                    n1recselect2       = test_results[k][13]
+                    n2recselect2       = test_results[k][14]
+                    nmaxrecselect2     = test_results[k][15]
+                    rec_selectnorm1    = test_results[k][16]
+                    rec_selectnorm2    = test_results[k][17]
+                    rec_selectnormmax  = test_results[k][19]
 
                     locopensol    = '../data_save/teste%d/dx%ddt%dfreq%d/'%(ptype,dx_ref,dt_ref,freq_ref)
                     sol            = np.load("%ssolplot_%s_%s_%d_%d.npy"%(locopensol,mshape,method,mvalue,nvalue))

@@ -63,8 +63,6 @@ cont_glob    = 0
 
 for k0 in range(0,nvptype):
     
-    lglobal = []
-
     for k1 in range(0,nvdxref):
         
         for k2 in range(0,nvdtref):
@@ -76,7 +74,8 @@ for k0 in range(0,nvptype):
                 dt_ref     = vdtref[k2]
                 freq_ref   = vfreqref[k3]
                 factor_ref = 16
-                
+                lglobal    = []
+
                 print('')
                 print('Number    = %d'%cont_me)
                 print('Test Type = %d'%ptype)
@@ -236,9 +235,9 @@ for k0 in range(0,nvptype):
 # OOpen Reference
 #============================================================================== 
                 locopenref = '../data_save/teste%d/reffreq%d/'%(ptype,freq_ref)
-                sol_ref        = np.load("%ssolplotcut_%d_%d_%d_%d.npy"%(locopenref,vptype[k0],vdxref[k1],vdtref[k2],vfreqref[k3]))
-                rec_ref        = np.load("%srecrefcut_%d_%d_%d_%d.npy"%(locopenref,vptype[k0],vdxref[k1],vdtref[k2],vfreqref[k3]))
-                rec_select_ref = np.load("%srecselectcut_%d_%d_%d_%d.npy"%(locopenref,vptype[k0],vdxref[k1],vdtref[k2],vfreqref[k3]))
+                sol_ref        = np.load("%ssolplotcut_%d_%d_%d_%d.npy"%(locopenref,ptype,dx_ref,dt_ref,freq_ref))
+                rec_ref        = np.load("%srecrefcut_%d_%d_%d_%d.npy"%(locopenref,ptype,dx_ref,dt_ref,freq_ref))
+                rec_select_ref = np.load("%srecselectcut_%d_%d_%d_%d.npy"%(locopenref,ptype,dx_ref,dt_ref,freq_ref))
 #==============================================================================
 
 #==============================================================================
@@ -417,7 +416,7 @@ for k0 in range(0,nvptype):
 #==============================================================================
 # Save Results
 #==============================================================================
-    locname = '../testresults/test%d_results_norms_fch'%(ptype)
-    with open(locname, 'wb') as f: 
-        pickle.dump(lglobal, f) 
+                locname = '../testresults/test%d_results_norms_fch_%d_%d_%d'%(ptype,dx_ref,dt_ref,freq_ref)
+                with open(locname, 'wb') as f: 
+                    pickle.dump(lglobal, f) 
 #==============================================================================

@@ -90,7 +90,7 @@ for k0 in range(0,nvptype):
 #==============================================================================
 # Teste Select
 #==============================================================================
-                locopen  = '../testresults/test%d_results_norms_fch'%(ptype)
+                locopen = '../testresults/test%d_results_norms_fch_%d_%d_%d'%(ptype,dx_ref,dt_ref,freq_ref)
                 with open(locopen, 'rb') as f: 
                     test_results  = pickle.load(f) 
 
