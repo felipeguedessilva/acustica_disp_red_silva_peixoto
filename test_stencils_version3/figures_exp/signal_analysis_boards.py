@@ -43,15 +43,10 @@ from im_fft_norms import fftnorm3
 #==============================================================================
 # Range of Parameters
 #==============================================================================
-# vptype    = [1] 
-# vdxref    = [1,2,4,8]
-# vdtref    = [1,2,4,6]
-# vfreqref  = [1,2,3] 
-
 vptype    = [1] 
-vdxref    = [1]
-vdtref    = [1]
-vfreqref  = [1]
+vdxref    = [1,2,4,8]
+vdtref    = [1,2,4,6]
+vfreqref  = [1,2,3] 
 
 nvptype      = len(vptype) 
 nvdxref      = len(vdxref)
@@ -238,9 +233,9 @@ for k0 in range(0,nvptype):
 # Open Reference
 #============================================================================== 
                 locopenref = '../data_save/teste%d/reffreq%d/'%(ptype,freq_ref)
-                sol_ref        = np.load("%ssolplotcut_%d_%d_%d_%d.npy"%(locopenref,vptype[k0],vdxref[k1],vdtref[k2],vfreqref[k3]))
-                rec_ref        = np.load("%srecrefcut_%d_%d_%d_%d.npy"%(locopenref,vptype[k0],vdxref[k1],vdtref[k2],vfreqref[k3]))
-                rec_select_ref = np.load("%srecselectcut_%d_%d_%d_%d.npy"%(locopenref,vptype[k0],vdxref[k1],vdtref[k2],vfreqref[k3]))
+                sol_ref0        = np.load("%ssolplotcut_%d_%d_%d_%d.npy"%(locopenref,vptype[k0],vdxref[k1],vdtref[k2],vfreqref[k3]))
+                rec_ref0        = np.load("%srecrefcut_%d_%d_%d_%d.npy"%(locopenref,vptype[k0],vdxref[k1],vdtref[k2],vfreqref[k3]))
+                rec_select_ref0 = np.load("%srecselectcut_%d_%d_%d_%d.npy"%(locopenref,vptype[k0],vdxref[k1],vdtref[k2],vfreqref[k3]))
 #==============================================================================                 
 
 #==============================================================================
@@ -330,13 +325,12 @@ for k0 in range(0,nvptype):
                     nmaxrecselect2     = test_results[k][15]
                     rec_selectnorm1    = test_results[k][16]
                     rec_selectnorm2    = test_results[k][17]
-                    rec_selectnormmax  = test_results[k][19]
+                    rec_selectnormmax  = test_results[k][18]
 
                     locopensol    = '../data_save/teste%d/dx%ddt%dfreq%d/'%(ptype,dx_ref,dt_ref,freq_ref)
                     sol            = np.load("%ssolplot_%s_%s_%d_%d.npy"%(locopensol,mshape,method,mvalue,nvalue))
                     rec            = np.load("%srec_%s_%s_%d_%d.npy"%(locopensol,mshape,method,mvalue,nvalue))
                     rec_select     = np.load("%srec_select_%s_%s_%d_%d.npy"%(locopensol,mshape,method,mvalue,nvalue))
-
 
                     nts = rec_select.shape[1]
 
@@ -345,10 +339,10 @@ for k0 in range(0,nvptype):
                     timeselect = vtimejump[itime]
 
                     sol     = sol[itime,:,:]
-                    sol_ref = sol_ref[itime,:,:]
+                    sol_ref = sol_ref0[itime,:,:]
 
                     rec     = rec[:,:]
-                    rec_ref = rec_ref[:,:]
+                    rec_ref = rec_ref0[:,:]
 
                     solnorm1   = la.norm(sol-sol_ref,1)/la.norm(sol_ref,1)
                     solnorm2   = la.norm(sol-sol_ref,2)/la.norm(sol_ref,2)
@@ -359,7 +353,7 @@ for k0 in range(0,nvptype):
                     recnormmax = la.norm(rec-rec_ref,np.inf)/la.norm(rec_ref,np.inf)
 
                     ts     = int(nts/2)
-                    recref = rec_select_ref[:,ts]
+                    recref = rec_select_ref0[:,ts]
                     recnum = rec_select[:,ts]
 
                     rec_selectnorm1   = la.norm(recnum-recref,1)/la.norm(recref,1)

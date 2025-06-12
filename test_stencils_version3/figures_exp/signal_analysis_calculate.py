@@ -43,15 +43,10 @@ from im_fft_norms import fftnorm3
 #==============================================================================
 # Range of Parameters
 #==============================================================================
-# vptype    = [1] 
-# vdxref    = [1,2,4,8]
-# vdtref    = [1,2,4,6]
-# vfreqref  = [1,2,3] 
-
 vptype    = [1] 
-vdxref    = [1]
-vdtref    = [1]
-vfreqref  = [1] 
+vdxref    = [1,2,4,8]
+vdtref    = [1,2,4,6]
+vfreqref  = [1,2,3] 
 
 nvptype      = len(vptype) 
 nvdxref      = len(vdxref)

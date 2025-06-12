@@ -43,15 +43,10 @@ from im_fft_norms import fftnorm3
 #==============================================================================
 # Range of Parameters
 #==============================================================================
-# vptype    = [1] 
-# vdxref    = [1,2,4,8]
-# vdtref    = [1,2,4,6]
-# vfreqref  = [1,2,3] 
-
 vptype    = [1] 
-vdxref    = [1]
-vdtref    = [1]
-vfreqref  = [1]
+vdxref    = [1,2,4,8]
+vdtref    = [1,2,4,6]
+vfreqref  = [1,2,3] 
 
 nvptype      = len(vptype) 
 nvdxref      = len(vdxref)
@@ -204,7 +199,7 @@ for k0 in range(0,nvptype):
                     fontsizevalue2=20
                     
                     plt.figure(figsize = (32,20)) # largura x altura
-                    plt.suptitle('Signal Analysis - Norm Comp \n %s \n dx = %.3fm - dy = %.3fm \n T= %.3fs - dt = %.3fms - freq = %.3fHz'%(testname,teste.hx,teste.hy,teste.tn/1000,dt0,teste.f0),fontsize=fontsizevalue2)
+                    plt.suptitle('Signal Analysis - Norm Comp \n %s \n dx = %.3fm - dy = %.3fm \n T= %.3fs - dt = %.3fms - freq = %.3fHz'%(testname,teste.hx,teste.hy,teste.tn/1000,0.5*dt_ref,teste.f0),fontsize=fontsizevalue2)
                     grid  = plt.GridSpec(3,3,wspace=0.4,hspace=0.5) # largura x altura
 
                     for b1 in range(0,nplot):
@@ -325,4 +320,5 @@ for k0 in range(0,nvptype):
 
                     plt.savefig('%s/norm%s.png'%(locsave,b0),dpi=400,bbox_inches='tight')
                     plt.close()
+                    print('Finish!')
 #==============================================================================
