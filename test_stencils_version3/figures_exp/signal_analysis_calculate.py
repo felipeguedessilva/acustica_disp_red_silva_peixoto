@@ -58,6 +58,8 @@ cont_glob    = 0
 
 for k0 in range(0,nvptype):
     
+    testresults = []
+    
     for k1 in range(0,nvdxref):
         
         for k2 in range(0,nvdtref):
@@ -233,6 +235,11 @@ for k0 in range(0,nvptype):
                 sol_ref        = np.load("%ssolplotcut_%d_%d_%d_%d.npy"%(locopenref,ptype,dx_ref,dt_ref,freq_ref))
                 rec_ref        = np.load("%srecrefcut_%d_%d_%d_%d.npy"%(locopenref,ptype,dx_ref,dt_ref,freq_ref))
                 rec_select_ref = np.load("%srecselectcut_%d_%d_%d_%d.npy"%(locopenref,ptype,dx_ref,dt_ref,freq_ref))
+
+                if(dt_ref==6):
+
+                    rec_ref        = rec_ref[1:,:]
+                    rec_select_ref = rec_select_ref[1:,:]
 #==============================================================================
 
 #==============================================================================
@@ -338,8 +345,9 @@ for k0 in range(0,nvptype):
                     llist4 = []
                     llist5 = []
                     llist6 = []
-                
-                    for m1 in range(0,nts):
+
+                    # for m1 in range(0,nts):
+                    for m1 in range(0,1):
 
                         recnumloc = rec_select[:,m1]
                         recrefloc = rec_select_ref[:,m1]
@@ -378,10 +386,30 @@ for k0 in range(0,nvptype):
                     n1recselect2       = np.amax(np.array(llist4))
                     n2recselect2       = np.amax(np.array(llist5))
                     nmaxrecselect2     = np.amax(np.array(llist6))
+                    
+                    try:
+                        
+                        rec_selectnorm1 = la.norm(rec_select-rec_select_ref,1)/la.norm(rec_select_ref,1)
 
-                    rec_selectnorm1   = la.norm(rec_select-rec_select_ref,1)/la.norm(rec_select_ref,1)
-                    rec_selectnorm2   = la.norm(rec_select-rec_select_ref,2)/la.norm(rec_select_ref,2)
-                    rec_selectnormmax = la.norm(rec_select-rec_select_ref,np.inf)/la.norm(rec_select_ref,np.inf)
+                    except:
+
+                        rec_selectnorm1 = np.nan
+
+                    try:
+                        
+                        rec_selectnorm2 = la.norm(rec_select-rec_select_ref,2)/la.norm(rec_select_ref,2)
+                    
+                    except:
+
+                        rec_selectnorm2 = np.nan 
+
+                    try:
+                        
+                        rec_selectnormmax = la.norm(rec_select-rec_select_ref,np.inf)/la.norm(rec_select_ref,np.inf)
+
+                    except:
+
+                        rec_selectnormmax = np.nan
 
                     llocal = []
                     llocal.append(mshape)
@@ -403,15 +431,25 @@ for k0 in range(0,nvptype):
                     llocal.append(rec_selectnorm1)
                     llocal.append(rec_selectnorm2)
                     llocal.append(rec_selectnormmax)
-                    
+            
+                    testresults.append([cont_me,ptype,dx_ref,dt_ref,freq_ref,mshape,method,mvalue,nvalue,npt,npe,llocal,parameters,cont_glob])
+
                     lglobal.append(llocal)
                     cont_glob = cont_glob + 1
 #==============================================================================
 
 #==============================================================================
-# Save Results
+# Save Results1
 #==============================================================================
                 locname = '../testresults/test%d_results_norms_fch_%d_%d_%d'%(ptype,dx_ref,dt_ref,freq_ref)
                 with open(locname, 'wb') as f: 
                     pickle.dump(lglobal, f) 
+#==============================================================================
+
+#==============================================================================
+# Save Results2
+#==============================================================================
+    locname = '../testresults/test%d_results_norms_fch'%(ptype)
+    with open(locname, 'wb') as f: 
+        pickle.dump(testresults, f) 
 #==============================================================================

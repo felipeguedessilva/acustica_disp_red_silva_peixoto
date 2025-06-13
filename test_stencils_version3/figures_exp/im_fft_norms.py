@@ -90,8 +90,15 @@ def fftnorm1(recref,recnum,teste,wcut,cutf):
         difangle[m1] = distf4(alpha1,alpha2)
         
     nmeasureangle1 = (difangle/np.pi)*(np.abs(absnum)/np.abs(np.amax(absnum)))
-    nnorm1         = (1/np.sqrt(nsamples))*la.norm(nmeasureangle1,normtype)
     
+    try: 
+        
+        nnorm1 = (1/np.sqrt(nsamples))*la.norm(nmeasureangle1,normtype)
+    
+    except:
+
+        nnorm1 = np.nan
+
     return nnorm1
 #==============================================================================
 
@@ -134,8 +141,15 @@ def fftnorm2(recref,recnum,teste,wcut,cutf):
             cwtmatr_dif_angle[m1,m2] = distf4(alpha1,alpha2)
         
     nmeasureangle1 = (cwtmatr_dif_angle/np.pi)*(np.abs(cwtmatr_num_norm)/np.abs(np.amax(cwtmatr_num_norm)))
-    nnorm1 = (1/np.sqrt(cwtmatr_ref_angle.shape[0]))*(1/np.sqrt(cwtmatr_ref_angle.shape[1]))*la.norm(nmeasureangle1,normtype)
+
+    try: 
+        
+        nnorm1 = (1/np.sqrt(cwtmatr_ref_angle.shape[0]))*(1/np.sqrt(cwtmatr_ref_angle.shape[1]))*la.norm(nmeasureangle1,normtype)
     
+    except:
+
+        nnorm1 = np.nan
+
     return nnorm1
 #==============================================================================
 
@@ -166,7 +180,14 @@ def fftnorm3(recref,recnum,teste):
         instantaneous_phase_dif[m1] = distf4(alpha1,alpha2)                    
 
     nmeasureangle1 = (instantaneous_phase_dif/np.pi)*(np.abs(amplitude_envelope_num)/np.abs(np.amax(amplitude_envelope_num)))
-    nnorm1 = (1/np.sqrt(nsamples1))*la.norm(nmeasureangle1,normtype)
     
+    try:
+        
+        nnorm1 = (1/np.sqrt(nsamples1))*la.norm(nmeasureangle1,normtype)
+    
+    except:
+
+        nnorm1 = np.nan
+
     return nnorm1
 #==============================================================================

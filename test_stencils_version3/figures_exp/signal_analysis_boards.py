@@ -236,6 +236,11 @@ for k0 in range(0,nvptype):
                 sol_ref0        = np.load("%ssolplotcut_%d_%d_%d_%d.npy"%(locopenref,vptype[k0],vdxref[k1],vdtref[k2],vfreqref[k3]))
                 rec_ref0        = np.load("%srecrefcut_%d_%d_%d_%d.npy"%(locopenref,vptype[k0],vdxref[k1],vdtref[k2],vfreqref[k3]))
                 rec_select_ref0 = np.load("%srecselectcut_%d_%d_%d_%d.npy"%(locopenref,vptype[k0],vdxref[k1],vdtref[k2],vfreqref[k3]))
+
+                if(dt_ref==6):
+
+                    rec_ref0        = rec_ref0[1:,:]
+                    rec_select_ref0 = rec_select_ref0[1:,:]
 #==============================================================================                 
 
 #==============================================================================
