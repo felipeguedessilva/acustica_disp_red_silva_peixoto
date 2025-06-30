@@ -1,12 +1,6 @@
-/home/fguedes/acustica_disp_red_silva_peixoto/test_stencils_version3/figures_exp/rcs_files_norms_fields.py:464: RuntimeWarning: invalid value encountered in scalar divide
-  normlocrel1   = la.norm(solplotcut[i,:]-solplot[i,:],1)/la.norm(solplotcut[i,:],1)
-/home/fguedes/acustica_disp_red_silva_peixoto/test_stencils_version3/figures_exp/rcs_files_norms_fields.py:465: RuntimeWarning: invalid value encountered in scalar divide
-  normlocrel2   = la.norm(solplotcut[i,:]-solplot[i,:],2)/la.norm(solplotcut[i,:],2)
-/home/fguedes/acustica_disp_red_silva_peixoto/test_stencils_version3/figures_exp/rcs_files_norms_fields.py:466: RuntimeWarning: invalid value encountered in scalar divide
-  normlocrelmax = la.norm(solplotcut[i,:]-solplot[i,:],np.inf)/la.norm(solplotcut[i,:],np.inf)
 
 Number    = 0
-Test Type = 1
+Test Type = 4
 dx_ref    = 1
 dt_ref    = 1
 freq_ref  = 1
@@ -720,7 +714,7 @@ Close Test Files!
 
 
 Number    = 1
-Test Type = 1
+Test Type = 4
 dx_ref    = 1
 dt_ref    = 1
 freq_ref  = 2
@@ -1434,7 +1428,7 @@ Close Test Files!
 
 
 Number    = 2
-Test Type = 1
+Test Type = 4
 dx_ref    = 1
 dt_ref    = 1
 freq_ref  = 3
@@ -2148,7 +2142,7 @@ Close Test Files!
 
 
 Number    = 3
-Test Type = 1
+Test Type = 4
 dx_ref    = 1
 dt_ref    = 2
 freq_ref  = 1
@@ -2862,7 +2856,7 @@ Close Test Files!
 
 
 Number    = 4
-Test Type = 1
+Test Type = 4
 dx_ref    = 1
 dt_ref    = 2
 freq_ref  = 2
@@ -3576,7 +3570,7 @@ Close Test Files!
 
 
 Number    = 5
-Test Type = 1
+Test Type = 4
 dx_ref    = 1
 dt_ref    = 2
 freq_ref  = 3
@@ -4290,7 +4284,7 @@ Close Test Files!
 
 
 Number    = 6
-Test Type = 1
+Test Type = 4
 dx_ref    = 1
 dt_ref    = 4
 freq_ref  = 1
@@ -5004,7 +4998,7 @@ Close Test Files!
 
 
 Number    = 7
-Test Type = 1
+Test Type = 4
 dx_ref    = 1
 dt_ref    = 4
 freq_ref  = 2
@@ -5718,7 +5712,7 @@ Close Test Files!
 
 
 Number    = 8
-Test Type = 1
+Test Type = 4
 dx_ref    = 1
 dt_ref    = 4
 freq_ref  = 3
@@ -6432,7 +6426,7 @@ Close Test Files!
 
 
 Number    = 9
-Test Type = 1
+Test Type = 4
 dx_ref    = 1
 dt_ref    = 6
 freq_ref  = 1
@@ -7146,7 +7140,7 @@ Close Test Files!
 
 
 Number    = 10
-Test Type = 1
+Test Type = 4
 dx_ref    = 1
 dt_ref    = 6
 freq_ref  = 2
@@ -7860,7 +7854,7 @@ Close Test Files!
 
 
 Number    = 11
-Test Type = 1
+Test Type = 4
 dx_ref    = 1
 dt_ref    = 6
 freq_ref  = 3
@@ -8517,7 +8511,13 @@ Test with Stencil: 213
 shape: csq - method: displs - sou: 12 - mvalue: 6 - nvalue: 3
 
 Test with Stencil: 214
-shape: csq - method: displs - sou: 12 - mvalue: 6 - nvalue: 4
+shape: csq - method: displs - sou: 12 - mvalue: 6 - nvalue: 4/home/fguedes/acustica_disp_red_silva_peixoto/test_stencils_version3/figures_exp/rcs_files_norms_fields.py:430: RuntimeWarning: invalid value encountered in scalar divide
+  normlocrel1   = la.norm(solplotcut[i,:]-solplot[i,:],1)/la.norm(solplotcut[i,:],1)
+/home/fguedes/acustica_disp_red_silva_peixoto/test_stencils_version3/figures_exp/rcs_files_norms_fields.py:431: RuntimeWarning: invalid value encountered in scalar divide
+  normlocrel2   = la.norm(solplotcut[i,:]-solplot[i,:],2)/la.norm(solplotcut[i,:],2)
+/home/fguedes/acustica_disp_red_silva_peixoto/test_stencils_version3/figures_exp/rcs_files_norms_fields.py:432: RuntimeWarning: invalid value encountered in scalar divide
+  normlocrelmax = la.norm(solplotcut[i,:]-solplot[i,:],np.inf)/la.norm(solplotcut[i,:],np.inf)
+
 
 Test with Stencil: 215
 shape: csq - method: displs - sou: 12 - mvalue: 6 - nvalue: 5
@@ -8574,7 +8574,7 @@ Close Test Files!
 
 
 Number    = 12
-Test Type = 1
+Test Type = 4
 dx_ref    = 2
 dt_ref    = 1
 freq_ref  = 1
@@ -9288,7 +9288,7 @@ Close Test Files!
 
 
 Number    = 13
-Test Type = 1
+Test Type = 4
 dx_ref    = 2
 dt_ref    = 1
 freq_ref  = 2
@@ -10002,7 +10002,7 @@ Close Test Files!
 
 
 Number    = 14
-Test Type = 1
+Test Type = 4
 dx_ref    = 2
 dt_ref    = 1
 freq_ref  = 3
@@ -10716,7 +10716,7 @@ Close Test Files!
 
 
 Number    = 15
-Test Type = 1
+Test Type = 4
 dx_ref    = 2
 dt_ref    = 2
 freq_ref  = 1
@@ -11430,7 +11430,7 @@ Close Test Files!
 
 
 Number    = 16
-Test Type = 1
+Test Type = 4
 dx_ref    = 2
 dt_ref    = 2
 freq_ref  = 2
@@ -12144,7 +12144,7 @@ Close Test Files!
 
 
 Number    = 17
-Test Type = 1
+Test Type = 4
 dx_ref    = 2
 dt_ref    = 2
 freq_ref  = 3
@@ -12858,7 +12858,7 @@ Close Test Files!
 
 
 Number    = 18
-Test Type = 1
+Test Type = 4
 dx_ref    = 2
 dt_ref    = 4
 freq_ref  = 1
@@ -13572,7 +13572,7 @@ Close Test Files!
 
 
 Number    = 19
-Test Type = 1
+Test Type = 4
 dx_ref    = 2
 dt_ref    = 4
 freq_ref  = 2
@@ -14286,7 +14286,7 @@ Close Test Files!
 
 
 Number    = 20
-Test Type = 1
+Test Type = 4
 dx_ref    = 2
 dt_ref    = 4
 freq_ref  = 3
@@ -14976,7 +14976,9 @@ Test with Stencil: 224
 shape: csq - method: displs - sou: 16 - mvalue: 8 - nvalue: 1
 
 Test with Stencil: 225
-shape: csq - method: displs - sou: 16 - mvalue: 8 - nvalue: 2
+shape: csq - method: displs - sou: 16 - mvalue: 8 - nvalue: 2/home/fguedes/anaconda3/envs/devito/lib/python3.13/site-packages/numpy/linalg/_linalg.py:2805: RuntimeWarning: overflow encountered in reduce
+  ret = add.reduce(abs(x), axis=row_axis).max(axis=col_axis)
+
 
 Test with Stencil: 226
 shape: csq - method: displs - sou: 16 - mvalue: 8 - nvalue: 3
@@ -15000,7 +15002,7 @@ Close Test Files!
 
 
 Number    = 21
-Test Type = 1
+Test Type = 4
 dx_ref    = 2
 dt_ref    = 6
 freq_ref  = 1
@@ -15567,9 +15569,7 @@ Test with Stencil: 183
 shape: crb - method: displs - sou: 14 - mvalue: 7 - nvalue: 3
 
 Test with Stencil: 184
-shape: crb - method: displs - sou: 14 - mvalue: 7 - nvalue: 4/home/fguedes/anaconda3/envs/devito/lib/python3.13/site-packages/numpy/linalg/_linalg.py:2805: RuntimeWarning: overflow encountered in reduce
-  ret = add.reduce(abs(x), axis=row_axis).max(axis=col_axis)
-/home/fguedes/anaconda3/envs/devito/lib/python3.13/site-packages/numpy/linalg/_linalg.py:2809: RuntimeWarning: overflow encountered in reduce
+shape: crb - method: displs - sou: 14 - mvalue: 7 - nvalue: 4/home/fguedes/anaconda3/envs/devito/lib/python3.13/site-packages/numpy/linalg/_linalg.py:2809: RuntimeWarning: overflow encountered in reduce
   ret = add.reduce(abs(x), axis=col_axis).max(axis=row_axis)
 
 
@@ -15718,7 +15718,7 @@ Close Test Files!
 
 
 Number    = 22
-Test Type = 1
+Test Type = 4
 dx_ref    = 2
 dt_ref    = 6
 freq_ref  = 2
@@ -16432,7 +16432,7 @@ Close Test Files!
 
 
 Number    = 23
-Test Type = 1
+Test Type = 4
 dx_ref    = 2
 dt_ref    = 6
 freq_ref  = 3
@@ -17146,7 +17146,7 @@ Close Test Files!
 
 
 Number    = 24
-Test Type = 1
+Test Type = 4
 dx_ref    = 4
 dt_ref    = 1
 freq_ref  = 1
@@ -17860,7 +17860,7 @@ Close Test Files!
 
 
 Number    = 25
-Test Type = 1
+Test Type = 4
 dx_ref    = 4
 dt_ref    = 1
 freq_ref  = 2
@@ -18574,7 +18574,7 @@ Close Test Files!
 
 
 Number    = 26
-Test Type = 1
+Test Type = 4
 dx_ref    = 4
 dt_ref    = 1
 freq_ref  = 3
@@ -19288,7 +19288,7 @@ Close Test Files!
 
 
 Number    = 27
-Test Type = 1
+Test Type = 4
 dx_ref    = 4
 dt_ref    = 2
 freq_ref  = 1
@@ -20002,7 +20002,7 @@ Close Test Files!
 
 
 Number    = 28
-Test Type = 1
+Test Type = 4
 dx_ref    = 4
 dt_ref    = 2
 freq_ref  = 2
@@ -20716,7 +20716,7 @@ Close Test Files!
 
 
 Number    = 29
-Test Type = 1
+Test Type = 4
 dx_ref    = 4
 dt_ref    = 2
 freq_ref  = 3
@@ -21430,7 +21430,7 @@ Close Test Files!
 
 
 Number    = 30
-Test Type = 1
+Test Type = 4
 dx_ref    = 4
 dt_ref    = 4
 freq_ref  = 1
@@ -22144,7 +22144,7 @@ Close Test Files!
 
 
 Number    = 31
-Test Type = 1
+Test Type = 4
 dx_ref    = 4
 dt_ref    = 4
 freq_ref  = 2
@@ -22858,7 +22858,7 @@ Close Test Files!
 
 
 Number    = 32
-Test Type = 1
+Test Type = 4
 dx_ref    = 4
 dt_ref    = 4
 freq_ref  = 3
@@ -23572,7 +23572,7 @@ Close Test Files!
 
 
 Number    = 33
-Test Type = 1
+Test Type = 4
 dx_ref    = 4
 dt_ref    = 6
 freq_ref  = 1
@@ -24286,7 +24286,7 @@ Close Test Files!
 
 
 Number    = 34
-Test Type = 1
+Test Type = 4
 dx_ref    = 4
 dt_ref    = 6
 freq_ref  = 2
@@ -25000,7 +25000,7 @@ Close Test Files!
 
 
 Number    = 35
-Test Type = 1
+Test Type = 4
 dx_ref    = 4
 dt_ref    = 6
 freq_ref  = 3
@@ -25714,7 +25714,7 @@ Close Test Files!
 
 
 Number    = 36
-Test Type = 1
+Test Type = 4
 dx_ref    = 8
 dt_ref    = 1
 freq_ref  = 1
@@ -26428,7 +26428,7 @@ Close Test Files!
 
 
 Number    = 37
-Test Type = 1
+Test Type = 4
 dx_ref    = 8
 dt_ref    = 1
 freq_ref  = 2
@@ -27142,7 +27142,7 @@ Close Test Files!
 
 
 Number    = 38
-Test Type = 1
+Test Type = 4
 dx_ref    = 8
 dt_ref    = 1
 freq_ref  = 3
@@ -27612,9 +27612,7 @@ shape: csq - method: specls - sou: 14 - mvalue: 7 - nvalue: 6
 Test with Stencil: 151
 shape: csq - method: specls - sou: 14 - mvalue: 7 - nvalue: 7
 
-Test with Stencil: 152/home/fguedes/anaconda3/envs/devito/lib/python3.13/site-packages/numpy/linalg/_linalg.py:2777: RuntimeWarning: overflow encountered in reduce
-  return add.reduce(abs(x), axis=axis, keepdims=keepdims)
-
+Test with Stencil: 152
 shape: csq - method: specls - sou: 16 - mvalue: 8 - nvalue: 1
 
 Test with Stencil: 153
@@ -27858,7 +27856,7 @@ Close Test Files!
 
 
 Number    = 39
-Test Type = 1
+Test Type = 4
 dx_ref    = 8
 dt_ref    = 2
 freq_ref  = 1
@@ -28572,7 +28570,7 @@ Close Test Files!
 
 
 Number    = 40
-Test Type = 1
+Test Type = 4
 dx_ref    = 8
 dt_ref    = 2
 freq_ref  = 2
@@ -29286,7 +29284,7 @@ Close Test Files!
 
 
 Number    = 41
-Test Type = 1
+Test Type = 4
 dx_ref    = 8
 dt_ref    = 2
 freq_ref  = 3
@@ -30000,7 +29998,7 @@ Close Test Files!
 
 
 Number    = 42
-Test Type = 1
+Test Type = 4
 dx_ref    = 8
 dt_ref    = 4
 freq_ref  = 1
@@ -30714,7 +30712,7 @@ Close Test Files!
 
 
 Number    = 43
-Test Type = 1
+Test Type = 4
 dx_ref    = 8
 dt_ref    = 4
 freq_ref  = 2
@@ -31428,7 +31426,7 @@ Close Test Files!
 
 
 Number    = 44
-Test Type = 1
+Test Type = 4
 dx_ref    = 8
 dt_ref    = 4
 freq_ref  = 3
@@ -32142,7 +32140,7 @@ Close Test Files!
 
 
 Number    = 45
-Test Type = 1
+Test Type = 4
 dx_ref    = 8
 dt_ref    = 6
 freq_ref  = 1
@@ -32856,7 +32854,7 @@ Close Test Files!
 
 
 Number    = 46
-Test Type = 1
+Test Type = 4
 dx_ref    = 8
 dt_ref    = 6
 freq_ref  = 2
@@ -32901,71 +32899,7 @@ Test with Stencil: 9
 shape: cl - method: spectetheta - sou: 4 - mvalue: 2 - nvalue: 1
 
 Test with Stencil: 10
-shape: cl - method: spectetheta - sou: 6 - mvalue: 3 - nvalue: 1 ** On entry to DLASCL parameter number  4 had an illegal value
- ** On entry to DLASCL parameter number  5 had an illegal value
- ** On entry to DLASCL parameter number  4 had an illegal value
- ** On entry to DLASCL parameter number  5 had an illegal value
- ** On entry to DLASCL parameter number  4 had an illegal value
- ** On entry to DLASCL parameter number  5 had an illegal value
- ** On entry to DLASCL parameter number  4 had an illegal value
- ** On entry to DLASCL parameter number  5 had an illegal value
- ** On entry to DLASCL parameter number  4 had an illegal value
- ** On entry to DLASCL parameter number  5 had an illegal value
- ** On entry to DLASCL parameter number  4 had an illegal value
- ** On entry to DLASCL parameter number  5 had an illegal value
- ** On entry to DLASCL parameter number  4 had an illegal value
- ** On entry to DLASCL parameter number  5 had an illegal value
- ** On entry to DLASCL parameter number  4 had an illegal value
- ** On entry to DLASCL parameter number  5 had an illegal value
- ** On entry to DLASCL parameter number  4 had an illegal value
- ** On entry to DLASCL parameter number  5 had an illegal value
- ** On entry to DLASCL parameter number  4 had an illegal value
- ** On entry to DLASCL parameter number  5 had an illegal value
- ** On entry to DLASCL parameter number  4 had an illegal value
- ** On entry to DLASCL parameter number  5 had an illegal value
- ** On entry to DLASCL parameter number  4 had an illegal value
- ** On entry to DLASCL parameter number  5 had an illegal value
- ** On entry to DLASCL parameter number  4 had an illegal value
- ** On entry to DLASCL parameter number  5 had an illegal value
- ** On entry to DLASCL parameter number  4 had an illegal value
- ** On entry to DLASCL parameter number  5 had an illegal value
- ** On entry to DLASCL parameter number  4 had an illegal value
- ** On entry to DLASCL parameter number  5 had an illegal value
- ** On entry to DLASCL parameter number  4 had an illegal value
- ** On entry to DLASCL parameter number  5 had an illegal value
- ** On entry to DLASCL parameter number  4 had an illegal value
- ** On entry to DLASCL parameter number  5 had an illegal value
- ** On entry to DLASCL parameter number  4 had an illegal value
- ** On entry to DLASCL parameter number  5 had an illegal value
- ** On entry to DLASCL parameter number  4 had an illegal value
- ** On entry to DLASCL parameter number  5 had an illegal value
- ** On entry to DLASCL parameter number  4 had an illegal value
- ** On entry to DLASCL parameter number  5 had an illegal value
- ** On entry to DLASCL parameter number  4 had an illegal value
- ** On entry to DLASCL parameter number  5 had an illegal value
- ** On entry to DLASCL parameter number  4 had an illegal value
- ** On entry to DLASCL parameter number  5 had an illegal value
- ** On entry to DLASCL parameter number  4 had an illegal value
- ** On entry to DLASCL parameter number  5 had an illegal value
- ** On entry to DLASCL parameter number  4 had an illegal value
- ** On entry to DLASCL parameter number  5 had an illegal value
- ** On entry to DLASCL parameter number  4 had an illegal value
- ** On entry to DLASCL parameter number  5 had an illegal value
- ** On entry to DLASCL parameter number  4 had an illegal value
- ** On entry to DLASCL parameter number  5 had an illegal value
- ** On entry to DLASCL parameter number  4 had an illegal value
- ** On entry to DLASCL parameter number  5 had an illegal value
- ** On entry to DLASCL parameter number  4 had an illegal value
- ** On entry to DLASCL parameter number  5 had an illegal value
- ** On entry to DLASCL parameter number  4 had an illegal value
- ** On entry to DLASCL parameter number  5 had an illegal value
- ** On entry to DLASCL parameter number  4 had an illegal value
- ** On entry to DLASCL parameter number  5 had an illegal value
- ** On entry to DLASCL parameter number  4 had an illegal value
- ** On entry to DLASCL parameter number  5 had an illegal value
- ** On entry to DLASCL parameter number  4 had an illegal value
- ** On entry to DLASCL parameter number  5 had an illegal value
-
+shape: cl - method: spectetheta - sou: 6 - mvalue: 3 - nvalue: 1
 
 Test with Stencil: 11
 shape: cl - method: spectetheta - sou: 8 - mvalue: 4 - nvalue: 1
@@ -33634,7 +33568,7 @@ Close Test Files!
 
 
 Number    = 47
-Test Type = 1
+Test Type = 4
 dx_ref    = 8
 dt_ref    = 6
 freq_ref  = 3
@@ -34346,6 +34280,54 @@ shape: csq - method: displs - sou: 16 - mvalue: 8 - nvalue: 8
 
 Close Test Files!
 
+ ** On entry to DLASCL parameter number  4 had an illegal value
+ ** On entry to DLASCL parameter number  5 had an illegal value
+ ** On entry to DLASCL parameter number  4 had an illegal value
+ ** On entry to DLASCL parameter number  5 had an illegal value
+ ** On entry to DLASCL parameter number  4 had an illegal value
+ ** On entry to DLASCL parameter number  5 had an illegal value
+ ** On entry to DLASCL parameter number  4 had an illegal value
+ ** On entry to DLASCL parameter number  5 had an illegal value
+ ** On entry to DLASCL parameter number  4 had an illegal value
+ ** On entry to DLASCL parameter number  5 had an illegal value
+ ** On entry to DLASCL parameter number  4 had an illegal value
+ ** On entry to DLASCL parameter number  5 had an illegal value
+ ** On entry to DLASCL parameter number  4 had an illegal value
+ ** On entry to DLASCL parameter number  5 had an illegal value
+ ** On entry to DLASCL parameter number  4 had an illegal value
+ ** On entry to DLASCL parameter number  5 had an illegal value
+ ** On entry to DLASCL parameter number  4 had an illegal value
+ ** On entry to DLASCL parameter number  5 had an illegal value
+ ** On entry to DLASCL parameter number  4 had an illegal value
+ ** On entry to DLASCL parameter number  5 had an illegal value
+ ** On entry to DLASCL parameter number  4 had an illegal value
+ ** On entry to DLASCL parameter number  5 had an illegal value
+ ** On entry to DLASCL parameter number  4 had an illegal value
+ ** On entry to DLASCL parameter number  5 had an illegal value
+ ** On entry to DLASCL parameter number  4 had an illegal value
+ ** On entry to DLASCL parameter number  5 had an illegal value
+ ** On entry to DLASCL parameter number  4 had an illegal value
+ ** On entry to DLASCL parameter number  5 had an illegal value
+ ** On entry to DLASCL parameter number  4 had an illegal value
+ ** On entry to DLASCL parameter number  5 had an illegal value
+ ** On entry to DLASCL parameter number  4 had an illegal value
+ ** On entry to DLASCL parameter number  5 had an illegal value
+ ** On entry to DLASCL parameter number  4 had an illegal value
+ ** On entry to DLASCL parameter number  5 had an illegal value
+ ** On entry to DLASCL parameter number  4 had an illegal value
+ ** On entry to DLASCL parameter number  5 had an illegal value
+ ** On entry to DLASCL parameter number  4 had an illegal value
+ ** On entry to DLASCL parameter number  5 had an illegal value
+ ** On entry to DLASCL parameter number  4 had an illegal value
+ ** On entry to DLASCL parameter number  5 had an illegal value
+ ** On entry to DLASCL parameter number  4 had an illegal value
+ ** On entry to DLASCL parameter number  5 had an illegal value
+ ** On entry to DLASCL parameter number  4 had an illegal value
+ ** On entry to DLASCL parameter number  5 had an illegal value
+ ** On entry to DLASCL parameter number  4 had an illegal value
+ ** On entry to DLASCL parameter number  5 had an illegal value
+ ** On entry to DLASCL parameter number  4 had an illegal value
+ ** On entry to DLASCL parameter number  5 had an illegal value
  ** On entry to DLASCL parameter number  4 had an illegal value
  ** On entry to DLASCL parameter number  5 had an illegal value
  ** On entry to DLASCL parameter number  4 had an illegal value

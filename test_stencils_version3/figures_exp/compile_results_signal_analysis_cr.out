@@ -1,3 +1,5 @@
+/home/fguedes/anaconda3/envs/devito/lib/python3.13/site-packages/matplotlib/ticker.py:2468: RuntimeWarning: overflow encountered in power
+  ticklocs = b ** decades
 
 Number    = 0
 Test Type = 1
@@ -5,3 +7,321 @@ dx_ref    = 1
 dt_ref    = 1
 freq_ref  = 1
 
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 1
+Test Type = 1
+dx_ref    = 1
+dt_ref    = 1
+freq_ref  = 2
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 2
+Test Type = 1
+dx_ref    = 1
+dt_ref    = 1
+freq_ref  = 3
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 3
+Test Type = 1
+dx_ref    = 1
+dt_ref    = 2
+freq_ref  = 1
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 4
+Test Type = 1
+dx_ref    = 1
+dt_ref    = 2
+freq_ref  = 2
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 5
+Test Type = 1
+dx_ref    = 1
+dt_ref    = 2
+freq_ref  = 3
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 6
+Test Type = 1
+dx_ref    = 1
+dt_ref    = 4
+freq_ref  = 1
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 7
+Test Type = 1
+dx_ref    = 1
+dt_ref    = 4
+freq_ref  = 2
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 8
+Test Type = 1
+dx_ref    = 1
+dt_ref    = 4
+freq_ref  = 3
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 9
+Test Type = 1
+dx_ref    = 1
+dt_ref    = 6
+freq_ref  = 1
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 10
+Test Type = 1
+dx_ref    = 1
+dt_ref    = 6
+freq_ref  = 2
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 11
+Test Type = 1
+dx_ref    = 1
+dt_ref    = 6
+freq_ref  = 3
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 12
+Test Type = 1
+dx_ref    = 2
+dt_ref    = 1
+freq_ref  = 1
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 13
+Test Type = 1
+dx_ref    = 2
+dt_ref    = 1
+freq_ref  = 2
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 14
+Test Type = 1
+dx_ref    = 2
+dt_ref    = 1
+freq_ref  = 3
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 15
+Test Type = 1
+dx_ref    = 2
+dt_ref    = 2
+freq_ref  = 1
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 16
+Test Type = 1
+dx_ref    = 2
+dt_ref    = 2
+freq_ref  = 2
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 17
+Test Type = 1
+dx_ref    = 2
+dt_ref    = 2
+freq_ref  = 3
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 18
+Test Type = 1
+dx_ref    = 2
+dt_ref    = 4
+freq_ref  = 1
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 19
+Test Type = 1
+dx_ref    = 2
+dt_ref    = 4
+freq_ref  = 2
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 20
+Test Type = 1
+dx_ref    = 2
+dt_ref    = 4
+freq_ref  = 3
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 21
+Test Type = 1
+dx_ref    = 2
+dt_ref    = 6
+freq_ref  = 1
+
+Traceback (most recent call last):
+  File "/home/fguedes/acustica_disp_red_silva_peixoto/test_stencils_version3/figures_exp/signal_analysis_cr.py", line 321, in <module>
+    plt.savefig('%s/norm%s.png'%(locsave,b0),dpi=400,bbox_inches='tight')
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/fguedes/anaconda3/envs/devito/lib/python3.13/site-packages/matplotlib/pyplot.py", line 1251, in savefig
+    res = fig.savefig(*args, **kwargs)  # type: ignore[func-returns-value]
+  File "/home/fguedes/anaconda3/envs/devito/lib/python3.13/site-packages/matplotlib/figure.py", line 3490, in savefig
+    self.canvas.print_figure(fname, **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/fguedes/anaconda3/envs/devito/lib/python3.13/site-packages/matplotlib/backend_bases.py", line 2155, in print_figure
+    self.figure.draw(renderer)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/home/fguedes/anaconda3/envs/devito/lib/python3.13/site-packages/matplotlib/artist.py", line 94, in draw_wrapper
+    result = draw(artist, renderer, *args, **kwargs)
+  File "/home/fguedes/anaconda3/envs/devito/lib/python3.13/site-packages/matplotlib/artist.py", line 71, in draw_wrapper
+    return draw(artist, renderer)
+  File "/home/fguedes/anaconda3/envs/devito/lib/python3.13/site-packages/matplotlib/figure.py", line 3257, in draw
+    mimage._draw_list_compositing_images(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        renderer, self, artists, self.suppressComposite)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/fguedes/anaconda3/envs/devito/lib/python3.13/site-packages/matplotlib/image.py", line 134, in _draw_list_compositing_images
+    a.draw(renderer)
+    ~~~~~~^^^^^^^^^^
+  File "/home/fguedes/anaconda3/envs/devito/lib/python3.13/site-packages/matplotlib/artist.py", line 71, in draw_wrapper
+    return draw(artist, renderer)
+  File "/home/fguedes/anaconda3/envs/devito/lib/python3.13/site-packages/matplotlib/axes/_base.py", line 3180, in draw
+    self._update_title_position(renderer)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/home/fguedes/anaconda3/envs/devito/lib/python3.13/site-packages/matplotlib/axes/_base.py", line 3124, in _update_title_position
+    ax.yaxis.get_tightbbox(renderer)  # update offsetText
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/home/fguedes/anaconda3/envs/devito/lib/python3.13/site-packages/matplotlib/axis.py", line 1351, in get_tightbbox
+    ticks_to_draw = self._update_ticks()
+  File "/home/fguedes/anaconda3/envs/devito/lib/python3.13/site-packages/matplotlib/axis.py", line 1282, in _update_ticks
+    major_labels = self.major.formatter.format_ticks(major_locs)
+  File "/home/fguedes/anaconda3/envs/devito/lib/python3.13/site-packages/matplotlib/ticker.py", line 217, in format_ticks
+    return [self(value, i) for i, value in enumerate(values)]
+            ~~~~^^^^^^^^^^
+  File "/home/fguedes/anaconda3/envs/devito/lib/python3.13/site-packages/matplotlib/ticker.py", line 1097, in __call__
+    is_x_decade = _is_close_to_int(fx)
+  File "/home/fguedes/anaconda3/envs/devito/lib/python3.13/site-packages/matplotlib/ticker.py", line 2327, in _is_close_to_int
+    return math.isclose(x, round(x))
+                           ~~~~~^^^
+OverflowError: cannot convert float infinity to integer

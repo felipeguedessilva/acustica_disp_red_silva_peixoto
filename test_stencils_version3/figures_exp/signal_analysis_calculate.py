@@ -43,7 +43,7 @@ from im_fft_norms import fftnorm3
 #==============================================================================
 # Range of Parameters
 #==============================================================================
-vptype    = [1] 
+vptype    = [4] 
 vdxref    = [1,2,4,8]
 vdtref    = [1,2,4,6]
 vfreqref  = [1,2,3] 
@@ -235,8 +235,8 @@ for k0 in range(0,nvptype):
                 sol_ref        = np.load("%ssolplotcut_%d_%d_%d_%d.npy"%(locopenref,ptype,dx_ref,dt_ref,freq_ref))
                 rec_ref        = np.load("%srecrefcut_%d_%d_%d_%d.npy"%(locopenref,ptype,dx_ref,dt_ref,freq_ref))
                 rec_select_ref = np.load("%srecselectcut_%d_%d_%d_%d.npy"%(locopenref,ptype,dx_ref,dt_ref,freq_ref))
-
-                if(dt_ref==6):
+                   
+                if(dt_ref==6 and ptype==1):
 
                     rec_ref        = rec_ref[1:,:]
                     rec_select_ref = rec_select_ref[1:,:]
@@ -346,8 +346,7 @@ for k0 in range(0,nvptype):
                     llist5 = []
                     llist6 = []
 
-                    # for m1 in range(0,nts):
-                    for m1 in range(0,1):
+                    for m1 in range(0,nts):
 
                         recnumloc = rec_select[:,m1]
                         recrefloc = rec_select_ref[:,m1]
