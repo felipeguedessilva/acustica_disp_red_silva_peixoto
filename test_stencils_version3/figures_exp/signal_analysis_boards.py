@@ -349,21 +349,83 @@ for k0 in range(0,nvptype):
                     rec     = rec[:,:]
                     rec_ref = rec_ref0[:,:]
 
-                    solnorm1   = la.norm(sol-sol_ref,1)/la.norm(sol_ref,1)
-                    solnorm2   = la.norm(sol-sol_ref,2)/la.norm(sol_ref,2)
-                    solnormmax = la.norm(sol-sol_ref,np.inf)/la.norm(sol_ref,np.inf)
+                    try:
+                        
+                        solnorm1   = la.norm(sol-sol_ref,1)/la.norm(sol_ref,1)
+                    
+                    except:
+                        
+                        solnorm1 = np.nan
 
-                    recnorm1   = la.norm(rec-rec_ref,1)/la.norm(rec_ref,1)
-                    recnorm2   = la.norm(rec-rec_ref,2)/la.norm(rec_ref,2)
-                    recnormmax = la.norm(rec-rec_ref,np.inf)/la.norm(rec_ref,np.inf)
+                    
+                    try: 
+                    
+                        solnorm2   = la.norm(sol-sol_ref,2)/la.norm(sol_ref,2)
+                    
+                    except:
+
+                        solnorm2 = np.nan
+
+                    try: 
+
+                        solnormmax = la.norm(sol-sol_ref,np.inf)/la.norm(sol_ref,np.inf)
+
+                    except:
+
+                        solnormmax = np.nan
+
+                    try:
+
+                        recnorm1   = la.norm(rec-rec_ref,1)/la.norm(rec_ref,1)
+                    
+                    except:
+
+                        recnorm1 = np.nan
+                    
+                    try:
+                        
+                        recnorm2   = la.norm(rec-rec_ref,2)/la.norm(rec_ref,2)
+                    
+                    except:
+
+                        recnorm2 = np.nan
+                    
+                    try:
+
+                        recnormmax = la.norm(rec-rec_ref,np.inf)/la.norm(rec_ref,np.inf)
+
+                    except:
+
+                        recnormmax = np.nan
 
                     ts     = int(nts/2)
                     recref = rec_select_ref0[:,ts]
                     recnum = rec_select[:,ts]
 
-                    rec_selectnorm1   = la.norm(recnum-recref,1)/la.norm(recref,1)
-                    rec_selectnorm2   = la.norm(recnum-recref,2)/la.norm(recref,2)
-                    rec_selectnormmax = la.norm(recnum-recref,np.inf)/la.norm(recref,np.inf)
+                    try: 
+
+                        rec_selectnorm1   = la.norm(recnum-recref,1)/la.norm(recref,1)
+                    
+                    except:
+
+                        rec_selectnorm1 = np.nan
+
+                    try: 
+
+                        rec_selectnorm2   = la.norm(recnum-recref,2)/la.norm(recref,2)
+                    
+                    except:
+
+                        rec_selectnorm2 = np.nan
+
+                    try: 
+
+
+                        rec_selectnormmax = la.norm(recnum-recref,np.inf)/la.norm(recref,np.inf)
+
+                    except:
+
+                        rec_selectnormmax = np.nan
 
                     tns    = teste.tn/1000
                     nt     = recref.shape[0]
@@ -425,7 +487,14 @@ for k0 in range(0,nvptype):
                         difangle[m1] = distf4(alpha1,alpha2)
 
                     ncfft  = (difangle/np.pi)*(np.abs(absnum)/np.abs(np.amax(absnum)))
-                    nncfft = (1/np.sqrt(nsamples))*la.norm(ncfft,2)
+
+                    try:
+
+                        nncfft = (1/np.sqrt(nsamples))*la.norm(ncfft,2)
+
+                    except:
+
+                        nncfft = np.nan
 
                     # CWT Analysis
 
@@ -459,8 +528,16 @@ for k0 in range(0,nvptype):
                             cwtmatr_dif_angle[m1,m2] = distf4(alpha1,alpha2)
             
                     nccwt  = (cwtmatr_dif_angle/np.pi)*(np.abs(cwtmatr_num_norm)/np.abs(np.amax(cwtmatr_num_norm)))
-                    nnccwt = (1/np.sqrt(cwtmatr_ref_angle.shape[0]))*(1/np.sqrt(cwtmatr_ref_angle.shape[1]))*la.norm(nccwt,2)
+
+                    try: 
                     
+                        nnccwt = (1/np.sqrt(cwtmatr_ref_angle.shape[0]))*(1/np.sqrt(cwtmatr_ref_angle.shape[1]))*la.norm(nccwt,2)
+                    
+                    except:
+
+                        
+                        nnccwt = np.nan
+
                     # Hilbert Analysis
 
                     analytic_signal_ref         = hilbert(recref)
@@ -482,7 +559,14 @@ for k0 in range(0,nvptype):
                         instantaneous_phase_dif[m1] = distf4(alpha1,alpha2)                    
 
                     nchilbert  = (instantaneous_phase_dif/np.pi)*(np.abs(amplitude_envelope_num)/np.abs(np.amax(amplitude_envelope_num)))
-                    nnchilbert = (1/np.sqrt(nsamples1))*la.norm(nchilbert,2)
+                    
+                    try:
+                    
+                        nnchilbert = (1/np.sqrt(nsamples1))*la.norm(nchilbert,2)
+
+                    except:
+                        
+                        nnchilbert = np.nan
 
                     columns1   = ['Norm Type','Values']
                     cell_text1 = [['1 Norm Relative',np.around(solnorm1,5)],['2 Norm Relative',np.around(solnorm2,5)],['Max Norm Relative',np.around(solnormmax,5)]]

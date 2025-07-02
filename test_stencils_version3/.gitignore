@@ -1,6 +1,6 @@
 *.npy
 *.segy
-*.jpeg
+#*.jpeg
 *.pickle
 *.pkl
-*.png
+#*.png

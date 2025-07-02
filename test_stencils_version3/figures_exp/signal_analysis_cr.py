@@ -43,7 +43,7 @@ from im_fft_norms import fftnorm3
 #==============================================================================
 # Range of Parameters
 #==============================================================================
-vptype    = [1] 
+vptype    = [1,2,3,4] 
 vdxref    = [1,2,4,8]
 vdtref    = [1,2,4,6]
 vfreqref  = [1,2,3] 
@@ -251,6 +251,34 @@ for k0 in range(0,nvptype):
                             plt.rc('xtick',labelsize=fontsizevalue2)
                             plt.rc('ytick',labelsize=fontsizevalue2)
                             labelpadvalue = 14
+
+                            ncom      = len(lplot)
+                            factorloc = 10000
+                            min1      = np.amin(np.array(lplot))
+                            min2      = np.amin(np.array(lplot1))
+                            min3      = np.amin(np.array(lplot2))
+                            min4      = np.amin(np.array(lplotmax))
+                            min5      = np.amin(np.array(lplot1full))
+                            min6      = np.amin(np.array(lplot2full))
+                            min7      = np.amin(np.array(lplotmaxfull))
+
+                            for c1 in range(0,ncom):
+
+                                # if(lplot[c1]<factorloc*min1 or lplot[c1]==np.inf):        lplot[c1] = np.nan
+                                # if(lplot1[c1]<factorloc*min2 or lplot1[c1]==np.inf):       lplot1[c1] = np.nan
+                                # if(lplot2[c1]<factorloc*min3 or lplot2[c1]==np.inf):       lplot2[c1] = np.nan
+                                # if(lplotmax[c1]<factorloc*min4 or lplotmax[c1]==np.inf):     lplotmax[c1] = np.nan
+                                # if(lplot1full[c1]<factorloc*min5 or lplot1full[c1]==np.inf):   lplot1full[c1] = np.nan
+                                # if(lplot2full[c1]<factorloc*min6 or lplot2full[c1]==np.inf):   lplot2full[c1] = np.nan
+                                # if(lplotmaxfull[c1]<factorloc*min7 or lplotmaxfull[c1]==np.inf): lplotmaxfull[c1] = np.nan
+
+                                if(lplot[c1]>factorloc or lplot[c1]==np.inf):        lplot[c1] = np.nan
+                                if(lplot1[c1]>factorloc or lplot1[c1]==np.inf):       lplot1[c1] = np.nan
+                                if(lplot2[c1]>factorloc or lplot2[c1]==np.inf):       lplot2[c1] = np.nan
+                                if(lplotmax[c1]>factorloc or lplotmax[c1]==np.inf):     lplotmax[c1] = np.nan
+                                if(lplot1full[c1]>factorloc or lplot1full[c1]==np.inf):   lplot1full[c1] = np.nan
+                                if(lplot2full[c1]>factorloc or lplot2full[c1]==np.inf):   lplot2full[c1] = np.nan
+                                if(lplotmaxfull[c1]>factorloc or lplotmaxfull[c1]==np.inf): lplotmaxfull[c1] = np.nan
 
                             plt.subplot(grid[0,1])       
                             #plt.semilogy(vorder,lplot,label='%s-%s'%(lglobal[ci][0],lglobal[ci][1]),color=linep[2][b1],linestyle=linep[1][b1],marker=linep[0][b1])

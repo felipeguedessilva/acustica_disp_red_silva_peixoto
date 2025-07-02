@@ -1,5 +1,3 @@
-/home/fguedes/anaconda3/envs/devito/lib/python3.13/site-packages/matplotlib/ticker.py:2468: RuntimeWarning: overflow encountered in power
-  ticklocs = b ** decades
 
 Number    = 0
 Test Type = 1
@@ -280,48 +278,2219 @@ dx_ref    = 2
 dt_ref    = 6
 freq_ref  = 1
 
-Traceback (most recent call last):
-  File "/home/fguedes/acustica_disp_red_silva_peixoto/test_stencils_version3/figures_exp/signal_analysis_cr.py", line 321, in <module>
-    plt.savefig('%s/norm%s.png'%(locsave,b0),dpi=400,bbox_inches='tight')
-    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/fguedes/anaconda3/envs/devito/lib/python3.13/site-packages/matplotlib/pyplot.py", line 1251, in savefig
-    res = fig.savefig(*args, **kwargs)  # type: ignore[func-returns-value]
-  File "/home/fguedes/anaconda3/envs/devito/lib/python3.13/site-packages/matplotlib/figure.py", line 3490, in savefig
-    self.canvas.print_figure(fname, **kwargs)
-    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
-  File "/home/fguedes/anaconda3/envs/devito/lib/python3.13/site-packages/matplotlib/backend_bases.py", line 2155, in print_figure
-    self.figure.draw(renderer)
-    ~~~~~~~~~~~~~~~~^^^^^^^^^^
-  File "/home/fguedes/anaconda3/envs/devito/lib/python3.13/site-packages/matplotlib/artist.py", line 94, in draw_wrapper
-    result = draw(artist, renderer, *args, **kwargs)
-  File "/home/fguedes/anaconda3/envs/devito/lib/python3.13/site-packages/matplotlib/artist.py", line 71, in draw_wrapper
-    return draw(artist, renderer)
-  File "/home/fguedes/anaconda3/envs/devito/lib/python3.13/site-packages/matplotlib/figure.py", line 3257, in draw
-    mimage._draw_list_compositing_images(
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
-        renderer, self, artists, self.suppressComposite)
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/fguedes/anaconda3/envs/devito/lib/python3.13/site-packages/matplotlib/image.py", line 134, in _draw_list_compositing_images
-    a.draw(renderer)
-    ~~~~~~^^^^^^^^^^
-  File "/home/fguedes/anaconda3/envs/devito/lib/python3.13/site-packages/matplotlib/artist.py", line 71, in draw_wrapper
-    return draw(artist, renderer)
-  File "/home/fguedes/anaconda3/envs/devito/lib/python3.13/site-packages/matplotlib/axes/_base.py", line 3180, in draw
-    self._update_title_position(renderer)
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
-  File "/home/fguedes/anaconda3/envs/devito/lib/python3.13/site-packages/matplotlib/axes/_base.py", line 3124, in _update_title_position
-    ax.yaxis.get_tightbbox(renderer)  # update offsetText
-    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
-  File "/home/fguedes/anaconda3/envs/devito/lib/python3.13/site-packages/matplotlib/axis.py", line 1351, in get_tightbbox
-    ticks_to_draw = self._update_ticks()
-  File "/home/fguedes/anaconda3/envs/devito/lib/python3.13/site-packages/matplotlib/axis.py", line 1282, in _update_ticks
-    major_labels = self.major.formatter.format_ticks(major_locs)
-  File "/home/fguedes/anaconda3/envs/devito/lib/python3.13/site-packages/matplotlib/ticker.py", line 217, in format_ticks
-    return [self(value, i) for i, value in enumerate(values)]
-            ~~~~^^^^^^^^^^
-  File "/home/fguedes/anaconda3/envs/devito/lib/python3.13/site-packages/matplotlib/ticker.py", line 1097, in __call__
-    is_x_decade = _is_close_to_int(fx)
-  File "/home/fguedes/anaconda3/envs/devito/lib/python3.13/site-packages/matplotlib/ticker.py", line 2327, in _is_close_to_int
-    return math.isclose(x, round(x))
-                           ~~~~~^^^
-OverflowError: cannot convert float infinity to integer
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 22
+Test Type = 1
+dx_ref    = 2
+dt_ref    = 6
+freq_ref  = 2
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 23
+Test Type = 1
+dx_ref    = 2
+dt_ref    = 6
+freq_ref  = 3
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 24
+Test Type = 1
+dx_ref    = 4
+dt_ref    = 1
+freq_ref  = 1
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 25
+Test Type = 1
+dx_ref    = 4
+dt_ref    = 1
+freq_ref  = 2
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 26
+Test Type = 1
+dx_ref    = 4
+dt_ref    = 1
+freq_ref  = 3
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 27
+Test Type = 1
+dx_ref    = 4
+dt_ref    = 2
+freq_ref  = 1
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 28
+Test Type = 1
+dx_ref    = 4
+dt_ref    = 2
+freq_ref  = 2
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 29
+Test Type = 1
+dx_ref    = 4
+dt_ref    = 2
+freq_ref  = 3
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 30
+Test Type = 1
+dx_ref    = 4
+dt_ref    = 4
+freq_ref  = 1
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 31
+Test Type = 1
+dx_ref    = 4
+dt_ref    = 4
+freq_ref  = 2
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 32
+Test Type = 1
+dx_ref    = 4
+dt_ref    = 4
+freq_ref  = 3
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 33
+Test Type = 1
+dx_ref    = 4
+dt_ref    = 6
+freq_ref  = 1
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 34
+Test Type = 1
+dx_ref    = 4
+dt_ref    = 6
+freq_ref  = 2
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 35
+Test Type = 1
+dx_ref    = 4
+dt_ref    = 6
+freq_ref  = 3
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 36
+Test Type = 1
+dx_ref    = 8
+dt_ref    = 1
+freq_ref  = 1
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 37
+Test Type = 1
+dx_ref    = 8
+dt_ref    = 1
+freq_ref  = 2
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 38
+Test Type = 1
+dx_ref    = 8
+dt_ref    = 1
+freq_ref  = 3
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 39
+Test Type = 1
+dx_ref    = 8
+dt_ref    = 2
+freq_ref  = 1
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 40
+Test Type = 1
+dx_ref    = 8
+dt_ref    = 2
+freq_ref  = 2
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 41
+Test Type = 1
+dx_ref    = 8
+dt_ref    = 2
+freq_ref  = 3
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 42
+Test Type = 1
+dx_ref    = 8
+dt_ref    = 4
+freq_ref  = 1
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 43
+Test Type = 1
+dx_ref    = 8
+dt_ref    = 4
+freq_ref  = 2
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 44
+Test Type = 1
+dx_ref    = 8
+dt_ref    = 4
+freq_ref  = 3
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 45
+Test Type = 1
+dx_ref    = 8
+dt_ref    = 6
+freq_ref  = 1
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 46
+Test Type = 1
+dx_ref    = 8
+dt_ref    = 6
+freq_ref  = 2
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 47
+Test Type = 1
+dx_ref    = 8
+dt_ref    = 6
+freq_ref  = 3
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 48
+Test Type = 2
+dx_ref    = 1
+dt_ref    = 1
+freq_ref  = 1
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 49
+Test Type = 2
+dx_ref    = 1
+dt_ref    = 1
+freq_ref  = 2
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 50
+Test Type = 2
+dx_ref    = 1
+dt_ref    = 1
+freq_ref  = 3
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 51
+Test Type = 2
+dx_ref    = 1
+dt_ref    = 2
+freq_ref  = 1
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 52
+Test Type = 2
+dx_ref    = 1
+dt_ref    = 2
+freq_ref  = 2
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 53
+Test Type = 2
+dx_ref    = 1
+dt_ref    = 2
+freq_ref  = 3
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 54
+Test Type = 2
+dx_ref    = 1
+dt_ref    = 4
+freq_ref  = 1
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 55
+Test Type = 2
+dx_ref    = 1
+dt_ref    = 4
+freq_ref  = 2
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 56
+Test Type = 2
+dx_ref    = 1
+dt_ref    = 4
+freq_ref  = 3
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 57
+Test Type = 2
+dx_ref    = 1
+dt_ref    = 6
+freq_ref  = 1
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 58
+Test Type = 2
+dx_ref    = 1
+dt_ref    = 6
+freq_ref  = 2
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 59
+Test Type = 2
+dx_ref    = 1
+dt_ref    = 6
+freq_ref  = 3
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 60
+Test Type = 2
+dx_ref    = 2
+dt_ref    = 1
+freq_ref  = 1
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 61
+Test Type = 2
+dx_ref    = 2
+dt_ref    = 1
+freq_ref  = 2
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 62
+Test Type = 2
+dx_ref    = 2
+dt_ref    = 1
+freq_ref  = 3
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 63
+Test Type = 2
+dx_ref    = 2
+dt_ref    = 2
+freq_ref  = 1
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 64
+Test Type = 2
+dx_ref    = 2
+dt_ref    = 2
+freq_ref  = 2
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 65
+Test Type = 2
+dx_ref    = 2
+dt_ref    = 2
+freq_ref  = 3
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 66
+Test Type = 2
+dx_ref    = 2
+dt_ref    = 4
+freq_ref  = 1
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 67
+Test Type = 2
+dx_ref    = 2
+dt_ref    = 4
+freq_ref  = 2
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 68
+Test Type = 2
+dx_ref    = 2
+dt_ref    = 4
+freq_ref  = 3
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 69
+Test Type = 2
+dx_ref    = 2
+dt_ref    = 6
+freq_ref  = 1
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 70
+Test Type = 2
+dx_ref    = 2
+dt_ref    = 6
+freq_ref  = 2
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 71
+Test Type = 2
+dx_ref    = 2
+dt_ref    = 6
+freq_ref  = 3
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 72
+Test Type = 2
+dx_ref    = 4
+dt_ref    = 1
+freq_ref  = 1
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 73
+Test Type = 2
+dx_ref    = 4
+dt_ref    = 1
+freq_ref  = 2
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 74
+Test Type = 2
+dx_ref    = 4
+dt_ref    = 1
+freq_ref  = 3
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 75
+Test Type = 2
+dx_ref    = 4
+dt_ref    = 2
+freq_ref  = 1
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 76
+Test Type = 2
+dx_ref    = 4
+dt_ref    = 2
+freq_ref  = 2
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 77
+Test Type = 2
+dx_ref    = 4
+dt_ref    = 2
+freq_ref  = 3
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 78
+Test Type = 2
+dx_ref    = 4
+dt_ref    = 4
+freq_ref  = 1
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 79
+Test Type = 2
+dx_ref    = 4
+dt_ref    = 4
+freq_ref  = 2
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 80
+Test Type = 2
+dx_ref    = 4
+dt_ref    = 4
+freq_ref  = 3
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 81
+Test Type = 2
+dx_ref    = 4
+dt_ref    = 6
+freq_ref  = 1
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 82
+Test Type = 2
+dx_ref    = 4
+dt_ref    = 6
+freq_ref  = 2
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 83
+Test Type = 2
+dx_ref    = 4
+dt_ref    = 6
+freq_ref  = 3
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 84
+Test Type = 2
+dx_ref    = 8
+dt_ref    = 1
+freq_ref  = 1
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 85
+Test Type = 2
+dx_ref    = 8
+dt_ref    = 1
+freq_ref  = 2
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 86
+Test Type = 2
+dx_ref    = 8
+dt_ref    = 1
+freq_ref  = 3
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 87
+Test Type = 2
+dx_ref    = 8
+dt_ref    = 2
+freq_ref  = 1
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 88
+Test Type = 2
+dx_ref    = 8
+dt_ref    = 2
+freq_ref  = 2
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 89
+Test Type = 2
+dx_ref    = 8
+dt_ref    = 2
+freq_ref  = 3
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 90
+Test Type = 2
+dx_ref    = 8
+dt_ref    = 4
+freq_ref  = 1
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 91
+Test Type = 2
+dx_ref    = 8
+dt_ref    = 4
+freq_ref  = 2
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 92
+Test Type = 2
+dx_ref    = 8
+dt_ref    = 4
+freq_ref  = 3
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 93
+Test Type = 2
+dx_ref    = 8
+dt_ref    = 6
+freq_ref  = 1
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 94
+Test Type = 2
+dx_ref    = 8
+dt_ref    = 6
+freq_ref  = 2
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 95
+Test Type = 2
+dx_ref    = 8
+dt_ref    = 6
+freq_ref  = 3
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 96
+Test Type = 3
+dx_ref    = 1
+dt_ref    = 1
+freq_ref  = 1
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 97
+Test Type = 3
+dx_ref    = 1
+dt_ref    = 1
+freq_ref  = 2
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 98
+Test Type = 3
+dx_ref    = 1
+dt_ref    = 1
+freq_ref  = 3
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 99
+Test Type = 3
+dx_ref    = 1
+dt_ref    = 2
+freq_ref  = 1
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 100
+Test Type = 3
+dx_ref    = 1
+dt_ref    = 2
+freq_ref  = 2
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 101
+Test Type = 3
+dx_ref    = 1
+dt_ref    = 2
+freq_ref  = 3
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 102
+Test Type = 3
+dx_ref    = 1
+dt_ref    = 4
+freq_ref  = 1
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 103
+Test Type = 3
+dx_ref    = 1
+dt_ref    = 4
+freq_ref  = 2
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 104
+Test Type = 3
+dx_ref    = 1
+dt_ref    = 4
+freq_ref  = 3
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 105
+Test Type = 3
+dx_ref    = 1
+dt_ref    = 6
+freq_ref  = 1
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 106
+Test Type = 3
+dx_ref    = 1
+dt_ref    = 6
+freq_ref  = 2
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 107
+Test Type = 3
+dx_ref    = 1
+dt_ref    = 6
+freq_ref  = 3
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 108
+Test Type = 3
+dx_ref    = 2
+dt_ref    = 1
+freq_ref  = 1
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 109
+Test Type = 3
+dx_ref    = 2
+dt_ref    = 1
+freq_ref  = 2
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 110
+Test Type = 3
+dx_ref    = 2
+dt_ref    = 1
+freq_ref  = 3
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 111
+Test Type = 3
+dx_ref    = 2
+dt_ref    = 2
+freq_ref  = 1
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 112
+Test Type = 3
+dx_ref    = 2
+dt_ref    = 2
+freq_ref  = 2
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 113
+Test Type = 3
+dx_ref    = 2
+dt_ref    = 2
+freq_ref  = 3
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 114
+Test Type = 3
+dx_ref    = 2
+dt_ref    = 4
+freq_ref  = 1
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 115
+Test Type = 3
+dx_ref    = 2
+dt_ref    = 4
+freq_ref  = 2
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 116
+Test Type = 3
+dx_ref    = 2
+dt_ref    = 4
+freq_ref  = 3
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 117
+Test Type = 3
+dx_ref    = 2
+dt_ref    = 6
+freq_ref  = 1
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 118
+Test Type = 3
+dx_ref    = 2
+dt_ref    = 6
+freq_ref  = 2
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 119
+Test Type = 3
+dx_ref    = 2
+dt_ref    = 6
+freq_ref  = 3
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 120
+Test Type = 3
+dx_ref    = 4
+dt_ref    = 1
+freq_ref  = 1
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 121
+Test Type = 3
+dx_ref    = 4
+dt_ref    = 1
+freq_ref  = 2
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 122
+Test Type = 3
+dx_ref    = 4
+dt_ref    = 1
+freq_ref  = 3
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 123
+Test Type = 3
+dx_ref    = 4
+dt_ref    = 2
+freq_ref  = 1
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 124
+Test Type = 3
+dx_ref    = 4
+dt_ref    = 2
+freq_ref  = 2
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 125
+Test Type = 3
+dx_ref    = 4
+dt_ref    = 2
+freq_ref  = 3
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 126
+Test Type = 3
+dx_ref    = 4
+dt_ref    = 4
+freq_ref  = 1
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 127
+Test Type = 3
+dx_ref    = 4
+dt_ref    = 4
+freq_ref  = 2
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 128
+Test Type = 3
+dx_ref    = 4
+dt_ref    = 4
+freq_ref  = 3
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 129
+Test Type = 3
+dx_ref    = 4
+dt_ref    = 6
+freq_ref  = 1
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 130
+Test Type = 3
+dx_ref    = 4
+dt_ref    = 6
+freq_ref  = 2
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 131
+Test Type = 3
+dx_ref    = 4
+dt_ref    = 6
+freq_ref  = 3
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 132
+Test Type = 3
+dx_ref    = 8
+dt_ref    = 1
+freq_ref  = 1
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 133
+Test Type = 3
+dx_ref    = 8
+dt_ref    = 1
+freq_ref  = 2
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 134
+Test Type = 3
+dx_ref    = 8
+dt_ref    = 1
+freq_ref  = 3
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 135
+Test Type = 3
+dx_ref    = 8
+dt_ref    = 2
+freq_ref  = 1
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 136
+Test Type = 3
+dx_ref    = 8
+dt_ref    = 2
+freq_ref  = 2
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 137
+Test Type = 3
+dx_ref    = 8
+dt_ref    = 2
+freq_ref  = 3
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 138
+Test Type = 3
+dx_ref    = 8
+dt_ref    = 4
+freq_ref  = 1
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 139
+Test Type = 3
+dx_ref    = 8
+dt_ref    = 4
+freq_ref  = 2
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 140
+Test Type = 3
+dx_ref    = 8
+dt_ref    = 4
+freq_ref  = 3
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 141
+Test Type = 3
+dx_ref    = 8
+dt_ref    = 6
+freq_ref  = 1
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 142
+Test Type = 3
+dx_ref    = 8
+dt_ref    = 6
+freq_ref  = 2
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 143
+Test Type = 3
+dx_ref    = 8
+dt_ref    = 6
+freq_ref  = 3
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 144
+Test Type = 4
+dx_ref    = 1
+dt_ref    = 1
+freq_ref  = 1
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 145
+Test Type = 4
+dx_ref    = 1
+dt_ref    = 1
+freq_ref  = 2
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 146
+Test Type = 4
+dx_ref    = 1
+dt_ref    = 1
+freq_ref  = 3
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 147
+Test Type = 4
+dx_ref    = 1
+dt_ref    = 2
+freq_ref  = 1
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 148
+Test Type = 4
+dx_ref    = 1
+dt_ref    = 2
+freq_ref  = 2
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 149
+Test Type = 4
+dx_ref    = 1
+dt_ref    = 2
+freq_ref  = 3
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 150
+Test Type = 4
+dx_ref    = 1
+dt_ref    = 4
+freq_ref  = 1
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 151
+Test Type = 4
+dx_ref    = 1
+dt_ref    = 4
+freq_ref  = 2
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 152
+Test Type = 4
+dx_ref    = 1
+dt_ref    = 4
+freq_ref  = 3
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 153
+Test Type = 4
+dx_ref    = 1
+dt_ref    = 6
+freq_ref  = 1
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 154
+Test Type = 4
+dx_ref    = 1
+dt_ref    = 6
+freq_ref  = 2
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 155
+Test Type = 4
+dx_ref    = 1
+dt_ref    = 6
+freq_ref  = 3
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 156
+Test Type = 4
+dx_ref    = 2
+dt_ref    = 1
+freq_ref  = 1
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 157
+Test Type = 4
+dx_ref    = 2
+dt_ref    = 1
+freq_ref  = 2
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 158
+Test Type = 4
+dx_ref    = 2
+dt_ref    = 1
+freq_ref  = 3
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 159
+Test Type = 4
+dx_ref    = 2
+dt_ref    = 2
+freq_ref  = 1
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 160
+Test Type = 4
+dx_ref    = 2
+dt_ref    = 2
+freq_ref  = 2
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 161
+Test Type = 4
+dx_ref    = 2
+dt_ref    = 2
+freq_ref  = 3
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 162
+Test Type = 4
+dx_ref    = 2
+dt_ref    = 4
+freq_ref  = 1
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 163
+Test Type = 4
+dx_ref    = 2
+dt_ref    = 4
+freq_ref  = 2
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 164
+Test Type = 4
+dx_ref    = 2
+dt_ref    = 4
+freq_ref  = 3
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 165
+Test Type = 4
+dx_ref    = 2
+dt_ref    = 6
+freq_ref  = 1
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 166
+Test Type = 4
+dx_ref    = 2
+dt_ref    = 6
+freq_ref  = 2
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 167
+Test Type = 4
+dx_ref    = 2
+dt_ref    = 6
+freq_ref  = 3
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 168
+Test Type = 4
+dx_ref    = 4
+dt_ref    = 1
+freq_ref  = 1
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 169
+Test Type = 4
+dx_ref    = 4
+dt_ref    = 1
+freq_ref  = 2
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 170
+Test Type = 4
+dx_ref    = 4
+dt_ref    = 1
+freq_ref  = 3
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 171
+Test Type = 4
+dx_ref    = 4
+dt_ref    = 2
+freq_ref  = 1
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 172
+Test Type = 4
+dx_ref    = 4
+dt_ref    = 2
+freq_ref  = 2
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 173
+Test Type = 4
+dx_ref    = 4
+dt_ref    = 2
+freq_ref  = 3
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 174
+Test Type = 4
+dx_ref    = 4
+dt_ref    = 4
+freq_ref  = 1
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 175
+Test Type = 4
+dx_ref    = 4
+dt_ref    = 4
+freq_ref  = 2
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 176
+Test Type = 4
+dx_ref    = 4
+dt_ref    = 4
+freq_ref  = 3
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 177
+Test Type = 4
+dx_ref    = 4
+dt_ref    = 6
+freq_ref  = 1
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 178
+Test Type = 4
+dx_ref    = 4
+dt_ref    = 6
+freq_ref  = 2
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 179
+Test Type = 4
+dx_ref    = 4
+dt_ref    = 6
+freq_ref  = 3
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 180
+Test Type = 4
+dx_ref    = 8
+dt_ref    = 1
+freq_ref  = 1
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 181
+Test Type = 4
+dx_ref    = 8
+dt_ref    = 1
+freq_ref  = 2
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 182
+Test Type = 4
+dx_ref    = 8
+dt_ref    = 1
+freq_ref  = 3
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 183
+Test Type = 4
+dx_ref    = 8
+dt_ref    = 2
+freq_ref  = 1
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 184
+Test Type = 4
+dx_ref    = 8
+dt_ref    = 2
+freq_ref  = 2
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 185
+Test Type = 4
+dx_ref    = 8
+dt_ref    = 2
+freq_ref  = 3
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 186
+Test Type = 4
+dx_ref    = 8
+dt_ref    = 4
+freq_ref  = 1
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 187
+Test Type = 4
+dx_ref    = 8
+dt_ref    = 4
+freq_ref  = 2
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 188
+Test Type = 4
+dx_ref    = 8
+dt_ref    = 4
+freq_ref  = 3
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 189
+Test Type = 4
+dx_ref    = 8
+dt_ref    = 6
+freq_ref  = 1
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 190
+Test Type = 4
+dx_ref    = 8
+dt_ref    = 6
+freq_ref  = 2
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+
+Number    = 191
+Test Type = 4
+dx_ref    = 8
+dt_ref    = 6
+freq_ref  = 3
+
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
+Finish!
