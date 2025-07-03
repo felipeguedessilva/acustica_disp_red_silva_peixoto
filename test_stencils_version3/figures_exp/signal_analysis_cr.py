@@ -169,12 +169,13 @@ for k0 in range(0,nvptype):
 #==============================================================================
                 lglobal = []
                 ntr     = len(test_results)
-
                 for l0 in range(0,ntr):
-
+                    
+                    mshpaeloc = test_results[l0][0]
                     nvalueloc = test_results[l0][3]
 
-                    if(nvalueloc==1): lglobal.append(test_results[l0])
+                    if(nvalueloc==1 and mshpaeloc!='csq'): lglobal.append(test_results[l0])
+                    if(nvalueloc==0 and mshpaeloc=='csq'): lglobal.append(test_results[l0])
 
                 nplot  = int(len(lglobal)/8)
                 vorder = np.linspace(2,14,7)

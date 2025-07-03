@@ -111,10 +111,18 @@ def acoustic_operator_multiple_exec(dx_ref,dt_ref,freq_ref,ptype,percent_glob):
                 elif(shape == 'rb'):
                     
                     vnvalue = [mvalue]
-                
-                else:
+
+                elif(shape == 'crb'):
                 
                     vnvalue  = np.arange(1,mvalue+1)
+
+                elif(shape == 'csq'):
+                
+                    vnvalue  = np.arange(0,mvalue+1)
+
+                # else:
+                
+                #     vnvalue  = np.arange(1,mvalue+1)
                 
                 nvnvalue = len(vnvalue)
                 

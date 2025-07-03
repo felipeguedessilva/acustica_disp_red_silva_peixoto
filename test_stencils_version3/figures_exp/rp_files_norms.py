@@ -31,7 +31,7 @@ def gera_norms(ptype,dx_ref,dt_ref,freq_ref):
     #==============================================================================
     # Read Txt Files
     #==============================================================================    
-    locopen  = '../testresults/test%d_results_norms_fields'%(ptype)
+    locopen  = '../testresults/test%d_results_norms_classic'%(ptype)
     
     with open(locopen, 'rb') as f: 
     
@@ -72,7 +72,7 @@ def gera_norms(ptype,dx_ref,dt_ref,freq_ref):
     # Selecting Data
     #==============================================================================
     lf_select = []
-    
+
     for k1 in range(0,ntr):
         
         if(test_results[k1][4]==freq_ref):
@@ -80,9 +80,9 @@ def gera_norms(ptype,dx_ref,dt_ref,freq_ref):
             lf_select.append(test_results[k1])   
     
     nlf = len(lf_select)
-    
+
     lfdxdt_select = []
-    
+
     for k1 in range(0,nlf):
         
         if(lf_select[k1][2]==dx_ref and lf_select[k1][3]==dt_ref):
@@ -429,13 +429,21 @@ def gera_norms(ptype,dx_ref,dt_ref,freq_ref):
         if(normtype=='nfft'): plt.suptitle('FFT Norm of Full Receivers at time  %.3f s \n dx = %.4fm - dt = %.4fs - freq = %.3f Hz \n %s'%(vparameters[3],vparameters[1],vparameters[2],vparameters[6],vparameters[5]))
         grid = plt.GridSpec(3,3,wspace=0.4,hspace=0.2)    
         plt.subplot(grid[xpos[0],ypos[0]])
-        min_value = 0.8*min(min(vcl[0]),min(vcl[1]),min(vcl[2]),min(vcl[3]),min(vcl[4]))
-        max_value = 1.2*max(max(vcl[0]),max(vcl[1]),max(vcl[2]),max(vcl[3]),max(vcl[4])) 
         
+        locfactor = 10
+
         for k1 in range(0,nvcl):
+           
+            loclen = vcl[k1].shape[0]
+
+            for j1 in range(0,loclen):
+
+                if(vcl[k1][j1]>locfactor or vcl[k1][j1]==np.inf): vcl[k1][j1] = np.nan
             
             plt.plot(ordersv[1::],vcl[k1],label=clnames[k1],color=linep[2][k1],linestyle=linep[1][k1],marker=linep[0][k1])
-                        
+
+        min_value = 0.8*min(min(vcl[0]),min(vcl[1]),min(vcl[2]),min(vcl[3]),min(vcl[4]))
+        max_value = 1.2*max(max(vcl[0]),max(vcl[1]),max(vcl[2]),max(vcl[3]),max(vcl[4]))                    
         plt.grid()
         plt.title('cross-line')
         plt.xticks(ordersv)
@@ -456,6 +464,7 @@ def gera_norms(ptype,dx_ref,dt_ref,freq_ref):
             plt.subplot(grid[xpos[k1],ypos[k1]])
             
             vcrb[k1-1][vcrb[k1-1]==0] = np.nan 
+            vcrb[k1-1][vcrb[k1-1]>locfactor] = np.nan 
             
             fig1 = plt.imshow(np.transpose(vcrb[k1-1]),cmap='jet',interpolation='kaiser')  
             plt.grid()
@@ -504,6 +513,8 @@ def gera_norms(ptype,dx_ref,dt_ref,freq_ref):
         nvnpte_csq = len(vnpte_csq)        
         ntimes     = vcl[0].shape[0]
         
+        locfactor = 10
+
         for k3 in range(0,ntimes):
         
             plt.figure(figsize = (20,16))
@@ -512,13 +523,19 @@ def gera_norms(ptype,dx_ref,dt_ref,freq_ref):
             if(normtype=='nfft'): plt.suptitle('FFT Norm of Full Displacements at time  %.3f s \n dx = %.4fm - dt = %.4fs - freq = %.3f Hz \n %s'%(vparameters[3][k3],vparameters[1],vparameters[2],vparameters[6],vparameters[5]))
             grid = plt.GridSpec(3,3,wspace=0.4,hspace=0.2)    
             plt.subplot(grid[xpos[0],ypos[0]])
-            min_value = 0.8*min(min(vcl[0][k3,:]),min(vcl[1][k3,:]),min(vcl[2][k3,:]),min(vcl[3][k3,:]),min(vcl[4][k3,:]))
-            max_value = 1.2*max(max(vcl[0][k3,:]),max(vcl[1][k3,:]),max(vcl[2][k3,:]),max(vcl[3][k3,:]),max(vcl[4][k3,:])) 
             
             for k1 in range(0,nvcl):
-                
-                plt.plot(ordersv[1::],vcl[k1][k3,:],label=clnames[k1],color=linep[2][k1],linestyle=linep[1][k1],marker=linep[0][k1])
             
+                loclen = vcl[k1][k3,:].shape[0]
+
+                for j1 in range(0,loclen):
+
+                    if(vcl[k1][k3,:][j1]>locfactor or vcl[k1][k3,:][j1]==np.inf): vcl[k1][k3,:][j1] = np.nan
+                    
+                plt.plot(ordersv[1::],vcl[k1][k3,:],label=clnames[k1],color=linep[2][k1],linestyle=linep[1][k1],marker=linep[0][k1])
+
+            min_value = 0.8*min(min(vcl[0][k3,:]),min(vcl[1][k3,:]),min(vcl[2][k3,:]),min(vcl[3][k3,:]),min(vcl[4][k3,:]))
+            max_value = 1.2*max(max(vcl[0][k3,:]),max(vcl[1][k3,:]),max(vcl[2][k3,:]),max(vcl[3][k3,:]),max(vcl[4][k3,:]))   
             plt.grid()
             plt.title('cross-line')
             plt.xticks(ordersv)
@@ -539,7 +556,8 @@ def gera_norms(ptype,dx_ref,dt_ref,freq_ref):
                 plt.subplot(grid[xpos[k1],ypos[k1]])
                 
                 vcrb[k1-1][vcrb[k1-1]==0] = np.nan 
-                
+                vcrb[k1-1][vcrb[k1-1]>locfactor] = np.nan      
+
                 fig1 = plt.imshow(np.transpose(vcrb[k1-1][k3,:]),cmap='jet',interpolation='kaiser')  
                 plt.grid()
                 plt.title('%s'%(crbnames[k1-1]))
@@ -599,7 +617,14 @@ def gera_norms(ptype,dx_ref,dt_ref,freq_ref):
             max_value = 1.2*max(max(vcl[0][k3,:]),max(vcl[1][k3,:]),max(vcl[2][k3,:]),max(vcl[3][k3,:]),max(vcl[4][k3,:])) 
             
             for k1 in range(0,nvcl):
-                
+
+                locfactor = 10000
+                loclen    = len(vcl[k1])
+
+                for j1 in range(0,loclen):
+
+                    if(vcl[j1]>locfactor or vcl[j1]==np.inf): vcl[j1] = np.nan
+
                 plt.plot(ordersv[1::],vcl[k1][k3,:],label=clnames[k1],color=linep[2][k1],linestyle=linep[1][k1],marker=linep[0][k1])
             
             plt.grid()
@@ -739,7 +764,7 @@ def gera_norms(ptype,dx_ref,dt_ref,freq_ref):
     
     figname     = 'normrecselect_p%ddx%ddt%dfreq%d'%(vnamefig[0],vnamefig[1],vnamefig[2],vnamefig[3])
     
-    P3          = plot3(vcl,clnames,xpos,ypos,vcrb,crbnames,vparameters,vnamefig,figname,locsave,ordersv,linep,xpositionv,ypositionv,normtype,vnpte_crb,vnpte_csq)
+    #P3          = plot3(vcl,clnames,xpos,ypos,vcrb,crbnames,vparameters,vnamefig,figname,locsave,ordersv,linep,xpositionv,ypositionv,normtype,vnpte_crb,vnpte_csq)
     #==============================================================================
     
     #==============================================================================
@@ -803,7 +828,7 @@ def gera_norms(ptype,dx_ref,dt_ref,freq_ref):
 
     figname     = 'normrecselect_p%ddx%ddt%dfreq%d'%(vnamefig[0],vnamefig[1],vnamefig[2],vnamefig[3])
 
-    P6          = plot3(vcl,clnames,xpos,ypos,vcrb,crbnames,vparameters,vnamefig,figname,locsave,ordersv,linep,xpositionv,ypositionv,normtype,vnpte_crb,vnpte_csq)
+    #P6          = plot3(vcl,clnames,xpos,ypos,vcrb,crbnames,vparameters,vnamefig,figname,locsave,ordersv,linep,xpositionv,ypositionv,normtype,vnpte_crb,vnpte_csq)
     #==============================================================================
 
     #==============================================================================

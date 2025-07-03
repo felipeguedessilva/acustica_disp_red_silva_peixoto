@@ -212,9 +212,17 @@ for k0 in range(0,nvptype):
                                     
                                 vnvalue = [mvalue]
                                 
-                            else:
-                                
+                            elif(shape == 'crb'):
+                            
                                 vnvalue  = np.arange(1,mvalue+1)
+
+                            elif(shape == 'csq'):
+                            
+                                vnvalue  = np.arange(0,mvalue+1)
+
+                            # else:
+                            
+                            #     vnvalue  = np.arange(1,mvalue+1)
                                 
                             nvnvalue = len(vnvalue)
                                 
