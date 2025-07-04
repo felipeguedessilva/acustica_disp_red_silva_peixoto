@@ -17,7 +17,7 @@ import testes_opt              as ttopt
 #==============================================================================
 # Range of Parameters
 #==============================================================================
-vptype    = [4] 
+vptype    = [1] 
 vdxref    = [1,2,4,8]
 vdtref    = [1,2,4,6]
 vfreqref  = [1,2,3] 
@@ -45,17 +45,127 @@ for k0 in range(0,nvptype):
                 dt_ref     = vdtref[k2]
                 freq_ref   = vfreqref[k3]
                 factor_ref = 16
+
+                if(ptype==1 and dx_ref==2 and dt_ref==6):
+
+                    print('Jump Test!')
+
+                elif(ptype==1 and dx_ref==4 and dt_ref==4):
+
+                    print('Jump Test!')
+
+                elif(ptype==1 and dx_ref==4 and dt_ref==6):
+
+                    print('Jump Test!')
+
+                elif(ptype==1 and dx_ref==8 and dt_ref==2):
+
+                    print('Jump Test!')
+
+                elif(ptype==1 and dx_ref==8 and dt_ref==4):
+
+                    print('Jump Test!')
+
+                elif(ptype==1 and dx_ref==8 and dt_ref==6):
+
+                    print('Jump Test!')
+
+                elif(ptype==2 and dx_ref==2 and dt_ref==4):
+
+                    print('Jump Test!')
+
+                elif(ptype==2 and dx_ref==2 and dt_ref==6):
+
+                    print('Jump Test!')
+
+                elif(ptype==2 and dx_ref==4 and dt_ref==2):
+
+                    print('Jump Test!')
+
+                elif(ptype==2 and dx_ref==4 and dt_ref==4):
+
+                    print('Jump Test!')
+
+                elif(ptype==2 and dx_ref==4 and dt_ref==6):
+
+                    print('Jump Test!')
+
+                elif(ptype==2 and dx_ref==8 and dt_ref==1):
+
+                    print('Jump Test!')
+
+                elif(ptype==2 and dx_ref==8 and dt_ref==2):
+
+                    print('Jump Test!')
+
+                elif(ptype==2 and dx_ref==8 and dt_ref==4):
+
+                    print('Jump Test!')
+
+                elif(ptype==2 and dx_ref==8 and dt_ref==6):
+
+                    print('Jump Test!')
+
+                elif(ptype==3 and dx_ref==2 and dt_ref==6):
+
+                    print('Jump Test!')
+
+                elif(ptype==3 and dx_ref==4 and dt_ref==4):
+
+                    print('Jump Test!')
+
+                elif(ptype==3 and dx_ref==4 and dt_ref==6):
+
+                    print('Jump Test!')
+
+                elif(ptype==3 and dx_ref==8 and dt_ref==2):
+
+                    print('Jump Test!')
+
+                elif(ptype==3 and dx_ref==8 and dt_ref==4):
+
+                    print('Jump Test!')
+
+                elif(ptype==3 and dx_ref==8 and dt_ref==6):
+
+                    print('Jump Test!')
+
+                elif(ptype==4 and dx_ref==2 and dt_ref==6):
+
+                    print('Jump Test!')
+
+                elif(ptype==4 and dx_ref==4 and dt_ref==4):
+
+                    print('Jump Test!')
+
+                elif(ptype==4 and dx_ref==4 and dt_ref==6):
+
+                    print('Jump Test!')
+
+                elif(ptype==4 and dx_ref==8 and dt_ref==2):
+
+                    print('Jump Test!')
+
+                elif(ptype==4 and dx_ref==8 and dt_ref==4):
+
+                    print('Jump Test!')
+
+                elif(ptype==4 and dx_ref==8 and dt_ref==6):
+
+                    print('Jump Test!')
+
+                else:
                 
-                print('')
-                print('Number    = %d'%cont_me)
-                print('Test Type = %d'%ptype)
-                print('dx_ref    = %d'%dx_ref)
-                print('dt_ref    = %d'%dt_ref)
-                print('freq_ref  = %d'%freq_ref)
-                print('')
-                
-                lconfig_me.append((cont_me,ptype,dx_ref,dt_ref,freq_ref))
-                cont_me = cont_me + 1
+                    print('')
+                    print('Number    = %d'%cont_me)
+                    print('Test Type = %d'%ptype)
+                    print('dx_ref    = %d'%dx_ref)
+                    print('dt_ref    = %d'%dt_ref)
+                    print('freq_ref  = %d'%freq_ref)
+                    print('')
+                    
+                    lconfig_me.append((cont_me,ptype,dx_ref,dt_ref,freq_ref))
+                    cont_me = cont_me + 1
 #==============================================================================
 
 #==============================================================================
@@ -108,9 +218,7 @@ for k0 in range(0,nvptype):
                         
                     elif(method == 'dispte' or method == 'specls' or method == 'displs'):
                             
-                        #vshape = ['crb']
                         vshape = ['crb','csq'] 
-                        #vshape = ['rb',crb','csq','sq']
                             
                     nvshape = len(vshape)
                         
@@ -137,10 +245,6 @@ for k0 in range(0,nvptype):
                             elif(shape == 'csq'):
                             
                                 vnvalue  = np.arange(0,mvalue+1)
-
-                            # else:
-                            
-                            #     vnvalue  = np.arange(1,mvalue+1)
                                 
                             nvnvalue = len(vnvalue)
                                 

@@ -189,9 +189,7 @@ for k0 in range(0,nvptype):
                         
                     elif(method == 'dispte' or method == 'specls' or method == 'displs'):
                             
-                        #vshape = ['crb']
                         vshape = ['crb','csq'] 
-                        #vshape = ['rb',crb','csq','sq']
                             
                     nvshape = len(vshape)
                         
@@ -218,11 +216,7 @@ for k0 in range(0,nvptype):
                             elif(shape == 'csq'):
                             
                                 vnvalue  = np.arange(0,mvalue+1)
-
-                            # else:
                             
-                            #     vnvalue  = np.arange(1,mvalue+1)
-                                
                             nvnvalue = len(vnvalue)
                                 
                             for m4 in range(0,nvnvalue):
